@@ -4,8 +4,6 @@ import BackEnd.views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('test/', BackEnd.views.test, name='test'),
-
-    #
+    # get请求，将csrf_token设置到浏览器的cookie中
     path('csrf/', BackEnd.views.get_csrf_token, name='get_csrf_token')
 ]
