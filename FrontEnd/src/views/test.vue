@@ -1,6 +1,6 @@
 <template>
     <div>
-        我是test
+        <p class="test">我是test</p>
         <v-btn @click="test1">我是vuetify的btn1</v-btn>
         <v-btn @click="test2">我是vuetify的btn2</v-btn>
     </div>
@@ -30,6 +30,10 @@
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    @import "@/styles/_variables.scss";
 
+    .test {
+        color:$test-color;
+    }
 </style>

@@ -12,10 +12,10 @@
         inheritAttrs: false
     })
 
-    onMounted(() => {
-        // 每次App.vue加载，都会发送请求，设置csrf_token
-        axios_server.get('/csrf/')
-    })
+    // onMounted(() => {
+    //     // 每次App.vue加载，都会发送请求，设置csrf_token
+    //     axios_server.get('/csrf/')
+    // })
 </script>
 
 <style scoped>
