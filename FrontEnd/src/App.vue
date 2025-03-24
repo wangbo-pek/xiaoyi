@@ -58,7 +58,7 @@
         display: flex;
         justify-content: right;
         align-items: flex-start;
-        gap: 30px;
+        gap: 10px;
         margin-top:2px;
 
         .content {
