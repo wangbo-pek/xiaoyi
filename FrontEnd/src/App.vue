@@ -66,7 +66,7 @@
             flex: 0 0 70%;
             height: 100%;
             border-radius: 5px;
-            padding: 10px;
+            padding: 2px 10px;
             overflow-y: auto;
         }
 

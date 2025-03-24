@@ -41,6 +41,7 @@
         .title-big {
             width: 32%;
             height: 100%;
+            padding-right: 30px;
         }
 
         .nav-big {
