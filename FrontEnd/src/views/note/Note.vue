@@ -3,315 +3,45 @@
         <div class="function-bar">function-bar</div>
         <div class="article-list">
             <v-row>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
+                <v-col v-for="(item, index) in article_list" :key="index">
+                    <div class="article-card">
+                        <v-card elevation="14" rounded="lg" hover>
+                            <v-img class="article-img" :src="imgURL" cover>
+                                <v-card-title>
+                                    <span>{{ item.title }}</span>
+                                </v-card-title>
+                            </v-img>
+                            <v-card-text>
+                                {{ item.content }}
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-btn class="my-btn" variant="text">查看</v-btn>
+                                <v-btn class="my-btn" variant="text">删除</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </div>
+                </v-col>
             </v-row>
-            <v-row>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-            </v-row>
-            <v-row>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-            </v-row>
-            <v-row>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-            </v-row>
-            <v-row>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-            </v-row>
-            <v-row>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-                <v-col><div class="article-card">
-                <v-card elevation="14" rounded="lg" hover>
-                    <v-img class="article-img" :src="imgURL" cover>
-                        <v-card-title>
-                            <span>title title title title</span>
-                        </v-card-title>
-                    </v-img>
-                    <v-card-text>
-                        texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn class="my-btn" variant="text">查看</v-btn>
-                        <v-btn class="my-btn" variant="text">删除</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </div></v-col>
-            </v-row>
-
         </div>
     </div>
 
 </template>
 
 <script setup lang='ts'>
+    import axios_server from "@/utils/axios_server.ts";
+    import {onMounted} from "vue";
+
     defineOptions({
         name: 'Note',
         inheritAttrs: false
+    })
+
+    let article_list:any = null
+    onMounted(async () => {
+        let result = await axios_server.get('getArticleList')
+        result = result.data
+        console.log('result >>', result)
+        article_list = result
     })
 
     const imgURL = "https://channel-jk.com/wp-content/uploads/2021/08/2598173953459235257.jpg"
@@ -342,9 +72,9 @@
         .article-list {
             position: relative;
             top: 10%;
-            width: 95%;
+            width: 98%;
             margin: 0 auto;
-            background-color: lightslategrey;
+            background-color: lightyellow;
             padding: 10px;
             border: 1px solid #cccccc;
             border-radius: 5px;
@@ -361,7 +91,7 @@
                     transition: transform 0.3s ease;
 
                     &:hover {
-                        transform: scale(1.05);
+                        transform: scale(1.03);
                     }
                 }
 

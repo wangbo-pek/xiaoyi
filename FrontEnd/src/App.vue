@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang='ts'>
-    // import {onMounted} from "vue";
-    // import axios_server from "./utils/axios_server.ts";
+    import {onMounted} from "vue";
+    import axios_server from "./utils/axios_server.ts";
     import Header from "@/components/Header/Header.vue";
 
     defineOptions({
@@ -29,10 +29,10 @@
     })
 
 
-    // onMounted(() => {
-    //     // 每次App.vue加载，都会发送请求，设置csrf_token
-    //     axios_server.get('/csrf/')
-    // })
+    onMounted(() => {
+        // 每次App.vue加载，都会发送请求，设置csrf_token
+        axios_server.get('/csrf/')
+    })
 </script>
 
 <style scoped lang="scss">
