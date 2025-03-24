@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory} from "vue-router";
+import {routesArray} from "@/router/routes_array.ts";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -6,40 +7,14 @@ const router = createRouter({
         {
             path: '/test',
             name: 'test',
-            component: () => import('@/views/test.vue')
+            component: () => import('@/views/test.vue'),
         },
         {
             path: '/',
             name: 'layout',
             component: () => import('@/views/Layout.vue'),
             redirect: '/home',
-            children: [
-                {
-                    path: 'home',
-                    name: 'home',
-                    component: () => import('@/views/home/Home.vue')
-                },
-                {
-                    path: 'note',
-                    name: 'note',
-                    component: () => import('@/views/note/Note.vue')
-                },
-                {
-                    path: 'essay',
-                    name: 'essay',
-                    component: () => import('@/views/essay/Essay.vue')
-                },
-                {
-                    path: 'diary',
-                    name: 'diary',
-                    component: () => import('@/views/diary/Diary.vue')
-                },
-                {
-                    path: 'about',
-                    name: 'about',
-                    component: () => import('@/views/about/About.vue')
-                },
-            ]
+            children: routesArray
         },
         {
             path: '/404',

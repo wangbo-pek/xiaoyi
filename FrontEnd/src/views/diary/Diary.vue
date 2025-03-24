@@ -1,5 +1,5 @@
 <template>
-
+<div>diary</div>
 </template>
 
 <script setup lang='ts'>
