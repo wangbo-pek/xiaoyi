@@ -15,8 +15,7 @@
                                 {{ item.brief }}
                             </v-card-text>
                             <v-card-actions>
-                                <v-btn class="my-btn" variant="text">查看</v-btn>
-                                <v-btn class="my-btn" variant="text">删除</v-btn>
+                                <v-btn class="my-btn" variant="outlined" prepend-icon="mdi-eye-outline" @click="jumpTo(item.id)">查看</v-btn>
                             </v-card-actions>
                         </v-card>
                     </div>
@@ -28,6 +27,7 @@
 
 <script setup lang='ts'>
     import useNoteStore from "@/store/note.ts";
+    import {useRouter} from "vue-router";
 
     defineOptions({
         name: 'Note',
@@ -35,6 +35,15 @@
     })
 
     const noteStore = useNoteStore()
+    const $router = useRouter()
+    const jumpTo = (noteId: string) => {
+        $router.push({
+            name: 'noteDetail',
+            params: {
+                id:noteId
+            }
+        })
+    }
 
 </script>
 
@@ -61,12 +70,12 @@
 
         .article-list {
             position: relative;
-            top: 10%;
+            top: 7%;
             width: 98%;
             margin: 0 auto;
-            background-color: lightyellow;
+            //background-color: lightyellow;
             padding: 10px;
-            border: 1px solid #cccccc;
+            //border: 1px solid #cccccc;
             border-radius: 5px;
             min-height: 200px;
             box-sizing: border-box;
@@ -117,11 +126,11 @@
                 }
 
                 .my-btn {
-                    width: 65px;
-                    font-size: 14px;
-                    color: #d7d7d7;
-                    margin: 0 3px;
-                    background-color: rgba(42, 6, 6, 0.45)
+                    width: 80px;
+                    font-size: 13px;
+                    color: rgba(21, 110, 78, 0.9);
+                    margin: 10px 10px;
+                    padding: 0 5px;
                 }
             }
         }

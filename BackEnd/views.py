@@ -22,10 +22,10 @@ def get_article_list(request):
         tags_name = list(note_list_object.tags.values_list('name', flat=True))
 
         note_list_data.append({
+            "id": note_list_object.id,
             "title": note_list_object.title,
             "brief": note_list_object.brief,
-            # ImageFieldFile类型不能序列化
-            "coverImg": note_list_object.cover_img.url if note_list_object.cover_img else "",
+            "coverImg": note_list_object.cover_img,
             "isShow": note_list_object.is_show,
             "createdTime": note_list_object.created_time,
             "modifiedTime": note_list_object.modified_time,
@@ -38,4 +38,37 @@ def get_article_list(request):
         "code": 0,
         "msg": "success",
         "data": note_list_data
+    })
+
+
+def get_article(request):
+    try:
+        note_list_id = int(request.GET.get('noteId'))
+    except (TypeError, ValueError):
+        return JsonResponse({
+            "code": 1,
+            "msg": "invalid noteId"
+        })
+
+    try:
+        note_list_obj = models.NoteList.objects.filter(id=note_list_id).first()
+    except Exception:
+        return JsonResponse({
+            "code": 1,
+            "msg": "failed"
+        })
+
+    if not note_list_obj or not hasattr(note_list_obj, 'note'):
+        return JsonResponse({
+            "code": 1,
+            "msg": "note not found"
+        })
+    note_obj = note_list_obj.note
+    return JsonResponse({
+        "code": 0,
+        "msg": "success",
+        "data": {
+            "content":note_obj.content,
+            "title":note_obj.title
+        }
     })

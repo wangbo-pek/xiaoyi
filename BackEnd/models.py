@@ -42,7 +42,7 @@ class DiaryInfo(BaseInfo):
 class DiaryList(BaseList):
     # 日记 1:1 日记列表
     diary = models.OneToOneField(to='Diary', on_delete=models.CASCADE)
-    cover_img = models.ImageField(verbose_name='封面图', max_length=512, upload_to='diary_covers/', blank=True, null=True,
+    cover_img = models.CharField(verbose_name='封面图', max_length=512, blank=True, null=True,
                                   default='default_cover.jpg')
 
     def __str__(self):
@@ -71,8 +71,8 @@ class EssayList(BaseList):
     essay = models.OneToOneField(to='Essay', on_delete=models.CASCADE)
     # 文章 n:n 标签
     tags = models.ManyToManyField(to='Tag')
-    cover_img = models.ImageField(verbose_name='封面图', max_length=512, upload_to='essay_covers/', blank=True, null=True,
-                                  default='default_cover.jpg')
+    cover_img = models.CharField(verbose_name='封面图', max_length=512, blank=True, null=True,
+                                 default='default_cover.jpg')
     is_reprint = models.BooleanField(verbose_name='是否转载', default=False)
     reprint_source = models.CharField(verbose_name='转载源', max_length=64, blank=True, null=True)
     reprint_author = models.CharField(verbose_name='原作者', max_length=64, blank=True, null=True)
@@ -105,8 +105,8 @@ class NoteList(BaseList):
     second_classification = models.ForeignKey(to='SecondClassification', on_delete=models.CASCADE)
     # 笔记 n:n 标签
     tags = models.ManyToManyField(to='Tag')
-    cover_img = models.ImageField(verbose_name='封面图', max_length=512, upload_to='note_covers/', blank=True, null=True,
-                                  default='default_cover.jpg')
+    cover_img = models.CharField(verbose_name='封面图', max_length=512, blank=True, null=True,
+                                 default='default_cover.jpg')
 
     def __str__(self):
         return f'{self.title}的列表'

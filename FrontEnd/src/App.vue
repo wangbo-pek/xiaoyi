@@ -1,20 +1,6 @@
 <template>
     <v-app>
-        <!-- 页面的顶部：包括了博客名称、导航菜单(笔记、文章、日记、关于我)、其他小挂件(天气、日历)-->
-        <div class="headerbar">
-            <Header></Header>
-        </div>
-        <!-- 页面内容展示区：左侧(宽)笔记、文章、日记的列表、展示右侧(窄) -->
-        <div class="main">
-            <div class="content">
-                <router-view></router-view>
-            </div>
-            <div class="siderbar">
-                <div>
-                    <v-icon>mdi-home</v-icon>
-                </div>
-            </div>
-        </div>
+        <router-view></router-view>
     </v-app>
 </template>
 
@@ -22,7 +8,7 @@
     import {onMounted} from "vue";
     import useNoteStore from "@/store/note.ts";
     import axios_server from "./utils/axios_server.ts";
-    import Header from "@/components/Header/Header.vue";
+
 
     defineOptions({
         name: 'App',
@@ -74,7 +60,7 @@
         margin-top: 2px;
 
         .content {
-            background-color: aliceblue;
+            //background-color: aliceblue;
             flex: 0 0 70%;
             height: 100%;
             border-radius: 5px;
