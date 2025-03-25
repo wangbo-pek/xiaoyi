@@ -1,5 +1,5 @@
 export default interface NoteListItem {
-    "id": number,
+    "noteListId": number,
     "title": string,
     "brief": string,
     "coverImg": string,

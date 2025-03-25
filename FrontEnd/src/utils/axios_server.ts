@@ -7,7 +7,7 @@ let axios_server = axios.create({
     withCredentials: true
 })
 
-//
+// 获取浏览器中保存的csrf_token的cookie
 function getCsrfToken(): string | undefined {
     const cookies = document.cookie.split(';')
     for (const cookie of cookies) {
@@ -18,7 +18,6 @@ function getCsrfToken(): string | undefined {
     }
     return undefined
 }
-
 
 // 给axios_server添加请求拦截器
 axios_server.interceptors.request.use((config) => {

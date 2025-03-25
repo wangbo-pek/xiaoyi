@@ -8,7 +8,7 @@ def create_diary_with_extra(title, content):
         content=content
     )
 
-    diary_list_obj = models.DiaryList.objects.create(
+    models.DiaryList.objects.create(
         diary=diary_obj,
         cover_img='https://channel-jk.com/wp-content/uploads/2021/08/2598173953459235257.jpg',
         title=title,

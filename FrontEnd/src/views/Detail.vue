@@ -33,9 +33,9 @@
     const route = useRoute()
     const $router = useRouter()
     const noteStore = useNoteStore()
-    const noteId = Number(route.params.id)
+    const noteListId = Number(route.params.id)
     const noteItem = reactive({
-        "id": '',
+        "noteListId": '',
         "title": '',
         "brief": '',
         "content": '',
@@ -50,11 +50,11 @@
 
     onMounted(async () => {
         // 页面加载时，从noteStore中获取文章list
-        const result = noteStore.noteList.find(note => note.id === noteId)
+        const result = noteStore.noteList.find(note => note.id === noteListId)
         // 页面加载时，从后端获取文章content
-        const content = await axios_server.get('getArticle/', {
+        const content = await axios_server.get('getNote/', {
             params: {
-                noteId
+                noteListId
             }
         })
         Object.assign(noteItem, result)

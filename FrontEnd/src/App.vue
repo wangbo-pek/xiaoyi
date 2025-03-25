@@ -9,7 +9,6 @@
     import useNoteStore from "@/store/note.ts";
     import axios_server from "./utils/axios_server.ts";
 
-
     defineOptions({
         name: 'App',
         inheritAttrs: false
@@ -21,7 +20,7 @@
         // 每次App.vue加载，都会发送请求，设置csrf_token
         axios_server.get('csrf/').then(() => {
             // 每次App.vue加载，都会发送请求，获取Note文章列表信息
-            axios_server.get('getArticleList/').then(
+            axios_server.get('getNoteList/').then(
                 (response) => {
                     // 把文章列表信息保存到noteStore仓库中
                     noteStore.noteList = response.data
@@ -43,7 +42,7 @@
         width: 100%;
         height: 10vh;
         z-index: 1000;
-        background-image: linear-gradient(to right, #34a4f5, #43e1fc, #66f6d5, #65f8ae);
+        background-image: linear-gradient(to right, #4fadf1, #4fe5f3, #5bf5c6, #6bf898);
     }
 
     .main {
@@ -60,7 +59,6 @@
         margin-top: 2px;
 
         .content {
-            //background-color: aliceblue;
             flex: 0 0 70%;
             height: 100%;
             border-radius: 5px;
