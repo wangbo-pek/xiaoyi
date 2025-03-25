@@ -15,7 +15,7 @@
                                 {{ item.brief }}
                             </v-card-text>
                             <v-card-actions>
-                                <v-btn class="my-btn" variant="outlined" prepend-icon="mdi-eye-outline" @click="jumpTo(item.id)">查看</v-btn>
+                                <v-btn class="my-btn" variant="outlined" prepend-icon="mdi-eye-outline" @click="jumpTo(item.noteListId)">查看</v-btn>
                             </v-card-actions>
                         </v-card>
                     </div>
@@ -36,11 +36,11 @@
 
     const noteStore = useNoteStore()
     const $router = useRouter()
-    const jumpTo = (noteId: string) => {
+    const jumpTo = (noteListId: number) => {
         $router.push({
             name: 'noteDetail',
             params: {
-                id:noteId
+                id:noteListId
             }
         })
     }

@@ -50,7 +50,7 @@
 
     onMounted(async () => {
         // 页面加载时，从noteStore中获取文章list
-        const result = noteStore.noteList.find(note => note.id === noteListId)
+        const result = noteStore.noteList.find(note => note.noteListId === noteListId)
         // 页面加载时，从后端获取文章content
         const content = await axios_server.get('getNote/', {
             params: {
