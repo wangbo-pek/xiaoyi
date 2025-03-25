@@ -10,11 +10,9 @@ let axios_server = axios.create({
 //
 function getCsrfToken(): string | undefined {
     const cookies = document.cookie.split(';')
-    console.log('cookies', cookies)
     for (const cookie of cookies) {
         const [key, value] = cookie.trim().split('=')
         if (key === 'csrftoken') {
-            console.log('value', value)
             return value
         }
     }

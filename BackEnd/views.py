@@ -11,33 +11,31 @@ def get_csrf_token(request):
 
 
 def get_article_list(request):
-    print(request.body)
-    print(request.GET)
-    note_query_set = models.Note.objects.all()
-    print(note_query_set)
+    note_list_query_set = models.NoteList.objects.all()
+    print(note_list_query_set)
 
     # 把数据转换为列表
-    note_list = []
-    for note_object in note_query_set:
-        second_class_name = note_object.second_classification.name
-        first_class_name = note_object.second_classification.first_classification.name
-        tags_name = list(note_object.tags.values_list('name', flat=True))
+    note_list_data = []
+    for note_list_object in note_list_query_set:
+        second_classification = note_list_object.second_classification.name
+        first_classification = note_list_object.second_classification.first_classification.name
+        tags_name = list(note_list_object.tags.values_list('name', flat=True))
 
-        note_list.append({
-            "title": note_object.title,
-            "brief": note_object.brief,
-            "content": note_object.content,
-            "cover_item": "No more picture",
-            "is_show": note_object.is_show,
-            "created_time": note_object.created_time,
-            "modified_time": note_object.modified_time,
-            "tags": tags_name,
-            "first_classification": first_class_name,
-            "second_classification": second_class_name
+        note_list_data.append({
+            "title": note_list_object.title,
+            "brief": note_list_object.brief,
+            # ImageFieldFile类型不能序列化
+            "coverImg": note_list_object.cover_img.url if note_list_object.cover_img else "",
+            "isShow": note_list_object.is_show,
+            "createdTime": note_list_object.created_time,
+            "modifiedTime": note_list_object.modified_time,
+            "tagsName": tags_name,
+            "firstClassification": first_classification,
+            "secondClassification": second_classification
         })
 
     return JsonResponse({
         "code": 0,
         "msg": "success",
-        "data": note_list
+        "data": note_list_data
     })

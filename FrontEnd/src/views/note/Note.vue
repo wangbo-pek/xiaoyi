@@ -3,16 +3,16 @@
         <div class="function-bar">function-bar</div>
         <div class="article-list">
             <v-row>
-                <v-col v-for="(item, index) in article_list" :key="index">
+                <v-col v-for="(item, index) in noteStore.noteList" :key="index">
                     <div class="article-card">
                         <v-card elevation="14" rounded="lg" hover>
-                            <v-img class="article-img" :src="imgURL" cover>
+                            <v-img class="article-img" :src="item.coverImg" cover>
                                 <v-card-title>
                                     <span>{{ item.title }}</span>
                                 </v-card-title>
                             </v-img>
                             <v-card-text>
-                                {{ item.content }}
+                                {{ item.brief }}
                             </v-card-text>
                             <v-card-actions>
                                 <v-btn class="my-btn" variant="text">查看</v-btn>
@@ -24,27 +24,18 @@
             </v-row>
         </div>
     </div>
-
 </template>
 
 <script setup lang='ts'>
-    import axios_server from "@/utils/axios_server.ts";
-    import {onMounted} from "vue";
+    import useNoteStore from "@/store/note.ts";
 
     defineOptions({
         name: 'Note',
         inheritAttrs: false
     })
 
-    let article_list:any = null
-    onMounted(async () => {
-        let result = await axios_server.get('getArticleList')
-        result = result.data
-        console.log('result >>', result)
-        article_list = result
-    })
+    const noteStore = useNoteStore()
 
-    const imgURL = "https://channel-jk.com/wp-content/uploads/2021/08/2598173953459235257.jpg"
 </script>
 
 <style scoped lang="scss">
@@ -55,9 +46,8 @@
 
         .function-bar {
             position: fixed;
-            top: 105px;
+            top: 85px;
             left: 12%;
-            margin: 0 auto;
             width: 65%;
             height: 8%;
             background-color: #f5f5dc;
@@ -102,23 +92,23 @@
                 }
 
                 .v-card-title {
-                    font-size: 24px;
+                    font-size: 20px;
                     padding: 16px;
                     font-weight: 800;
-                    color: #f5f5f5;
 
                     span {
                         background-color: rgba(2, 2, 2, 0.3);
+                        color: #f5f5f5;
                         padding: 0 10px;
                         border-radius: 5px;
                     }
                 }
 
                 .v-card-text {
-                    font-size: 20px;
+                    font-size: 16px;
                     padding: 16px;
                     font-weight: 300;
-                    color: black;
+                    color: #727272;
                 }
 
                 .v-card-action {

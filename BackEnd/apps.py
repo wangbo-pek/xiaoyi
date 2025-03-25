@@ -5,7 +5,7 @@ class BackendConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'BackEnd'
 
-    def ready(self):
-        import BackEnd.signals
+    # def ready(self):
+    #     import BackEnd.signals
 
 

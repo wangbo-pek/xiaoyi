@@ -1,10 +1,11 @@
 {
     "compilerOptions": {
+        "moduleResolution": "node",
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"]
         },
-        "types": ["node"],
+        "types": ["node", "vue", "vuetify"],
     },
     "files": [],
     "references": [
