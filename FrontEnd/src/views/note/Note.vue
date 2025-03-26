@@ -1,33 +1,95 @@
 <template>
     <div class="content-container">
-        <div class="function-bar">function-bar</div>
+        <div class="function-bar">
+            <div class="select-container">
+                <v-select
+                    variant="solo-inverted"
+                    density="compact"
+                    clearable
+                    chips
+                    label="1th-class"
+                    :items="['1','2','3','4']"
+                    class="first-class-select"
+                >
+                </v-select>
+            </div>
+            <div class="select-container">
+                <v-select
+                    variant="solo-inverted"
+                    density="compact"
+                    clearable
+                    chips
+                    label="2nd-class"
+                    :items="['1','2','3','4']"
+                    multiple
+                    class="second-class-select"
+                >
+                </v-select>
+            </div>
+            <div class="select-container">
+                <v-select
+                    variant="solo-inverted"
+                    density="compact"
+                    clearable
+                    chips
+                    label="tags"
+                    :items="['1','2','3','4']"
+                    multiple
+                    class="tags-select"
+                >
+                </v-select>
+            </div>
+        </div>
+
         <div class="article-list">
             <v-row>
                 <v-col v-for="(item, index) in noteStore.noteList" :key="index">
                     <div class="article-card">
-                        <v-card elevation="14" rounded="lg" hover>
-                            <v-img class="article-img" :src="item.coverImg" cover>
-                                <v-card-title>
-                                    <span>{{ item.title }}</span>
-                                </v-card-title>
-                            </v-img>
-                            <v-card-text>
-                                {{ item.brief }}
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-btn class="my-btn" variant="outlined" prepend-icon="mdi-eye-outline" @click="jumpTo(item.noteListId)">查看</v-btn>
-                            </v-card-actions>
+                        <v-card elevation="14" rounded="lg" hover @click="jumpTo(item.noteListId)">
+                            <template v-slot:image>
+                                <v-img class="article-img" :src="item.coverImg" cover></v-img>
+                            </template>
+                            <v-card-item>
+                                <v-card-text class="title">{{ item.title }}</v-card-text>
+                                <v-card-text class="subtitle">{{ item.brief }} ... ...</v-card-text>
+                            </v-card-item>
+                            <v-card-item>
+                                <template v-for="(subItem) in item.tagsName">
+                                    <v-chip class="tags" label variant="text">
+                                        <v-icon icon="mdi-label-outline" start></v-icon>
+                                        {{ subItem }}
+                                    </v-chip>
+                                </template>
+                            </v-card-item>
+                            <v-card-item>
+                                <v-chip class="info" label variant="outlined">
+                                    <v-icon icon="mdi-thumb-up-outline" start></v-icon>
+                                    33
+                                </v-chip>
+                                <v-chip class="info" label variant="outlined">
+                                    <v-icon icon="mdi-thumb-down-outline" start></v-icon>
+                                    23
+                                </v-chip>
+                                <v-chip class="info" label variant="outlined">
+                                    <v-icon icon="mdi-heart-outline" start></v-icon>
+                                    23
+                                </v-chip>
+                            </v-card-item>
                         </v-card>
                     </div>
                 </v-col>
             </v-row>
         </div>
     </div>
+
+
 </template>
 
 <script setup lang='ts'>
     import useNoteStore from "@/store/note.ts";
     import {useRouter} from "vue-router";
+    import {onMounted, onUnmounted} from "vue";
+    import useAppearanceStore from "@/store/appearance.ts";
 
     defineOptions({
         name: 'Note',
@@ -36,15 +98,25 @@
 
     const noteStore = useNoteStore()
     const $router = useRouter()
+    let appearanceStore = useAppearanceStore()
+
     const jumpTo = (noteListId: number) => {
         $router.push({
             name: 'noteDetail',
             params: {
-                id:noteListId
+                id: noteListId
             }
         })
     }
 
+    onMounted(() => {
+        appearanceStore.isShowHomeCover = false
+        appearanceStore.isScrollOverViewport = true
+    })
+
+    onUnmounted(() => {
+        appearanceStore.isShowHomeCover = true
+    })
 </script>
 
 <style scoped lang="scss">
@@ -55,37 +127,47 @@
 
         .function-bar {
             position: fixed;
-            top: 85px;
-            left: 12%;
-            width: 65%;
-            height: 8%;
-            background-color: #f5f5dc;
+            top: 50px;
+            left: 6%;
+            width: 74%;
+            height: 10%;
+            background-color: rgba(23, 104, 122, 0.75);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
-            border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 10px;
+
+            .select-container {
+                position: relative;
+                top: 10px;
+                left: 0;
+                width: 400px;
+                margin: 0 10px;
+            }
+
         }
 
         .article-list {
             position: relative;
-            top: 7%;
-            width: 98%;
+            top: 5.5%;
+            left: 5%;
+            width: 100%;
             margin: 0 auto;
+            padding: 10px 2px;
             //background-color: lightyellow;
-            padding: 10px;
             //border: 1px solid #cccccc;
             border-radius: 5px;
             min-height: 200px;
             box-sizing: border-box;
 
             .article-card {
-                width: 350px;
-                margin: 10px auto;
+                //margin: 20px;
 
                 .v-card {
-                    border: 2px solid rgba(21, 110, 78, 0.9);
+                    width: 300px;
+                    height: 300px;
+                    border: 1px solid rgba(21, 110, 78, 0.9);
                     box-shadow: 2px 6px 12px rgba(21, 110, 78, 0.9);
                     transition: transform 0.3s ease;
 
@@ -95,44 +177,36 @@
                 }
 
                 .article-img {
-                    height: 200px;
-                    border-bottom: 3px solid #28936d;
-                    filter: brightness(0.9);
+                    border-bottom: 3px solid #ff0000;
+                    filter: brightness(0.3);
                 }
 
-                .v-card-title {
-                    font-size: 20px;
-                    padding: 16px;
-                    font-weight: 800;
-
-                    span {
-                        background-color: rgba(2, 2, 2, 0.3);
-                        color: #f5f5f5;
-                        padding: 0 10px;
-                        border-radius: 5px;
-                    }
-                }
-
-                .v-card-text {
+                .title {
                     font-size: 16px;
+                    padding: 20px;
+                    font-weight: 800;
+                    color: white;
+                }
+
+                .subtitle {
+                    font-size: 14px;
                     padding: 16px;
                     font-weight: 300;
-                    color: #727272;
+                    color: #d2d2d2;
                 }
 
-                .v-card-action {
-                    justify-content: flex-end;
-                    padding: 8px 16px;
-                }
-
-                .my-btn {
-                    width: 80px;
+                .tags {
                     font-size: 13px;
-                    color: rgba(21, 110, 78, 0.9);
-                    margin: 10px 10px;
-                    padding: 0 5px;
+                    margin: 0 1px;
+                    color: white;
+                }
+
+                .info {
+                    margin: 0 5px;
+                    color: white;
                 }
             }
+
         }
     }
 

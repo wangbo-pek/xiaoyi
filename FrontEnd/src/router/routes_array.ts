@@ -2,9 +2,9 @@ export const routesArray = [
     {
         path: 'home',
         name: 'home',
-        component: () => import('@/views/home/Home.vue'),
+        component: () => import('@/views/Home/Home.vue'),
         meta: {
-            title: "首页"
+            title: '首页'
         }
     },
     {
@@ -32,11 +32,11 @@ export const routesArray = [
         }
     },
     {
-        path: 'about',
-        name: 'about',
+        path: 'tags',
+        name: 'tags',
         component: () => import('@/views/about/About.vue'),
         meta: {
-            title: "关于我"
+            title: "标签"
         }
     },
 ]

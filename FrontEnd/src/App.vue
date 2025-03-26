@@ -33,46 +33,5 @@
 </script>
 
 <style scoped lang="scss">
-    .headerbar {
-        padding: 0;
-        margin: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 10vh;
-        z-index: 1000;
-        background-image: linear-gradient(to right, #4fadf1, #4fe5f3, #5bf5c6, #6bf898);
-    }
 
-    .main {
-        position: fixed;
-        top: 10vh;
-        left: 0;
-        width: 100%;
-        height: 90vh;
-        z-index: 900;
-        display: flex;
-        justify-content: right;
-        align-items: flex-start;
-        gap: 10px;
-        margin-top: 2px;
-
-        .content {
-            flex: 0 0 70%;
-            height: 100%;
-            border-radius: 5px;
-            padding: 2px 10px;
-            overflow-y: auto;
-        }
-
-        .siderbar {
-            background-color: lightblue;
-            flex: 0 0 20%;
-            height: 100%;
-            border-radius: 5px;
-            padding: 10px;
-            overflow-y: auto;
-        }
-    }
 </style>

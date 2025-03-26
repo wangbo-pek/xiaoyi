@@ -1,32 +1,39 @@
 <template>
     <!-- 当xs、sm时 -->
-    <div v-if="display.xs.value || display.sm.value || display.md.value">
-        <div>博客名称(xs、sm、md)</div>
-        <div>博客导航(xs、sm、md)</div>
-    </div>
+    <!--<div v-if="display.xs.value || display.sm.value || display.md.value">-->
+    <!--    <div>博客名称(xs、sm、md)</div>-->
+    <!--    <div>博客导航(xs、sm、md)</div>-->
+    <!--</div>-->
 
     <!-- 当sm、lg、xl、xxl -->
-    <div v-if="display.lgAndUp.value" class="header-container">
-        <div class="title-big"><HeaderTitleBig></HeaderTitleBig></div>
-        <div class="nav-big"><HeaderNavBig></HeaderNavBig></div>
-        <div class="widget-big"><HeaderWidgetBig></HeaderWidgetBig></div>
+    <!--<div v-if="display.lgAndUp.value" class="header-container"-->
+    <div class="header-container" :class="{'changeBackgroundColor':coverImage.isScrollOverViewport}">
+        <div class="title-big">
+            <HeaderTitle></HeaderTitle>
+        </div>
+        <div class="nav-big">
+            <HeaderNav></HeaderNav>
+        </div>
+        <div class="widget-big">
+            <HeaderWidget></HeaderWidget>
+        </div>
     </div>
 </template>
 
 <script setup lang='ts'>
-    import {useDisplay} from "vuetify";
-    import HeaderNavBig from "@/components/Header/header_nav_big/HeaderNavBig.vue";
-    import HeaderTitleBig from "@/components/Header/header_title_big/HeaderTitleBig.vue";
-    import HeaderWidgetBig from "@/components/Header/header_widget_big/HeaderWidgetBig.vue";
+    // import {useDisplay} from "vuetify";
+    import HeaderNav from "@/components/Header/HeaderNav.vue";
+    import HeaderTitle from "@/components/Header/HeaderTitle.vue";
+    import HeaderWidget from "@/components/Header/HeaderWidget.vue";
+    import useAppearanceStore from "@/store/appearance.ts";
 
     defineOptions({
         name: 'Header',
         inheritAttrs: false
     })
 
-    const display = useDisplay()
-    console.log(display.name.value)
-
+    const coverImage = useAppearanceStore()
+    // const display = useDisplay()
 </script>
 
 <style scoped lang='scss'>
@@ -36,10 +43,10 @@
         align-items: stretch;
         height: 100%;
         width: 100%;
-
+        background-color: rgba(204, 204, 204, 0.2);
 
         .title-big {
-            width: 32%;
+            width: 35%;
             height: 100%;
             padding-right: 30px;
         }
@@ -50,8 +57,13 @@
         }
 
         .widget-big {
-            width: 33%;
+            width: 30%;
             height: 100%;
         }
+
     }
+    .changeBackgroundColor {
+            background-color: #17687a;
+        }
+
 </style>
