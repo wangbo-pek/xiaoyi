@@ -1,9 +1,9 @@
 <template>
     <div class="nav-container">
-        <v-btn variant="text" class="my-btn" @click="jumpTo('note')">笔记</v-btn>
-        <v-btn variant="text" class="my-btn" @click="jumpTo('essay')">文章</v-btn>
-        <v-btn variant="text" class="my-btn" @click="jumpTo('diary')">日记</v-btn>
-        <v-btn variant="text" class="my-btn" @click="jumpTo('tags')">标签</v-btn>
+        <v-btn variant="text" class="my-btn" density="compact" prepend-icon="" @click="jumpTo('note')"><v-icon>mdi-fountain-pen-tip</v-icon>笔记</v-btn>
+        <v-btn variant="text" class="my-btn" density="compact" @click="jumpTo('essay')"><v-icon>mdi-format-quote-close</v-icon>文章</v-btn>
+        <v-btn variant="text" class="my-btn" density="compact" @click="jumpTo('diary')"><v-icon>mdi-ghost</v-icon>日记</v-btn>
+        <v-btn variant="text" class="my-btn" density="compact" @click="jumpTo('tags')"><v-icon>mdi-tag-multiple</v-icon>标签</v-btn>
     </div>
 </template>
 
@@ -31,11 +31,11 @@
         justify-content: flex-end;
 
         .my-btn {
-            width: 50px;
+            width: 75px;
             font-size: 14px;
             font-weight: 900;
             color: white;
-            //margin: 0 5px;
+            margin: 0 5px;
             //background-color: rgba(255, 255, 255, 0.15)
         }
     }

@@ -13,13 +13,14 @@
             <router-view></router-view>
         </div>
         <div class="siderbar">
-            <div><v-icon>mdi-home</v-icon><v-icon>mdi-heart</v-icon></div>
+            <Sider></Sider>
         </div>
     </div>
 </template>
 
 <script setup lang='ts'>
     import Header from "@/components/Header/Header.vue";
+    import Sider from "@/components/Sider/Sider.vue";
     import Cover from "@/components/Cover.vue";
     import useAppearanceStore from "@/store/appearance.ts";
 
@@ -54,7 +55,6 @@
         z-index: 900;
 
         .content {
-            background-color: lightcyan;
             flex: 0 0 82%;
             height: 100%;
             border-radius: 5px;

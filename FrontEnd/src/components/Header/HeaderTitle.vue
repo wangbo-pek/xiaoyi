@@ -1,7 +1,9 @@
 <template>
     <div class="title-container">
         <div class="title">
-            <v-btn variant="text" class="my-btn" @click="jumpTo">XiaoYi_Blog</v-btn>
+            <v-btn variant="text" class="my-btn" @click="jumpTo">
+                XiaoYi_Blog
+            </v-btn>
         </div>
     </div>
 </template>

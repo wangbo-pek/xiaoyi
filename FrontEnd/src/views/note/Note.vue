@@ -1,46 +1,5 @@
 <template>
     <div class="content-container">
-        <div class="function-bar">
-            <div class="select-container">
-                <v-select
-                    variant="solo-inverted"
-                    density="compact"
-                    clearable
-                    chips
-                    label="1th-class"
-                    :items="['1','2','3','4']"
-                    class="first-class-select"
-                >
-                </v-select>
-            </div>
-            <div class="select-container">
-                <v-select
-                    variant="solo-inverted"
-                    density="compact"
-                    clearable
-                    chips
-                    label="2nd-class"
-                    :items="['1','2','3','4']"
-                    multiple
-                    class="second-class-select"
-                >
-                </v-select>
-            </div>
-            <div class="select-container">
-                <v-select
-                    variant="solo-inverted"
-                    density="compact"
-                    clearable
-                    chips
-                    label="tags"
-                    :items="['1','2','3','4']"
-                    multiple
-                    class="tags-select"
-                >
-                </v-select>
-            </div>
-        </div>
-
         <div class="article-list">
             <v-row>
                 <v-col v-for="(item, index) in noteStore.noteList" :key="index">
@@ -150,13 +109,11 @@
 
         .article-list {
             position: relative;
-            top: 5.5%;
-            left: 5%;
+            top: 6vh;
+            left: 2vw;
             width: 100%;
             margin: 0 auto;
             padding: 10px 2px;
-            //background-color: lightyellow;
-            //border: 1px solid #cccccc;
             border-radius: 5px;
             min-height: 200px;
             box-sizing: border-box;
