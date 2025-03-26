@@ -15,24 +15,31 @@
                             <v-card-item>
                                 <template v-for="(subItem) in item.tagsName">
                                     <v-chip class="tags" label variant="text">
-                                        <v-icon icon="mdi-label-outline" start></v-icon>
+                                        <v-icon icon="mdi-label-outline"></v-icon>
                                         {{ subItem }}
                                     </v-chip>
                                 </template>
                             </v-card-item>
                             <v-card-item>
                                 <v-chip class="info" label variant="outlined">
-                                    <v-icon icon="mdi-thumb-up-outline" start></v-icon>
+                                    <v-icon icon="mdi-thumb-up-outline" size="small" start></v-icon>
                                     33
                                 </v-chip>
                                 <v-chip class="info" label variant="outlined">
-                                    <v-icon icon="mdi-thumb-down-outline" start></v-icon>
+                                    <v-icon icon="mdi-thumb-down-outline" size="small" start></v-icon>
                                     23
                                 </v-chip>
                                 <v-chip class="info" label variant="outlined">
-                                    <v-icon icon="mdi-heart-outline" start></v-icon>
+                                    <v-icon icon="mdi-heart-outline" size="small" start></v-icon>
                                     23
                                 </v-chip>
+                            </v-card-item>
+                            <v-card-item class="date-time">
+                                <v-chip class="tags" label variant="text">
+                                    <v-icon icon="mdi-alarm" size="small" start></v-icon>
+                                    2025-2-15
+                                </v-chip>
+
                             </v-card-item>
                         </v-card>
                     </div>
@@ -110,7 +117,6 @@
         .article-list {
             position: relative;
             top: 6vh;
-            left: 2vw;
             width: 100%;
             margin: 0 auto;
             padding: 10px 2px;
@@ -122,8 +128,8 @@
                 //margin: 20px;
 
                 .v-card {
-                    width: 300px;
-                    height: 300px;
+                    width: 350px;
+                    height: 350px;
                     border: 1px solid rgba(21, 110, 78, 0.9);
                     box-shadow: 2px 6px 12px rgba(21, 110, 78, 0.9);
                     transition: transform 0.3s ease;
@@ -161,6 +167,11 @@
                 .info {
                     margin: 0 5px;
                     color: white;
+                }
+
+                .date-time {
+                    color: white;
+                    font-size: 14px;
                 }
             }
 

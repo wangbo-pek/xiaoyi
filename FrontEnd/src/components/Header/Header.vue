@@ -43,7 +43,7 @@
         align-items: stretch;
         height: 100%;
         width: 100%;
-        background-color: rgba(204, 204, 204, 0.2);
+        background-color: rgba(204, 204, 204, 0.35);
 
         .title-big {
             width: 35%;
