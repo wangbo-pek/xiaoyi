@@ -3,9 +3,9 @@
         <div class="overlay">
             <div class="text-container">
                 <!-- title -->
-                <h2 class="title-text">{{title}}</h2>
+                <h2 class="title-text">{{ title }}</h2>
                 <!-- subtitle -->
-                <p class="subtitle-text">{{subtitle}}</p>
+                <p class="subtitle-text">{{ subtitle }}</p>
             </div>
 
             <div class="footer-container">
@@ -13,12 +13,12 @@
                 <div class="info-row">
                     <span class="created-date">
                         <v-icon class="created-date-icon" icon="mdi-alarm" size="small" start></v-icon>
-                        <span class="created-date-text">{{createdDate}}</span>
+                        <span class="created-date-text">{{ createdDate }}</span>
                     </span>
                     <span class="second-class">
                         <v-icon class="second-class-icon" icon="mdi-hexagon-multiple-outline" size="small"
                                 start></v-icon>
-                         <span class="second-class-text">{{secondClassification}}</span>
+                         <span class="second-class-text">{{ secondClassification }}</span>
                     </span>
                 </div>
 
@@ -30,17 +30,17 @@
                     <template v-for="(tag, index) in tags" :key="index">
                         <span class="tag">
                             <v-icon class="tag-icon" icon="mdi-tag-outline"></v-icon>
-                            <span class="tag-text">{{tag}}</span>
+                            <span class="tag-text">{{ tag }}</span>
                         </span>
                     </template>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
 
 <script setup lang='ts'>
+
     defineOptions({
         name: 'Card',
         inheritAttrs: false
@@ -48,15 +48,16 @@
 
     // title、subtitle、bgImage、createdDate、secondClassification、tags
     defineProps<{
-        title:string
-        subtitle:string
-        bgImage:string
-        createdDate:string
-        secondClassification:string
-        tags:string[]
+        title: string
+        subtitle: string
+        bgImage: string
+        createdDate: string
+        secondClassification: string
+        tags: string[]
     }>()
 
 </script>
+
 
 <style scoped lang='scss'>
     .card-container {
@@ -74,6 +75,7 @@
         align-items: stretch;
         justify-content: flex-start;
         transition: transform 0.3s ease;
+
         &:hover {
             transform: scale(1.03);
             z-index: 3;
@@ -188,14 +190,3 @@
         }
     }
 </style>
-
-
-
-
-
-
-
-
-
-
-

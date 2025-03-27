@@ -4,7 +4,8 @@ const useAppearanceStore = defineStore('appearance', {
     state: () => {
         return {
             isScrollOverViewport: false,
-            isShowHomeCover: true
+            isShowHomeCover: true,
+            isShowPreviewDialog: false
         }
     }
 })
