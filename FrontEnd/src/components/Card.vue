@@ -1,5 +1,5 @@
 <template>
-    <div class="card-container" :style="{backgroundImage:`url(${bgImage})`}">
+    <div class="card-container" :style="{backgroundImage:`url(${bgImage})`}" @click="$emit('click')">
         <div class="overlay">
             <div class="text-container">
                 <!-- title -->
@@ -83,17 +83,17 @@
 
         .overlay {
             background-image: linear-gradient(to bottom,
-                rgba(0, 0, 0, 0.25) 0%,
+                rgba(0, 0, 0, 0.3) 0%,
                 rgba(0, 0, 0, 0.35) 10%,
-                rgba(0, 0, 0, 0.45) 20%,
-                rgba(0, 0, 0, 0.55) 30%,
-                rgba(0, 0, 0, 0.65) 40%,
-                rgba(0, 0, 0, 0.65) 50%,
-                rgba(0, 0, 0, 0.65) 60%,
-                rgba(0, 0, 0, 0.55) 70%,
-                rgba(0, 0, 0, 0.45) 80%,
+                rgba(0, 0, 0, 0.4) 20%,
+                rgba(0, 0, 0, 0.45) 30%,
+                rgba(0, 0, 0, 0.5) 40%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.5) 60%,
+                rgba(0, 0, 0, 0.45) 70%,
+                rgba(0, 0, 0, 0.4) 80%,
                 rgba(0, 0, 0, 0.35) 90%,
-                rgba(0, 0, 0, 0.25) 100%,
+                rgba(0, 0, 0, 0.3) 100%,
             );
             width: 100%;
             padding: 16px;
