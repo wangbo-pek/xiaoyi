@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core.exceptions import ObjectDoesNotExist, FieldError
@@ -24,14 +23,24 @@ def get_note_list(request):
             first_classification = note_list_object.second_classification.first_classification.name
             tags_name = list(note_list_object.tags.values_list('name', flat=True))
 
+            temp_created_time = note_list_object.created_time
+            temp_modified_time = note_list_object.modified_time
+
             note_list_data.append({
                 "noteListId": note_list_object.id,
                 "title": note_list_object.title,
+                "subtitle": note_list_object.subtitle,
                 "brief": note_list_object.brief,
                 "coverImg": note_list_object.cover_img,
                 "isShow": note_list_object.is_show,
-                "createdTime": note_list_object.created_time,
-                "modifiedTime": note_list_object.modified_time,
+                "isPinned": note_list_object.is_pinned,
+                "isRecommended": note_list_object.is_recommended,
+                "viewedCount": note_list_object.viewed_count,
+                "likedCount": note_list_object.liked_count,
+                "disgustedCount": note_list_object.disgusted_count,
+                "encouragedCount": note_list_object.encouraged_count,
+                "createdTime": f"{temp_created_time.year}-{temp_created_time.month}-{temp_created_time.day}",
+                "modifiedTime": f"{temp_modified_time.year}-{temp_modified_time.month}-{temp_modified_time.day}",
                 "tagsName": tags_name,
                 "firstClassification": first_classification,
                 "secondClassification": second_classification

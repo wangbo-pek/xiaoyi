@@ -27,12 +27,9 @@ def create_note_with_extra(title, content, second_classification, tags):
         second_classification=second_classification,
         cover_img=random.choice(IMAGE_URL),
         title=title,
-        brief=note_obj.content[:44]
+        subtitle=note_obj.content[:15],
+        brief=note_obj.content[:64]
     )
     note_list_obj.tags.set(tags)
-
-    models.NoteInfo.objects.create(
-        note=note_obj
-    )
 
     return note_obj

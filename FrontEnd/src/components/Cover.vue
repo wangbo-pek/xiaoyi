@@ -118,7 +118,7 @@
 
         .cover-img {
             height: 100vh;
-            filter: grayscale(80%) brightness(0.5) contrast(120%);
+            filter: grayscale(80%) brightness(0.7) contrast(120%);
         }
 
         .cover-text {

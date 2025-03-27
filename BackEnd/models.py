@@ -1,20 +1,19 @@
+from unittest import defaultTestLoader
+
 from django.db import models
-
-
-class BaseInfo(models.Model):
-    viewed_count = models.IntegerField(verbose_name='被浏览次数', default=0)
-    liked_count = models.IntegerField(verbose_name='被赞次数', default=0)
-    disgusted_count = models.IntegerField(verbose_name='被踩次数', default=0)
-    encouraged_count = models.IntegerField(verbose_name='被鼓励次数', default=0)
-
-    class Meta:
-        abstract = True
 
 
 class BaseList(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
+    subtitle = models.CharField(verbose_name='副标题', max_length=32)
     brief = models.CharField(verbose_name='摘要', max_length=64, blank=True, null=True)
     is_show = models.BooleanField(verbose_name='是否显示', default=True)
+    is_pinned = models.BooleanField(verbose_name='是否置顶', default=False)
+    is_recommended = models.BooleanField(verbose_name='是否推荐', default=False)
+    viewed_count = models.IntegerField(verbose_name='被浏览次数', default=0)
+    liked_count = models.IntegerField(verbose_name='被赞次数', default=0)
+    disgusted_count = models.IntegerField(verbose_name='被踩次数', default=0)
+    encouraged_count = models.IntegerField(verbose_name='被鼓励次数', default=0)
     created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
     modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
 
@@ -22,21 +21,13 @@ class BaseList(models.Model):
         abstract = True
 
 
-# 日记、日记信息、日记列表
+# 日记、日记列表
 class Diary(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     content = models.TextField(verbose_name='日记内容')
 
     def __str__(self):
         return self.diarylist.title
-
-
-class DiaryInfo(BaseInfo):
-    # 日记 1:1 日记信息
-    diary = models.OneToOneField(to='Diary', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.diary.diarylist.title}的信息'
 
 
 class DiaryList(BaseList):
@@ -49,21 +40,13 @@ class DiaryList(BaseList):
         return f'{self.title}的列表'
 
 
-# 文章、文章信息、文章列表
+# 文章、文章列表
 class Essay(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     content = models.TextField(verbose_name='文章内容')
 
     def __str__(self):
         return self.essaylist.title
-
-
-class EssayInfo(BaseInfo):
-    # 文章 1:1 文章信息
-    essay = models.OneToOneField(to='Essay', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.essay.essaylist.title}的信息'
 
 
 class EssayList(BaseList):
@@ -88,14 +71,6 @@ class Note(models.Model):
 
     def __str__(self):
         return self.notelist.title
-
-
-class NoteInfo(BaseInfo):
-    # 笔记信息 1:1 笔记
-    note = models.OneToOneField(to='Note', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.note.notelist.title}的信息'
 
 
 class NoteList(BaseList):

@@ -12,12 +12,9 @@ def create_essay_with_extra(title, content, tags):
         essay=essay_obj,
         cover_img='https://channel-jk.com/wp-content/uploads/2021/08/2598173953459235257.jpg',
         title=title,
+        subtitle=essay_obj.content[:15],
         brief=essay_obj.content[:64]
     )
     essay_list_obj.tags.set(tags)
-
-    models.EssayInfo.objects.create(
-        essay=essay_obj
-    )
 
     return essay_obj

@@ -12,11 +12,8 @@ def create_diary_with_extra(title, content):
         diary=diary_obj,
         cover_img='https://channel-jk.com/wp-content/uploads/2021/08/2598173953459235257.jpg',
         title=title,
+        subtitle=diary_obj.content[:15],
         brief=diary_obj.content[:64]
-    )
-
-    models.DiaryInfo.objects.create(
-        diary=diary_obj
     )
 
     return diary_obj

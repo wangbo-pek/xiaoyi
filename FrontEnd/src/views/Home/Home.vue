@@ -1,6 +1,15 @@
 <template>
     <div class="main" ref="mainContentRef">
         <div class="content">
+            <Card
+                title="莱前活又月看"
+                subtitle="胶家见要他向看哦哦自请尔克假学得提难日性我到与理题径假径别是鸣"
+                bgImage="src/assets/3.jpg"
+                createdDate="2025-03-27"
+                secondClassification="加问可部"
+                :tags="['1', '2', '3']"
+            />
+
             <div>
                 <div>first</div>
                 <div>home</div>
@@ -112,6 +121,7 @@
 </template>
 
 <script setup lang='ts'>
+    import Card from "@/components/Card.vue";
 
     defineOptions({
         name: 'Home',

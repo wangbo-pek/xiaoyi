@@ -1,53 +1,18 @@
 <template>
     <div class="content-container">
         <div class="article-list">
-            <v-row>
-                <v-col v-for="(item, index) in noteStore.noteList" :key="index">
-                    <div class="article-card">
-                        <v-card elevation="14" rounded="lg" hover @click="jumpTo(item.noteListId)">
-                            <template v-slot:image>
-                                <v-img class="article-img" :src="item.coverImg" cover></v-img>
-                            </template>
-                            <v-card-item>
-                                <v-card-text class="title">{{ item.title }}</v-card-text>
-                                <v-card-text class="subtitle">{{ item.brief }} ... ...</v-card-text>
-                            </v-card-item>
-                            <v-card-item>
-                                <template v-for="(subItem) in item.tagsName">
-                                    <v-chip class="tags" label variant="text">
-                                        <v-icon icon="mdi-label-outline"></v-icon>
-                                        {{ subItem }}
-                                    </v-chip>
-                                </template>
-                            </v-card-item>
-                            <v-card-item>
-                                <v-chip class="info" label variant="outlined">
-                                    <v-icon icon="mdi-thumb-up-outline" size="small" start></v-icon>
-                                    33
-                                </v-chip>
-                                <v-chip class="info" label variant="outlined">
-                                    <v-icon icon="mdi-thumb-down-outline" size="small" start></v-icon>
-                                    23
-                                </v-chip>
-                                <v-chip class="info" label variant="outlined">
-                                    <v-icon icon="mdi-heart-outline" size="small" start></v-icon>
-                                    23
-                                </v-chip>
-                            </v-card-item>
-                            <v-card-item class="date-time">
-                                <v-chip class="tags" label variant="text">
-                                    <v-icon icon="mdi-alarm" size="small" start></v-icon>
-                                    2025-2-15
-                                </v-chip>
-
-                            </v-card-item>
-                        </v-card>
-                    </div>
-                </v-col>
-            </v-row>
+            <template v-for="item in noteStore.noteList" :key="item.noteListId">
+                <Card
+                    :title="item.title"
+                    :subtitle="item.subtitle"
+                    :bgImage="item.coverImg"
+                    :createdDate="item.createdTime"
+                    :secondClassification="item.secondClassification"
+                    :tags="item.tagsName"
+                ></Card>
+            </template>
         </div>
     </div>
-
 
 </template>
 
@@ -56,6 +21,7 @@
     import {useRouter} from "vue-router";
     import {onMounted, onUnmounted} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
+    import Card from "@/components/Card.vue";
 
     defineOptions({
         name: 'Note',
@@ -91,90 +57,13 @@
         width: 100%;
         height: 100%;
 
-        .function-bar {
-            position: fixed;
-            top: 50px;
-            left: 6%;
-            width: 74%;
-            height: 10%;
-            background-color: rgba(23, 104, 122, 0.75);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            border-radius: 10px;
-
-            .select-container {
-                position: relative;
-                top: 10px;
-                left: 0;
-                width: 400px;
-                margin: 0 10px;
-            }
-
-        }
-
         .article-list {
-            position: relative;
-            top: 6vh;
-            width: 100%;
-            margin: 0 auto;
-            padding: 10px 2px;
-            border-radius: 5px;
-            min-height: 200px;
-            box-sizing: border-box;
-
-            .article-card {
-                //margin: 20px;
-
-                .v-card {
-                    width: 350px;
-                    height: 350px;
-                    border: 1px solid rgba(21, 110, 78, 0.9);
-                    box-shadow: 2px 6px 12px rgba(21, 110, 78, 0.9);
-                    transition: transform 0.3s ease;
-
-                    &:hover {
-                        transform: scale(1.03);
-                    }
-                }
-
-                .article-img {
-                    border-bottom: 3px solid #ff0000;
-                    filter: brightness(0.3);
-                }
-
-                .title {
-                    font-size: 16px;
-                    padding: 20px;
-                    font-weight: 800;
-                    color: white;
-                }
-
-                .subtitle {
-                    font-size: 14px;
-                    padding: 16px;
-                    font-weight: 300;
-                    color: #d2d2d2;
-                }
-
-                .tags {
-                    font-size: 13px;
-                    margin: 0 1px;
-                    color: white;
-                }
-
-                .info {
-                    margin: 0 5px;
-                    color: white;
-                }
-
-                .date-time {
-                    color: white;
-                    font-size: 14px;
-                }
-            }
-
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            column-gap: 34px;
+            row-gap: 40px;
+            padding: 80px 20px 30px 20px;
+            justify-items: center;
         }
     }
 
