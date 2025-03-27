@@ -10,7 +10,7 @@ export const routesArray = [
     {
         path: 'note',
         name: 'note',
-        component: () => import('@/views/note/Note.vue'),
+        component: () => import('@/views/Note/Note.vue'),
         meta: {
             title: "笔记"
         }
@@ -18,7 +18,7 @@ export const routesArray = [
     {
         path: 'essay',
         name: 'essay',
-        component: () => import('@/views/essay/Essay.vue'),
+        component: () => import('@/views/Essay/Essay.vue'),
         meta: {
             title: "文章"
         }
@@ -26,7 +26,7 @@ export const routesArray = [
     {
         path: 'diary',
         name: 'diary',
-        component: () => import('@/views/diary/Diary.vue'),
+        component: () => import('@/views/Diary/Diary.vue'),
         meta: {
             title: "日记"
         }
