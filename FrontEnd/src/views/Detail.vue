@@ -1,17 +1,17 @@
 <template>
     <div class="detail-container">
         <div class="detail-header">
-            <h1>{{ noteItem.title }}</h1>
+            <h1>{{ noteContentItem.title }}</h1>
             <div class="detail-meta">
-                <span>分类：{{ noteItem.firstClassification }} >> {{ noteItem.secondClassification }}</span><br>
-                <span>标签：{{ noteItem.tagsName.join(',') }}</span><br>
-                <span>创建时间：{{ noteItem.createdTime }}</span><br>
-                <span>修改时间：{{ noteItem.modifiedTime }}</span>
+                <span>分类：{{ noteContentItem.firstClassification }} >> {{ noteContentItem.secondClassification }}</span><br>
+                <span>标签：{{ noteContentItem.tagsName.join(',') }}</span><br>
+                <span>创建时间：{{ noteContentItem.createdTime }}</span><br>
+                <span>修改时间：{{ noteContentItem.modifiedTime }}</span>
             </div>
         </div>
-        <img :src="noteItem.coverImg" alt="1">
+        <img :src="noteContentItem.coverImg" alt="1">
         <div class="detail-content">
-            {{ noteItem.content }}
+            {{ noteContentItem.content }}
         </div>
         <div class="detail-footer">
             <v-btn variant="outlined" @click="goBack">返回</v-btn>
@@ -24,6 +24,7 @@
     import {onMounted, reactive} from "vue";
     import useNoteStore from "@/store/note.ts";
     import axios_server from "@/utils/axios_server.ts";
+    import type {NoteContentItem} from "@/store/types/note.ts";
 
     defineOptions({
         name: 'Detail',
@@ -34,18 +35,25 @@
     const $router = useRouter()
     const noteStore = useNoteStore()
     const noteListId = Number(route.params.id)
-    const noteItem = reactive({
-        "noteListId": '',
+    const noteContentItem = reactive<NoteContentItem>({
+        "noteListId": 0,
         "title": '',
+        "subtitle": '',
         "brief": '',
-        "content": '',
         "coverImg": '',
-        "isShow": '',
+        "isShow": true,
+        "isPinned": false,
+        "isRecommended": false,
+        "viewedCount": 0,
+        "likedCount": 0,
+        "disgustedCount": 0,
+        "encouragedCount": 0,
         "createdTime": '',
         "modifiedTime": '',
-        "tagsName": [] as string[],
+        "tagsName": [],
         "firstClassification": '',
         "secondClassification": '',
+        "content": ''
     })
 
     onMounted(async () => {
@@ -57,8 +65,8 @@
                 noteListId
             }
         })
-        Object.assign(noteItem, result)
-        noteItem.content = content.data.content
+        Object.assign(noteContentItem, result)
+        noteContentItem.content = content.data.content
     })
 
     const goBack = () => {

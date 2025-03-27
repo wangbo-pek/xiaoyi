@@ -1,4 +1,4 @@
-export default interface NoteListItem {
+export interface NoteListItem {
     "noteListId": number,
     "title": string,
     "subtitle": string,
@@ -16,4 +16,25 @@ export default interface NoteListItem {
     "tagsName": string[],
     "firstClassification": string,
     "secondClassification": string,
+}
+
+export interface NoteContentItem {
+    "noteListId": number,
+    "title": string,
+    "subtitle": string,
+    "brief": string,
+    "coverImg": string,
+    "isShow": boolean,
+    "isPinned": boolean,
+    "isRecommended": boolean,
+    "viewedCount": number,
+    "likedCount": number,
+    "disgustedCount": number,
+    "encouragedCount": number,
+    "createdTime": string,
+    "modifiedTime": string,
+    "tagsName": string[],
+    "firstClassification": string,
+    "secondClassification": string,
+    "content": string
 }
