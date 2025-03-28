@@ -3,6 +3,12 @@ from unittest import defaultTestLoader
 from django.db import models
 
 
+class Test(models.Model):
+    title = models.CharField(max_length=64)
+    content = models.TextField()
+    img = models.ImageField(max_length=128, upload_to='test_cover/', blank=True, null=True)
+
+
 class BaseList(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     subtitle = models.CharField(verbose_name='副标题', max_length=32)

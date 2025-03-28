@@ -3,7 +3,7 @@ from django.urls import path
 import BackEnd.views
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     # get请求，将csrf_token设置到浏览器的cookie中
     path('csrf/', BackEnd.views.get_csrf_token, name='get_csrf_token'),
     # 获取所有的笔记列表信息 NoteList
