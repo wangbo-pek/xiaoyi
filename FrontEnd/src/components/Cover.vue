@@ -72,7 +72,6 @@
         }
     }
 
-    // const $router = useRouter()
     const mainContentRef = ref<HTMLElement | null>(null)
     const jumpTo = (btnText: string) => {
         if (btnText === '开始') {
@@ -183,7 +182,6 @@
     }
 
     .main {
-        //margin-top: 100vh;
         width: 100%;
         min-height: 90vh;
         display: flex;

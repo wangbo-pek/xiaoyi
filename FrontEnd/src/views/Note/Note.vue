@@ -22,7 +22,7 @@
             <div class="dialog-cover-container">
                 <div class="dialog-cover" :style="{
                     backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${currentDetail?.coverImg})`,
-                    filter: 'blur(3px)'
+                    filter: 'blur(1px)'
                 }"></div>
             </div>
             <!-- 内容展示区域 -->
@@ -88,7 +88,8 @@
                 <!-- 按钮展示区域-->
                 <div class="action-container">
                     <div class="read-more">
-                        <v-btn class="read-more-btn" variant="outlined" @click="jumpToNoteDetail(currentDetail.noteListId)">
+                        <v-btn class="read-more-btn" variant="outlined"
+                               @click="jumpToNoteDetail(currentDetail.noteListId)">
                             <span class="read-more-text">阅读</span>
                         </v-btn>
                     </div>
@@ -190,7 +191,7 @@
             position: fixed;
             top: 140px;
             background-color: rgba(255, 255, 255, 0.99);
-            border-radius: 12px 12px 12px 12px;
+            border-radius: 10px 10px 10px 10px;
 
             .dialog-cover-container {
 
@@ -203,26 +204,26 @@
             }
 
             .dialog-content-container {
-                width: 90%;
+                width: 80%;
                 //background: rgba(255, 255, 255, 0.75);
                 background-image: linear-gradient(to top,
-                    rgba(255, 255, 255, 0.41) 90%,
-                    rgba(255, 255, 255, 0.37) 91%,
-                    rgba(255, 255, 255, 0.34) 92%,
-                    rgba(255, 255, 255, 0.31) 93%,
-                    rgba(255, 255, 255, 0.28) 94%,
-                    rgba(255, 255, 255, 0.25) 95%,
-                    rgba(255, 255, 255, 0.22) 96%,
-                    rgba(255, 255, 255, 0.19) 97%,
-                    rgba(255, 255, 255, 0.16) 98%,
-                    rgba(255, 255, 255, 0.13) 99%,
-                    rgba(255, 255, 255, 0.1) 100%
+                    rgba(255, 255, 255, 0.45) 90%,
+                    rgba(255, 255, 255, 0.43) 91%,
+                    rgba(255, 255, 255, 0.41) 92%,
+                    rgba(255, 255, 255, 0.39) 93%,
+                    rgba(255, 255, 255, 0.37) 94%,
+                    rgba(255, 255, 255, 0.35) 95%,
+                    rgba(255, 255, 255, 0.33) 96%,
+                    rgba(255, 255, 255, 0.31) 97%,
+                    rgba(255, 255, 255, 0.29) 98%,
+                    rgba(255, 255, 255, 0.27) 99%,
+                    rgba(255, 255, 255, 0.25) 100%
                 );
                 border-radius: 10px;
                 padding: 24px;
                 position: relative;
                 top: -60px;
-                left: 55px;
+                left: 109px;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
                 .tags-classification-container {
@@ -248,6 +249,9 @@
                     .classification-container {
 
                         .classification {
+                            background-color: white;
+                            padding: 6px 10px;
+                            border-radius: 10px;
                             display: flex;
                             align-items: center;
                             gap: 4px;
@@ -260,7 +264,6 @@
                             .classification-text {
                                 font-size: 16px;
                                 color: #113c46;
-                                font-weight: 800;
                             }
                         }
                     }

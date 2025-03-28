@@ -7,7 +7,8 @@
 
     <!-- 当sm、lg、xl、xxl -->
     <!--<div v-if="display.lgAndUp.value" class="header-container"-->
-    <div class="header-container" :class="{'changeBackgroundColor':coverImage.isScrollOverViewport}">
+    <div class="header-container"
+         :class="{'change-bgcolor':coverImage.isScrollOverViewport}">
         <div class="title-big">
             <HeaderTitle></HeaderTitle>
         </div>
@@ -33,7 +34,6 @@
     })
 
     const coverImage = useAppearanceStore()
-    // const display = useDisplay()
 </script>
 
 <style scoped lang='scss'>
@@ -43,7 +43,7 @@
         align-items: stretch;
         height: 100%;
         width: 100%;
-        background-color: rgba(204, 204, 204, 0.35);
+        background-color: rgba(100, 100, 100, 0.5);
 
         .title-big {
             width: 35%;
@@ -60,10 +60,10 @@
             width: 30%;
             height: 100%;
         }
-
     }
-    .changeBackgroundColor {
-            background-color: #17687a;
-        }
+
+    .change-bgcolor {
+        background-color: #113c46;
+    }
 
 </style>

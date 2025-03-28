@@ -19,7 +19,9 @@
 
     const $router = useRouter()
     const jumpTo = () => {
-        $router.push('home')
+        $router.push({
+            name: 'home'
+        })
     }
 </script>
 

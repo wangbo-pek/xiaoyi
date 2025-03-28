@@ -16,9 +16,10 @@
     })
 
     const $router = useRouter()
-    const jumpTo = (path: string) => {
-        $router.push(path)
-
+    const jumpTo = (name: string) => {
+        $router.push({
+            name
+        })
     }
 
 </script>
