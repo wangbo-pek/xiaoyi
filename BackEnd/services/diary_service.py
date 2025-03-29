@@ -5,15 +5,13 @@ from BackEnd import models
 def create_diary_with_extra(title, content):
     diary_obj = models.Diary.objects.create(
         title=title,
-        content=content
+        markdown_content=content
     )
 
     models.DiaryList.objects.create(
         diary=diary_obj,
-        cover_img='https://channel-jk.com/wp-content/uploads/2021/08/2598173953459235257.jpg',
         title=title,
-        subtitle=diary_obj.content[:15],
-        brief=diary_obj.content[:64]
+        brief=diary_obj.markdown_content[:85]
     )
 
     return diary_obj

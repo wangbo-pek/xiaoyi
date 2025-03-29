@@ -38,7 +38,6 @@ def get_note_list(request):
                 "viewedCount": note_list_object.viewed_count,
                 "likedCount": note_list_object.liked_count,
                 "disgustedCount": note_list_object.disgusted_count,
-                "encouragedCount": note_list_object.encouraged_count,
                 "createdTime": f"{temp_created_time.year}-{temp_created_time.month}-{temp_created_time.day}",
                 "modifiedTime": f"{temp_modified_time.year}-{temp_modified_time.month}-{temp_modified_time.day}",
                 "tagsName": tags_name,
@@ -88,7 +87,7 @@ def get_note(request):
         "code": 0,
         "msg": "success",
         "data": {
-            "content": note_obj.content,
+            "content": note_obj.markdown_content,
             "title": note_obj.title
         }
     })

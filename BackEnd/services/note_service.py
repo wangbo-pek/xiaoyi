@@ -11,7 +11,7 @@ IMAGE_URL = [
     r'https://images.unsplash.com/photo-1742885203450-e2bdf135f0da?q=80&w=3266&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     r'https://images.unsplash.com/photo-1742206506252-7f7504f5de9a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     r'https://images.unsplash.com/photo-1710405152558-f13f4cecbf20?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    r'https://images.unsplash.com/photo-1708940734405-58b0acbb8d54?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dls',
+    r'https://images.unsplash.com/photo-1742827871492-72428a28106b?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 ]
 
 
@@ -19,7 +19,7 @@ IMAGE_URL = [
 def create_note_with_extra(title, content, second_classification, tags):
     note_obj = models.Note.objects.create(
         title=title,
-        content=content
+        markdown_content=content
     )
 
     note_list_obj = models.NoteList.objects.create(
@@ -27,8 +27,8 @@ def create_note_with_extra(title, content, second_classification, tags):
         second_classification=second_classification,
         cover_img=random.choice(IMAGE_URL),
         title=title,
-        subtitle=note_obj.content[:15],
-        brief=note_obj.content[:64]
+        subtitle=note_obj.markdown_content[:15],
+        brief=note_obj.markdown_content[:85]
     )
     note_list_obj.tags.set(tags)
 

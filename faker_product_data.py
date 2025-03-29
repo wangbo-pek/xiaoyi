@@ -82,7 +82,7 @@ for _ in range(20):
         content=content
     )
 
-# 创建Essay + EssayInfo + EssayList
+# 创建Essay + EssayList
 for _ in range(20):
     title = fake_chinese_text(length=random.randint(5, 12))
     content = fake_chinese_text(length=random.randint(1500, 4000))
