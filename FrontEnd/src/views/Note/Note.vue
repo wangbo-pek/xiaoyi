@@ -21,7 +21,7 @@
             <!-- 顶部封面图 -->
             <div class="dialog-cover-container">
                 <div class="dialog-cover" :style="{
-                    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${currentDetail?.coverImg})`,
+                    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${encodeURI(currentDetail?.coverImg)})`,
                     filter: 'blur(1px)'
                 }"></div>
             </div>
@@ -186,17 +186,17 @@
         padding: 40px 20px;
 
         .dialog-background {
-            width: 60%;
-            height: 63vh;
+            width: 50%;
+            height: 40em;
             position: fixed;
-            top: 140px;
+            top: 6em;
             background-color: rgba(255, 255, 255, 0.99);
             border-radius: 10px 10px 10px 10px;
 
             .dialog-cover-container {
 
                 .dialog-cover {
-                    height: 300px;
+                    height: 400px;
                     background-size: cover;
                     background-position: center;
                     border-radius: 12px 12px 0 0;
@@ -205,25 +205,12 @@
 
             .dialog-content-container {
                 width: 80%;
-                //background: rgba(255, 255, 255, 0.75);
-                background-image: linear-gradient(to top,
-                    rgba(255, 255, 255, 0.45) 90%,
-                    rgba(255, 255, 255, 0.43) 91%,
-                    rgba(255, 255, 255, 0.41) 92%,
-                    rgba(255, 255, 255, 0.39) 93%,
-                    rgba(255, 255, 255, 0.37) 94%,
-                    rgba(255, 255, 255, 0.35) 95%,
-                    rgba(255, 255, 255, 0.33) 96%,
-                    rgba(255, 255, 255, 0.31) 97%,
-                    rgba(255, 255, 255, 0.29) 98%,
-                    rgba(255, 255, 255, 0.27) 99%,
-                    rgba(255, 255, 255, 0.25) 100%
-                );
+                background: rgba(255, 255, 255, 0.85);
                 border-radius: 10px;
-                padding: 24px;
+                padding: 20px;
                 position: relative;
-                top: -60px;
-                left: 109px;
+                top: -20%;
+                left: 10%;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
                 .tags-classification-container {
@@ -242,7 +229,7 @@
                             color: white;
                             padding: 6px 10px;
                             border-radius: 10px;
-                            font-size: 14px;
+                            font-size: 12px;
                         }
                     }
 
@@ -257,12 +244,12 @@
                             gap: 4px;
 
                             .classification-icon {
-                                font-size: 16px;
+                                font-size: 12px;
                                 color: #113c46;
                             }
 
                             .classification-text {
-                                font-size: 16px;
+                                font-size: 12px;
                                 color: #113c46;
                             }
                         }
@@ -283,12 +270,12 @@
 
                     .created-date-icon {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
 
                     .created-date-text {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
                 }
 
@@ -299,12 +286,12 @@
 
                     .modified-date-icon {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
 
                     .modified-date-text {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
                 }
 
@@ -315,12 +302,12 @@
 
                     .viewed-icon {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
 
                     .viewed-text {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
                 }
 
@@ -331,12 +318,12 @@
 
                     .liked-icon {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
 
                     .liked-text {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
                 }
 
@@ -347,12 +334,12 @@
 
                     .disgusted-icon {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
 
                     .disgusted-text {
                         color: #515c7a;
-                        font-size: 18px;
+                        font-size: 14px;
                     }
                 }
             }
@@ -361,7 +348,7 @@
                 margin: 25px 0 0 0;
 
                 .title {
-                    font-size: 30px;
+                    font-size: 20px;
                     font-weight: 900;
                 }
             }
@@ -370,7 +357,7 @@
                 margin: 25px 0 0 0;
 
                 .subtitle {
-                    font-size: 24px;
+                    font-size: 16px;
                     font-weight: 600;
                     color: #666;
                     margin-bottom: 16px;
@@ -381,7 +368,7 @@
                 margin: 25px 0 0 0;
 
                 .brief {
-                    font-size: 18px;
+                    font-size: 14px;
                     color: #888888;
                     line-height: 1.6;
                 }
@@ -395,29 +382,31 @@
                 margin: 20px 30px 10px 0;
 
                 .read-more {
-
                     .read-more-btn {
+                        width: 18px;
+                        height: 30px;
                         display: flex;
                         align-items: center;
-                        justify-content: flex-start;
+                        justify-content: center;
 
                         .read-more-text {
                             color: #515c7a;
-                            font-size: 16px;
+                            font-size: 14px;
                         }
                     }
                 }
 
                 .exit {
-
                     .exit-btn {
+                        width: 18px;
+                        height: 30px;
                         display: flex;
                         align-items: center;
-                        justify-content: flex-start;
+                        justify-content: center;
 
                         .exit-text {
                             color: #515c7a;
-                            font-size: 16px;
+                            font-size: 14px;
                         }
                     }
                 }

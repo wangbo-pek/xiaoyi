@@ -60,6 +60,7 @@ def get_note_list(request):
 # 根据note list id，获取相关联的note content
 def get_note(request):
     try:
+        # 从请求中获取参数 noteListId，并转换为 int 类型
         note_list_id = int(request.GET.get('noteListId'))
     except (TypeError, ValueError):
         return JsonResponse({
@@ -68,26 +69,35 @@ def get_note(request):
         })
 
     try:
+        # 查询 NoteList 对象（通过主键 ID 查找）
         note_list_obj = models.NoteList.objects.filter(id=note_list_id).first()
+    except models.NoteList.DoesNotExist as e:
+        return JsonResponse({
+            "code": 1,
+            "msg": 'notelist not found'
+        })
     except (DatabaseError, FieldError) as e:
         return JsonResponse({
             "code": 1,
             "msg": f"failed({e})"
         })
 
-    if not note_list_obj or not hasattr(note_list_obj, 'note'):
+    if not hasattr(note_list_obj, 'note'):
         return JsonResponse({
             "code": 1,
             "msg": "note not found"
         })
 
+    # 取出note实例
     note_obj = note_list_obj.note
 
     return JsonResponse({
         "code": 0,
         "msg": "success",
         "data": {
-            "content": note_obj.markdown_content,
-            "title": note_obj.title
+            "title": note_obj.title,
+            "markdownContent":note_obj.markdown_content,
+            "htmlContent":note_obj.html_content,
+            "imageUrls":note_obj.image_urls
         }
     })

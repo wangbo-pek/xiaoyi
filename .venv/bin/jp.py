@@ -1,4 +1,4 @@
-#!/Users/wangbo/Documents/XiaoYi_Blog/.venv/bin/python
+#!/Users/wangbo/Documents/XiaoYi_Blog/.venv/bin/python3.13
 
 import sys
 import json

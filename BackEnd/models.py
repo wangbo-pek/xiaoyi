@@ -29,37 +29,37 @@ class DiaryList(models.Model):
 
 
 # 文章、文章列表
-class Essay(models.Model):
-    title = models.CharField(verbose_name='标题', max_length=32)
-    markdown_content = models.TextField(verbose_name='渲染前的md', blank=True, null=True)
-    image_urls = models.JSONField(verbose_name='插图链接列表', blank=True, null=True)
-    html_content = models.TextField(verbose_name='渲染后的HTML', blank=True, null=True)
-
-    def __str__(self):
-        return self.essaylist.title
-
-
-class EssayList(models.Model):
-    title = models.CharField(verbose_name='标题', max_length=32)
-    subtitle = models.CharField(verbose_name='副标题', max_length=32)
-    brief = models.CharField(verbose_name='摘要', max_length=128, blank=True, null=True)
-    is_show = models.BooleanField(verbose_name='是否显示', default=True)
-    viewed_count = models.IntegerField(verbose_name='被浏览次数', default=0)
-    created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
-    modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
-    is_recommended = models.BooleanField(verbose_name='是否推荐', default=False)
-    is_reprint = models.BooleanField(verbose_name='是否转载', default=False)
-    reprint_source = models.CharField(verbose_name='转载源', max_length=64, blank=True, null=True)
-    reprint_author = models.CharField(verbose_name='原作者', max_length=64, blank=True, null=True)
-    cover_img = models.ImageField(verbose_name='封面图', max_length=512, blank=True, null=True,
-                                  upload_to='essay_covers')
-    # 文章 1:1 文章列表
-    essay = models.OneToOneField(to='Essay', on_delete=models.CASCADE)
-    # 文章 n:n 标签
-    tags = models.ManyToManyField(to='Tag')
-
-    def __str__(self):
-        return f'{self.title}的列表'
+# class Essay(models.Model):
+#     title = models.CharField(verbose_name='标题', max_length=32)
+#     markdown_content = models.TextField(verbose_name='渲染前的md', blank=True, null=True)
+#     image_urls = models.JSONField(verbose_name='插图链接列表', blank=True, null=True)
+#     html_content = models.TextField(verbose_name='渲染后的HTML', blank=True, null=True)
+#
+#     def __str__(self):
+#         return self.essaylist.title
+#
+#
+# class EssayList(models.Model):
+#     title = models.CharField(verbose_name='标题', max_length=32)
+#     subtitle = models.CharField(verbose_name='副标题', max_length=32)
+#     brief = models.CharField(verbose_name='摘要', max_length=128, blank=True, null=True)
+#     is_show = models.BooleanField(verbose_name='是否显示', default=True)
+#     viewed_count = models.IntegerField(verbose_name='被浏览次数', default=0)
+#     created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+#     modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
+#     is_recommended = models.BooleanField(verbose_name='是否推荐', default=False)
+#     is_reprint = models.BooleanField(verbose_name='是否转载', default=False)
+#     reprint_source = models.CharField(verbose_name='转载源', max_length=64, blank=True, null=True)
+#     reprint_author = models.CharField(verbose_name='原作者', max_length=64, blank=True, null=True)
+#     cover_img = models.ImageField(verbose_name='封面图', max_length=512, blank=True, null=True,
+#                                   upload_to='essay_covers')
+#     # 文章 1:1 文章列表
+#     essay = models.OneToOneField(to='Essay', on_delete=models.CASCADE)
+#     # 文章 n:n 标签
+#     tags = models.ManyToManyField(to='Tag')
+#
+#     def __str__(self):
+#         return f'{self.title}的列表'
 
 
 # 笔记、笔记信息、笔记列表
@@ -85,8 +85,7 @@ class NoteList(models.Model):
     modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
     is_pinned = models.BooleanField(verbose_name='是否置顶', default=False)
     is_recommended = models.BooleanField(verbose_name='是否推荐', default=False)
-    cover_img = models.ImageField(verbose_name='封面图', max_length=512, blank=True, null=True,
-                                  upload_to='note_covers')
+    cover_img = models.URLField(verbose_name='封面图', max_length=512, blank=True, null=True)
 
     # 笔记 1:1 笔记列表
     note = models.OneToOneField(to='Note', on_delete=models.CASCADE)

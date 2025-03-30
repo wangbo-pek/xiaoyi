@@ -36,5 +36,8 @@ export interface NoteContentItem {
     "tagsName": string[],
     "firstClassification": string,
     "secondClassification": string,
-    "content": string
+    "markdownContent": string,
+    "htmlContent": string,
+    "imageUrls":string[]
 }
+

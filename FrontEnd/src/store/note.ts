@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import type NoteListItem from "@/store/types/note.ts";
+import type {NoteListItem} from "@/store/types/note.ts";
 
 const useNoteStore = defineStore('note', {
     state: () => {

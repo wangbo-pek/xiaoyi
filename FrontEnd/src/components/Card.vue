@@ -1,5 +1,5 @@
 <template>
-    <div class="card-container" :style="{backgroundImage:`url(${bgImage})`}" @click="$emit('click')">
+    <div class="card-container" :style="{ backgroundImage: `url(${encodeURI(bgImage)})` }" @click="$emit('click')">
         <div class="overlay">
             <div class="text-container">
                 <!-- title -->
@@ -68,7 +68,6 @@
         margin: 0 auto;
         border-radius: 5px;
         overflow: hidden;
-        background-image: url("src/assets/3.jpg");
         background-size: cover;
         background-position: center;
         display: flex;
