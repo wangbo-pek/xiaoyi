@@ -93,7 +93,7 @@
     const handleScroll = () => {
         if (coverAreaRef.value) {
             const rect = coverAreaRef.value.getBoundingClientRect()
-            appearanceStore.isScrollOverViewport = rect.bottom <= 55;
+            appearanceStore.isScrollOverViewport = rect.bottom <= 300;
         }
     }
 

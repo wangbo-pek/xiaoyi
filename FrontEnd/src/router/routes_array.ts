@@ -2,7 +2,7 @@ export const routesArray = [
     {
         path: 'home',
         name: 'home',
-        component: () => import('@/views/Home/Home.vue'),
+        component: () => import('@/views/home/Home.vue'),
         meta: {
             title: '首页'
         }
@@ -10,23 +10,15 @@ export const routesArray = [
     {
         path: 'note',
         name: 'note',
-        component: () => import('@/views/Note/Note.vue'),
+        component: () => import('@/views/note/Note.vue'),
         meta: {
             title: "笔记"
         }
     },
     {
-        path: 'essay',
-        name: 'essay',
-        component: () => import('@/views/Essay/Essay.vue'),
-        meta: {
-            title: "文章"
-        }
-    },
-    {
         path: 'diary',
         name: 'diary',
-        component: () => import('@/views/Diary/Diary.vue'),
+        component: () => import('@/views/diary/Diary.vue'),
         meta: {
             title: "日记"
         }
@@ -34,7 +26,7 @@ export const routesArray = [
     {
         path: 'tags',
         name: 'tags',
-        component: () => import('@/views/about/About.vue'),
+        component: () => import('@/views/tag/Tag.vue'),
         meta: {
             title: "标签"
         }

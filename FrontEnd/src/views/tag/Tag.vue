@@ -1,10 +1,10 @@
 <template>
-    <div>essay</div>
+    <div>tags</div>
 </template>
 
 <script setup lang='ts'>
     defineOptions({
-        name: 'Essay',
+        name: 'Tag',
         inheritAttrs: false
     })
 

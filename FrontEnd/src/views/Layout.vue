@@ -55,23 +55,24 @@
         z-index: 900;
 
         .content {
-            flex: 0 0 82%;
+            flex: 0 0 75%;
+            background-color: rgba(255, 0, 0, 0.15);
             height: 100%;
             border-radius: 5px;
             padding: 2px 10px;
             position: relative;
-            left: -10px
+            left: -1.5rem
         }
 
         .siderbar {
             background-color: lightseagreen;
-            flex: 0 0 15%;
+            flex: 0 0 20%;
             height: 100%;
             border-radius: 5px;
             padding: 10px;
             overflow-y: auto;
             position: relative;
-            left: -2px
+            left: -0.15rem;
         }
     }
 </style>

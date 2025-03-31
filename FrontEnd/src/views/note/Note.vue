@@ -68,8 +68,6 @@
                         <span class="disgusted-text">{{ currentDetail?.disgustedCount }}</span>
                     </span>
 
-                    <!--<span v-if="currentDetail?.isPinned">置顶</span>-->
-                    <!--<span v-if="currentDetail?.isRecommended">推荐</span>-->
                 </div>
 
                 <!-- 文章标题展示区域 -->
@@ -111,7 +109,6 @@
     import {onMounted, onUnmounted, ref} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
     import Card from "@/components/Card.vue";
-    import axios_server from "@/utils/axios_server.ts";
 
     defineOptions({
         name: 'Note',
