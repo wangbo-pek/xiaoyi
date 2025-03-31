@@ -150,7 +150,7 @@
 </template>
 
 <script setup lang='ts'>
-    import {useRoute, useRouter} from "vue-router";
+    import {useRoute} from "vue-router";
     import {onMounted, onUnmounted, ref, watchEffect} from "vue";
     import useNoteStore from "@/store/note.ts";
     import axios_server from "@/utils/axios_server.ts";
@@ -170,7 +170,6 @@
         html: true
     })
     const route = useRoute()
-    const $router = useRouter()
     const noteStore = useNoteStore()
     const noteListId = Number(route.params.id)
 
@@ -207,16 +206,28 @@
         const regex = /<h1>(.*?)<\/h1>/g;
         let match;
         let tocHtml = '<ul>';
+        let counter = 1;
+        let updatedMarkdown = noteStore.currentNote.renderedMarkdown;
 
         while ((match = regex.exec(noteStore.currentNote.renderedMarkdown)) !== null) {
             const headingText = match[1];
-            const id = headingText.replace(/\s+/g, '-').toLowerCase();  // 创建 id
-            tocHtml += `<li><a href="#${id}">${headingText}</a></li>`;  // 生成目录项
+            const id = `heading-${counter}`;
+
+            // 将原始的 <h1>标签 替换为带 id 的 <h1 id="heading-1">
+            const originalHeading = match[0]; // <h1>标题</h1>
+            const updatedHeading = `<h1 id="${id}">${headingText}</h1>`;
+            updatedMarkdown = updatedMarkdown.replace(originalHeading, updatedHeading);
+
+            // 构建 TOC 目录项
+            tocHtml += `<li><a href="#${id}">${headingText}</a></li>`;
+            counter++;
         }
 
         tocHtml += '</ul>';
-        toc.value = tocHtml;  // 将目录 HTML 存入 toc
 
+        // 更新 markdown 和 TOC 内容
+        noteStore.currentNote.renderedMarkdown = updatedMarkdown;
+        toc.value = tocHtml;
 
         // 调用 highlightCode 来处理代码高亮
         highlightCode();
@@ -231,10 +242,6 @@
         // 页面卸载时移除监听
         window.removeEventListener('scroll', handleScroll)
     })
-
-    const goBack = () => {
-        $router.back()
-    }
 
     // 解析并高亮代码块
     const highlightCode = () => {
@@ -840,18 +847,18 @@
 
     :deep(.toc) {
         position: fixed;
-        top: 50em;
-        left: 100em;
+        bottom: 10rem;
+        right: 0.5rem;
         background-color: #113c46; /* 设置目录背景色 */
-        padding: 15px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
         z-index: 10;
-        border-radius: 8px; /* 给目录容器加圆角 */
+        border-radius: 5px; /* 给目录容器加圆角 */
     }
 
     :deep(.toc h2) {
-        font-size: 1.5em;
-        margin-bottom: 15px;
+        font-size: 1rem;
+        margin-bottom: 10px;
     }
 
     :deep(.toc ul) {
@@ -860,14 +867,10 @@
         margin: 0; /* 移除默认的外边距 */
     }
 
-    :deep(.toc li) {
-        margin-bottom: 10px; /* 设置每项之间的间距 */
-    }
-
     :deep(.toc a) {
         color: white;
         text-decoration: none; /* 移除默认的下划线 */
-        font-size: 1em; /* 设置字体大小 */
+        font-size: 0.8em; /* 设置字体大小 */
         font-weight: 700; /* 设置字体加粗 */
         transition: color 0.3s ease; /* 添加过渡效果 */
     }
@@ -880,9 +883,9 @@
     :deep(.toc-title) {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin: 2px auto 10px 10px;
-        font-size: 1.2em; /* 设置字体大小 */
+        gap: 7px;
+        margin: 5px auto 10px 10px;
+        font-size: 0.85em; /* 设置字体大小 */
         font-weight: 700; /* 设置字体加粗 */
         color: white;
     }

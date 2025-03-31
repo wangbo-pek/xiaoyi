@@ -34,6 +34,6 @@
 
 <style lang="scss">
     body {
-        background-color: red;
+        background-color: #113c46;
     }
 </style>
