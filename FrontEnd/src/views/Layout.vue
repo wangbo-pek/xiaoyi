@@ -56,7 +56,6 @@
 
         .content {
             flex: 0 0 75%;
-            background-color: rgba(255, 0, 0, 0.05);
             height: 100%;
             border-radius: 5px;
             padding: 2px 10px;

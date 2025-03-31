@@ -697,7 +697,8 @@
         display: block; // 将图片设置为块级元素
         margin: 20px auto; // 上下边距 20px，左右居中
         border-radius: 5px; // 添加圆角效果
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 给图片添加阴影效果
+        border: 5px solid  rgba(17, 60, 70, 0.75);
+        box-shadow: 8px 8px 8px rgba(17, 60, 70, 0.5); // 给图片添加阴影效果
     }
 
     /* 设置 markdown-content 中的 h1 ~ h4 标题样式 */
