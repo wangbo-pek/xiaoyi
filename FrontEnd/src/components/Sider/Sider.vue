@@ -7,9 +7,6 @@
             <div class="my-name">
                 <span class="my-name-text">Wang</span>
             </div>
-            <div class="my-motto">
-                <span class="my-motto-text">世上本没有路</span>
-            </div>
             <div class="what-i-wanna-say">
                 <span class="what-i-wanna-say-text">人的一生就应该像一条河，开始是涓涓细流，被狭窄的河岸所束缚，然后，它激烈地奔过巨石，冲越瀑布。渐渐地，河流变宽了，两边的堤岸也远去，河水流动得更加平静。最后，它自然地融入了大海，并毫无痛苦地消失了自我。</span>
             </div>

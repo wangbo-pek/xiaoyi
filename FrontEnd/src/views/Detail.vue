@@ -115,8 +115,37 @@
         </div>
     </div>
 
-    <div class="share-container"></div>
-    <div class="coffee-me-container"></div>
+    <div class="share-container">
+        <div class="tags">
+            <span class="tag" v-for="(tag, index) in noteStore.currentNote.tagsName" :key="index">{{ tag }}</span>
+        </div>
+        <div class="share-icon">
+            <v-img class="wechat-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/wechat.svg'"></v-img>
+            <v-img class="twitter-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/twitter.svg'"></v-img>
+            <v-img class="github-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/github.svg'"></v-img>
+            <v-img class="google-plus-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/google_plus.svg'"></v-img>
+            <v-img class="linkedin-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/linkedin.svg'"></v-img>
+            <v-img class="weibo-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/weibo.svg'"></v-img>
+            <v-img class="zhihu-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/zhihu.svg'"></v-img>
+        </div>
+    </div>
+
+    <div class="coffee-container">
+        <span class="coffee-text">Coffee Me &nbsp;</span>
+        <v-img class="coffee-icon"
+               :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/coffee.svg'"></v-img>
+        <span class="coffee-text">&nbsp; ENCOURAGEMENT</span>
+    </div>
+
+    <div class="divider3"></div>
+
     <div class="recommend-note-container"></div>
 
 </template>
@@ -310,7 +339,6 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        z-index: 900;
 
         .article-background {
             padding: 50px 80px 20px 80px;
@@ -556,6 +584,101 @@
                 }
             }
         }
+    }
+
+    .share-container {
+        position: relative;
+        top: -130px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .tags {
+            width: 30%;
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            position: relative;
+            top: -6px;
+
+            .tag {
+                background-color: #113c46;
+                color: white;
+                padding: 6px 10px;
+                border-radius: 5px;
+                font-size: 0.8em;
+            }
+        }
+
+        .share-icon {
+            width: 30%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px;
+
+            .wechat-icon {
+                margin: 0 15px 15px 0;
+                max-width: 7%;
+            }
+
+            .twitter-icon {
+                margin: 0 15px 15px 0;
+                max-width: 7%;
+            }
+
+            .github-icon {
+                margin: 0 15px 15px 0;
+                max-width: 7%;
+            }
+
+            .google-plus-icon {
+                margin: 0 15px 15px 0;
+                max-width: 7%;
+            }
+
+            .linkedin-icon {
+                margin: 0 15px 15px 0;
+                max-width: 7%;
+            }
+
+            .weibo-icon {
+                margin: 0 15px 15px 0;
+                max-width: 7%;
+            }
+
+            .zhihu-icon {
+                margin: 0 15px 15px 0;
+                max-width: 7%;
+            }
+
+        }
+    }
+
+    .coffee-container {
+        position: relative;
+        top: -100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .coffee-icon {
+            max-width: 1.5%;
+        }
+
+        .coffee-text {
+            font-size: 1rem;
+            font-weight: 200;
+        }
+    }
+
+    .divider3 {
+        position: relative;
+        top: -75px;
+        display: flex;
+        width: 100%;
+        height: 2px;
+        background-color: #515c7a;;
+        margin: 10px 0 10px 0;
     }
 
     .change-bgcolor {
