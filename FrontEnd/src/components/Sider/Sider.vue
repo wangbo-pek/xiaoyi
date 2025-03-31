@@ -19,6 +19,13 @@
                    :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/wechat.svg'"></v-img>
             <v-img class="mail-icon"
                    :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/gmail.svg'"></v-img>
+            <v-img class="twitter-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/twitter.svg'"></v-img>
+        </div>
+        <div class="coffee-container">
+            <span class="coffee-text">COFFEE ME &nbsp;</span>
+            <v-img class="coffee-icon"
+                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/coffee.svg'"></v-img>
         </div>
     </div>
 </template>
@@ -35,8 +42,6 @@
         position: relative;
         width: 100%;
         height: 100%;
-        //display: flex;
-        //justify-content: center; /* 水平居中 */
 
         .introduction {
             text-align: center; /* 如果需要，确保文本水平居中 */
@@ -79,19 +84,42 @@
 
         .touch-me {
             position: relative;
-            top: 5rem;
+            top: 5.5rem;
             width: 100%;
             display: flex;
             justify-content: center;
             margin-top: 20px;
 
             .wechat-icon {
-                margin: 0 20px 0 0;
+                margin: 0 15px 0 15px;
                 max-width: 1.8rem;
             }
+
             .mail-icon {
-                margin: 0 10px 0 0;
+                margin: 0 15px 0 15px;
                 max-width: 1.8rem;
+            }
+
+            .twitter-icon {
+                margin: 0 15px 0 15px;
+                max-width: 1.8rem;
+            }
+        }
+
+        .coffee-container {
+            position: relative;
+            top: 7.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .coffee-icon {
+                max-width: 10%;
+            }
+
+            .coffee-text {
+                font-size: 1rem;
+                font-weight: 200;
             }
         }
     }

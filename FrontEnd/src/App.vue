@@ -32,6 +32,8 @@
     })
 </script>
 
-<style scoped lang="scss">
-
+<style lang="scss">
+    body {
+        background-color: red;
+    }
 </style>

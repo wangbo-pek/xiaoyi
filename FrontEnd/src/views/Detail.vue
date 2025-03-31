@@ -138,10 +138,9 @@
     </div>
 
     <div class="coffee-container">
-        <span class="coffee-text">Coffee Me &nbsp;</span>
+        <span class="coffee-text">COFFEE ME &nbsp;</span>
         <v-img class="coffee-icon"
                :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/coffee.svg'"></v-img>
-        <span class="coffee-text">&nbsp; ENCOURAGEMENT</span>
     </div>
 
     <div class="divider3"></div>
