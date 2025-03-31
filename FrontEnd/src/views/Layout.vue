@@ -65,10 +65,31 @@
         }
 
         .siderbar {
-            background-color: lightseagreen;
+            background-image: linear-gradient(to top,
+            rgba(17, 60, 70, 0.01),
+            rgba(17, 60, 70, 0.05),
+            rgba(17, 60, 70, 0.10),
+            rgba(17, 60, 70, 0.15),
+            rgba(17, 60, 70, 0.20),
+            rgba(17, 60, 70, 0.25),
+            rgba(17, 60, 70, 0.30),
+            rgba(17, 60, 70, 0.35),
+            rgba(17, 60, 70, 0.4),
+            rgba(17, 60, 70, 0.45),
+            rgba(17, 60, 70, 0.5),
+            rgba(17, 60, 70, 0.55),
+            rgba(17, 60, 70, 0.6),
+            rgba(17, 60, 70, 0.65),
+            rgba(17, 60, 70, 0.7),
+            rgba(17, 60, 70, 0.75),
+            rgba(17, 60, 70, 0.8),
+            rgba(17, 60, 70, 0.85),
+            rgba(17, 60, 70, 0.9),
+            rgba(17, 60, 70, 0.95),
+            rgba(17, 60, 70, 1)
+            );
             flex: 0 0 20%;
             height: 100%;
-            border-radius: 5px;
             padding: 10px;
             overflow-y: auto;
             position: relative;
