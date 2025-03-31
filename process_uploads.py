@@ -62,9 +62,6 @@ for mcp_dir_path in mcp_dirs_path:
     for local_image_file, oss_image_url in image_mapping.items():
         markdown_content = markdown_content.replace(f'{local_image_file}', f'{oss_image_url}')
 
-    # 渲染HTML内容
-    html_content = markdown(markdown_content, output_format='html')
-
     # 上传所有pictures到OSS
     for local_image_file in image_mapping.keys():
         image_name = Path(local_image_file).name
@@ -77,19 +74,18 @@ for mcp_dir_path in mcp_dirs_path:
     print('markdown插图映射：')
     for k, v in image_mapping.items():
         print(f'{k} --> {v}')
-    print('渲染后的HTML内容(前300字)：')
-    print(html_content[:300])
+    print('内容(前300字)：')
+    print(markdown_content[:300])
     print('='*60)
 
     # 写入数据库
-    default_second_classification = models.SecondClassification.objects.filter(id=401).first()
-    default_tags = models.Tag.objects.filter(id__in=[281, 282])
+    default_second_classification = models.SecondClassification.objects.filter(id=406).first()
+    default_tags = models.Tag.objects.filter(id__in=[286, 287])
     title = md_file_path.stem
 
     create_note_and_list(
         title=title,
         markdown_content=markdown_content,
-        html_content=html_content,
         image_urls=list(image_mapping.values()),
         cover_img=oss_cover_url or '',
         second_classification=default_second_classification,

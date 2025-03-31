@@ -12,7 +12,7 @@ def get_csrf_token(request):
 
 
 # 获取所有的笔记列表信息 NoteList
-def get_note_list(request):
+def get_all_note_list(request):
     try:
         note_list_query_set = models.NoteList.objects.all()
 
@@ -57,8 +57,8 @@ def get_note_list(request):
         })
 
 
-# 根据note list id，获取相关联的note content
-def get_note(request):
+# 根据noteListId，获取该文章所有的内容
+def get_note_all_content(request):
     try:
         # 从请求中获取参数 noteListId，并转换为 int 类型
         note_list_id = int(request.GET.get('noteListId'))
@@ -91,13 +91,33 @@ def get_note(request):
     # 取出note实例
     note_obj = note_list_obj.note
 
+    # 将返回的数据拼装为一个字典
+    temp_created_time = note_list_obj.created_time
+    temp_modified_time = note_list_obj.modified_time
+    note_item = {
+        "noteListId": note_list_obj.id,
+        "title": note_list_obj.title,
+        "subtitle": note_list_obj.subtitle,
+        "brief": note_list_obj.brief,
+        "coverImg": note_list_obj.cover_img,
+        "isShow": note_list_obj.is_show,
+        "isPinned": note_list_obj.is_pinned,
+        "isRecommended": note_list_obj.is_recommended,
+        "viewedCount": note_list_obj.viewed_count,
+        "likedCount": note_list_obj.liked_count,
+        "disgustedCount": note_list_obj.disgusted_count,
+        "createdTime": f"{temp_created_time.year}-{temp_created_time.month}-{temp_created_time.day}",
+        "modifiedTime": f"{temp_created_time.year}-{temp_modified_time.month}-{temp_modified_time.day}",
+        "tagsName": list(note_list_obj.tags.values_list('name', flat=True)),
+        "firstClassification": note_list_obj.second_classification.first_classification.name,
+        "secondClassification": note_list_obj.second_classification.name,
+        "markdownContent": note_obj.markdown_content,
+        "tableOfContent": note_obj.table_of_content,
+        "imageUrls": note_obj.image_urls
+    }
+
     return JsonResponse({
         "code": 0,
         "msg": "success",
-        "data": {
-            "title": note_obj.title,
-            "markdownContent":note_obj.markdown_content,
-            "htmlContent":note_obj.html_content,
-            "imageUrls":note_obj.image_urls
-        }
+        "data": note_item
     })

@@ -38,6 +38,7 @@ export interface NoteContentItem {
     "secondClassification": string,
     "markdownContent": string,
     "htmlContent": string,
-    "imageUrls":string[]
+    "imageUrls": string[],
+    "renderedMarkdown": string,
+    "tableOfContent": string
 }
-

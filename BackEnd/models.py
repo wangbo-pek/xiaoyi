@@ -67,7 +67,7 @@ class Note(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     markdown_content = models.TextField(verbose_name='渲染前的md', blank=True, null=True)
     image_urls = models.JSONField(verbose_name='插图链接列表', blank=True, null=True)
-    html_content = models.TextField(verbose_name='渲染后的HTML', blank=True, null=True)
+    table_of_content = models.TextField(verbose_name='文章目录', blank=True, null=True)
 
     def __str__(self):
         return self.notelist.title

@@ -111,6 +111,7 @@
     import {onMounted, onUnmounted, ref} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
     import Card from "@/components/Card.vue";
+    import axios_server from "@/utils/axios_server.ts";
 
     defineOptions({
         name: 'Note',
@@ -138,8 +139,8 @@
         currentDetail.value = null
     }
 
-    const jumpToNoteDetail = (noteListId: number) => {
-        $router.push({
+    const jumpToNoteDetail =  (noteListId: number) => {
+         $router.push({
             name: 'noteDetail',
             params: {
                 id: noteListId
@@ -209,8 +210,8 @@
                 border-radius: 10px;
                 padding: 20px;
                 position: relative;
-                top: -20%;
-                left: 10%;
+                top: -8em;
+                left: 5.6em;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
                 .tags-classification-container {
@@ -229,7 +230,7 @@
                             color: white;
                             padding: 6px 10px;
                             border-radius: 10px;
-                            font-size: 12px;
+                            font-size: 0.7rem;
                         }
                     }
 
@@ -244,12 +245,12 @@
                             gap: 4px;
 
                             .classification-icon {
-                                font-size: 12px;
+                                font-size: 0.7rem;
                                 color: #113c46;
                             }
 
                             .classification-text {
-                                font-size: 12px;
+                                font-size: 0.7rem;
                                 color: #113c46;
                             }
                         }
@@ -270,12 +271,12 @@
 
                     .created-date-icon {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size:0.9rem;
                     }
 
                     .created-date-text {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size: 0.9rem;
                     }
                 }
 
@@ -286,12 +287,12 @@
 
                     .modified-date-icon {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size: 0.9rem;
                     }
 
                     .modified-date-text {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size:0.9rem;
                     }
                 }
 
@@ -302,12 +303,12 @@
 
                     .viewed-icon {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size: 0.9rem;
                     }
 
                     .viewed-text {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size: 0.9rem;
                     }
                 }
 
@@ -318,7 +319,7 @@
 
                     .liked-icon {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size: 0.9rem;
                     }
 
                     .liked-text {
@@ -334,12 +335,12 @@
 
                     .disgusted-icon {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size: 0.9rem;
                     }
 
                     .disgusted-text {
                         color: #515c7a;
-                        font-size: 14px;
+                        font-size: 0.9rem;
                     }
                 }
             }
@@ -348,7 +349,7 @@
                 margin: 25px 0 0 0;
 
                 .title {
-                    font-size: 20px;
+                    font-size: 1.75rem;
                     font-weight: 900;
                 }
             }
@@ -357,7 +358,7 @@
                 margin: 25px 0 0 0;
 
                 .subtitle {
-                    font-size: 16px;
+                    font-size: 1.25rem;
                     font-weight: 600;
                     color: #666;
                     margin-bottom: 16px;
@@ -368,7 +369,7 @@
                 margin: 25px 0 0 0;
 
                 .brief {
-                    font-size: 14px;
+                    font-size: 1rem;
                     color: #888888;
                     line-height: 1.6;
                 }
@@ -383,30 +384,30 @@
 
                 .read-more {
                     .read-more-btn {
-                        width: 18px;
-                        height: 30px;
+                        width: 1rem;
+                        height: 2rem;
                         display: flex;
                         align-items: center;
                         justify-content: center;
 
                         .read-more-text {
                             color: #515c7a;
-                            font-size: 14px;
+                            font-size: 0.85rem;
                         }
                     }
                 }
 
                 .exit {
                     .exit-btn {
-                        width: 18px;
-                        height: 30px;
+                        width: 1rem;
+                        height: 2rem;
                         display: flex;
                         align-items: center;
                         justify-content: center;
 
                         .exit-text {
                             color: #515c7a;
-                            font-size: 14px;
+                             font-size: 0.85rem;
                         }
                     }
                 }

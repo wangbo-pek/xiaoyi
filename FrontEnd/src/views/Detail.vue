@@ -15,15 +15,15 @@
     </div>
 
     <div class="coverImage" ref="coverImageRef"
-         :style="{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${noteContentItem.coverImg})`,
+         :style="{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url(${noteStore.currentNote.coverImg})`,
          filter: 'blur(1px)'}"></div>
 
     <div class="article-title-container">
-        <span class="article-title">{{ noteContentItem.title }}</span>
+        <span class="article-title">{{ noteStore.currentNote.title }}</span>
     </div>
 
     <div class="article-subtitle-container">
-        <span class="article-subtitle">{{ noteContentItem.subtitle }}</span>
+        <span class="article-subtitle">{{ noteStore.currentNote.subtitle }}</span>
     </div>
 
     <div class="article-content-container">
@@ -32,16 +32,16 @@
             <!-- 标签、二级分类区域 -->
             <div class="tags-classification-container">
                 <div class="tags-container">
-                    <span class="tag" v-for="(tag, index) in noteContentItem.tagsName" :key="index">
+                    <span class="tag" v-for="(tag, index) in noteStore.currentNote.tagsName" :key="index">
                         {{ tag }}
                     </span>
                 </div>
                 <div class="classification-container">
                     <span class="classification">
                         <v-icon class="classification-icon" icon="mdi-bookmark-multiple"></v-icon>
-                        <span class="first-classification-text">{{ noteContentItem.firstClassification }}</span>
+                        <span class="first-classification-text">{{ noteStore.currentNote.firstClassification }}</span>
                         <span> / </span>
-                        <span class="second-classification-text">{{ noteContentItem.secondClassification }}</span>
+                        <span class="second-classification-text">{{ noteStore.currentNote.secondClassification }}</span>
                     </span>
                 </div>
             </div>
@@ -50,26 +50,26 @@
             <div class="article-info-container">
                 <span class="created-date">
                     <v-icon class="created-date-icon" icon="mdi-calendar-sync-outline"></v-icon>
-                    <span class="created-date-text">{{ noteContentItem.createdTime }}</span>
+                    <span class="created-date-text">{{ noteStore.currentNote.createdTime }}</span>
                 </span>
 
                 <span class="modified-date">
                     <v-icon class="modified-date-icon" icon="mdi-calendar-sync-outline"></v-icon>
-                    <span class="modified-date-text">{{ noteContentItem.modifiedTime }}</span>
+                    <span class="modified-date-text">{{ noteStore.currentNote.modifiedTime }}</span>
                 </span>
 
                 <span class="viewed">
                     <v-icon class="viewed-icon" icon="mdi-eye-outline"></v-icon>
-                    <span class="viewed-text">{{ noteContentItem.viewedCount }}</span>
+                    <span class="viewed-text">{{ noteStore.currentNote.viewedCount }}</span>
                 </span>
 
                 <span class="liked">
                     <v-icon class="liked-icon" icon="mdi-heart-outline"></v-icon>
-                    <span class="liked-text">{{ noteContentItem.likedCount }}</span>
+                    <span class="liked-text">{{ noteStore.currentNote.likedCount }}</span>
                 </span>
                 <span class="disgusted">
                     <v-icon class="disgusted-icon" icon="mdi-heart-off-outline"></v-icon>
-                    <span class="disgusted-text">{{ noteContentItem.disgustedCount }}</span>
+                    <span class="disgusted-text">{{ noteStore.currentNote.disgustedCount }}</span>
                 </span>
             </div>
 
@@ -77,8 +77,19 @@
 
             <!-- 文章正文区域 -->
             <div class="article-body-container">
-                <div class="article-body markdown-content" v-html="renderedMarkdown"></div>
+                <div class="article-body markdown-content" v-html="noteStore.currentNote.renderedMarkdown"></div>
             </div>
+
+            <!-- toc内容 -->
+            <div class="toc markdown-content">
+                <div class="toc-title">
+                    <v-icon class="toc-title-icon" icon="mdi-table-of-contents"></v-icon>
+                    <span class="toc-title-text">目录</span>
+                </div>
+                <div v-html="toc"></div>
+            </div>
+
+
             <div class="divider2"></div>
             <div class="article-footer-container">
                 <div class="author-container">
@@ -112,10 +123,9 @@
 
 <script setup lang='ts'>
     import {useRoute, useRouter} from "vue-router";
-    import {onMounted, onUnmounted, reactive, ref, watchEffect} from "vue";
+    import {onMounted, onUnmounted, ref, watchEffect} from "vue";
     import useNoteStore from "@/store/note.ts";
     import axios_server from "@/utils/axios_server.ts";
-    import type {NoteContentItem} from "@/store/types/note.ts";
     import HeaderNav from "@/components/Header/HeaderNav.vue";
     import HeaderTitle from "@/components/Header/HeaderTitle.vue";
     import HeaderWidget from "@/components/Header/HeaderWidget.vue";
@@ -131,34 +141,10 @@
     const md = new MarkdownIt({
         html: true
     })
-    let markdownContent = ref('')
-    let renderedMarkdown = ref('');
     const route = useRoute()
     const $router = useRouter()
     const noteStore = useNoteStore()
     const noteListId = Number(route.params.id)
-    const noteContentItem = reactive<NoteContentItem>({
-        "noteListId": 0,
-        "title": '',
-        "subtitle": '',
-        "brief": '',
-        "coverImg": '',
-        "isShow": true,
-        "isPinned": false,
-        "isRecommended": false,
-        "viewedCount": 0,
-        "likedCount": 0,
-        "disgustedCount": 0,
-        "encouragedCount": 0,
-        "createdTime": '',
-        "modifiedTime": '',
-        "tagsName": [],
-        "firstClassification": '',
-        "secondClassification": '',
-        "markdownContent": '',
-        "htmlContent": '',
-        "imageUrls": []
-    })
 
     // 获取class="coverImage"的DOM
     let coverImageRef = ref<HTMLElement | null>(null)
@@ -172,23 +158,40 @@
         }
     }
 
+    const toc = ref('');
+
     onMounted(async () => {
-        // 页面加载时，从noteStore中获取文章list
-        const result = noteStore.noteList.find(note => note.noteListId === noteListId)
         // 页面加载时，从后端获取文章content
-        const content = await axios_server.get('getNote/', {
+        const result = await axios_server.get('getNoteAllContent/', {
             params: {
                 noteListId
             }
         })
-        Object.assign(noteContentItem, result)
-        noteContentItem.markdownContent = content.data.markdownContent
-        noteContentItem.htmlContent = content.data.htmlContent
-        noteContentItem.imageUrls = content.data.imageUrls
+        console.log('result ~~~~~')
+        console.log(result)
+        Object.assign(noteStore.currentNote, result.data)
 
-        markdownContent.value = noteContentItem.markdownContent
-        markdownContent.value = md.renderInline(content.data.markdownContent)
-        renderedMarkdown = ref('')
+        // 将markdown进行渲染，渲染为html
+        noteStore.currentNote.renderedMarkdown = md.render(noteStore.currentNote.markdownContent)
+        console.log('renderedMarkdown ~~~~~~ ')
+        console.log(noteStore.currentNote.renderedMarkdown)
+
+        const regex = /<h1>(.*?)<\/h1>/g;
+        let match;
+        let tocHtml = '<ul>';
+
+        while ((match = regex.exec(noteStore.currentNote.renderedMarkdown)) !== null) {
+            const headingText = match[1];
+            const id = headingText.replace(/\s+/g, '-').toLowerCase();  // 创建 id
+            tocHtml += `<li><a href="#${id}">${headingText}</a></li>`;  // 生成目录项
+        }
+
+        tocHtml += '</ul>';
+        toc.value = tocHtml;  // 将目录 HTML 存入 toc
+
+
+        // 调用 highlightCode 来处理代码高亮
+        highlightCode();
 
         // 页面挂载时监听handleScroll
         window.addEventListener('scroll', handleScroll)
@@ -215,9 +218,7 @@
 
     // 实时渲染 Markdown 内容
     watchEffect(() => {
-        renderedMarkdown.value = md.render(markdownContent.value)
-        // 提取生成的目录
-        if (renderedMarkdown.value) {
+        if (noteStore.currentNote.renderedMarkdown) {
             setTimeout(() => {
                 highlightCode()
             }, 100)
@@ -315,7 +316,7 @@
             padding: 50px 80px 20px 80px;
             width: 75%;
             position: relative;
-            top: -3%;
+            top: -8.5em;
             background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px 10px 10px 10px;
             box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
@@ -714,4 +715,54 @@
         font-weight: 800;
         margin: 0; /* 移除引用内部段落的默认外边距 */
     }
+
+    :deep(.toc) {
+        position: fixed;
+        top: 50em;
+        left: 100em;
+        background-color: #113c46; /* 设置目录背景色 */
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+        border-radius: 8px; /* 给目录容器加圆角 */
+    }
+
+    :deep(.toc h2) {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    :deep(.toc ul) {
+        list-style: none; /* 移除默认的小圆点 */
+        padding: 0; /* 移除默认的内边距 */
+        margin: 0; /* 移除默认的外边距 */
+    }
+
+    :deep(.toc li) {
+        margin-bottom: 10px; /* 设置每项之间的间距 */
+    }
+
+    :deep(.toc a) {
+        color: white;
+        text-decoration: none; /* 移除默认的下划线 */
+        font-size: 1em; /* 设置字体大小 */
+        font-weight: 700; /* 设置字体加粗 */
+        transition: color 0.3s ease; /* 添加过渡效果 */
+    }
+
+    :deep(.toc a:hover) {
+        color: #ff6600; /* 鼠标悬停时改变颜色 */
+        text-decoration: underline; /* 添加下划线 */
+    }
+
+    :deep(.toc-title) {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 2px auto 10px 10px;
+        font-size: 1.2em; /* 设置字体大小 */
+        font-weight: 700; /* 设置字体加粗 */
+        color: white;
+    }
+
 </style>
