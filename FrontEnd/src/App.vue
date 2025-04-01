@@ -34,6 +34,9 @@
                 (response) => {
                     // 把文章列表信息保存到diaryStore仓库中
                     diaryStore.diaryList = response.data
+                    diaryStore.diaryList.forEach((value) => {
+                        value.timelinePointColor = diaryStore.timelinePointColor[Math.floor(Math.random() * diaryStore.timelinePointColor.length)]
+                    })
                     console.log('>>>> diaryStore.diaryList <<<<')
                     console.log(diaryStore.diaryList)
                 }

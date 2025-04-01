@@ -4,7 +4,7 @@
         <div class="diary-timeline">
             <v-timeline class="diary-timeline" align="start">
                 <v-timeline-item
-                    v-for="(diary, i) in testDiaryList"
+                    v-for="(diary, i) in diaryStore.diaryList"
                     :key="i"
                     :dot-color="diary.timelinePointColor"
                     size="small"
@@ -14,8 +14,7 @@
                         <div class="diary-date" :style="{color:diary.timelinePointColor}">
                             <v-chip class="diary-date-chip" variant="tonal" label :style="{color:diary.timelinePointColor}">
                                 {{ diary.createdTime }}
-                                &nbsp;
-                                {{ diary.title }}
+                               「{{ diary.title }}」
                             </v-chip>
                         </div>
                     </template>
@@ -25,11 +24,11 @@
                                 class="cover"
                                 :width="400"
                                 cover
-                                src="https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/note_covers/mcp1/cover.jpg"
+                                :src="diary.coverImg"
                             ></v-img>
                         </div>
                         <div class="brief-container">
-                            <p class="brief-text">{{ diary.brief }}... ...</p>
+                            <p class="brief-text">{{ diary.brief }}</p>
                         </div>
                     </div>
                 </v-timeline-item>
@@ -43,6 +42,7 @@
 <script setup lang='ts'>
     import {onMounted, onUnmounted} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
+    import useDiaryStore from "@/store/diary.ts";
     import testDiaryList from "@/mock/diaryMock.ts";
 
     defineOptions({
@@ -51,6 +51,7 @@
     })
 
     let appearanceStore = useAppearanceStore()
+    let diaryStore = useDiaryStore()
 
 
     onMounted(() => {

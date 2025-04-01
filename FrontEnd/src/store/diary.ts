@@ -22,13 +22,10 @@ const useDiaryStore = defineStore('diary', {
             timelinePointColor: [
                 '#1c4948',
                 '#0f3554',
-                '#61197e',
-                '#8a1948',
                 '#8a1919',
                 '#8a3b19',
                 '#8a5d19',
                 '#7f8a19',
-                '#198a1b',
                 '#198a5f',
             ]
         }
