@@ -1,93 +1,123 @@
+import json
 import re
 from pathlib import Path
-from markdown import markdown
 
-from BackEnd.utils.oss_upload import upload_file_to_oss
-from BackEnd.services.note_import_service import create_note_and_list
-from BackEnd import models
+from BackEnd.utils.oss_upload import upload_to_oss
+from BackEnd.utils.db_create import create_note_and_list, create_diary_and_list
 
-# 固定的markdown上传文件夹路径
-UPLOAD_DIR_PATH = Path('/Users/wangbo/Documents/uploads')
-# OSS路径前缀，不以 / 结尾
-OSS_PREFIX = 'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/note_images'
 
-print("当前扫描路径内容：", list(UPLOAD_DIR_PATH.glob("*")))
+# 用于提取markdown中的纯文本摘要
+def extract_text(md_text: str, max_length: int = 30) -> str:
+    cleaned = re.sub(r"!\[.*?]\(.*?\)", "", md_text)
+    cleaned = re.sub(r"^#{1,6}\s*", "", cleaned, flags=re.MULTILINE)
+    cleaned = re.sub(r"\*\*.*?\*\*", "", cleaned)
+    cleaned = re.sub(r"\*.*?\*|_.*?_", "", cleaned)
+    cleaned = re.sub(r"\[.*?]\(.*?\)", "", cleaned)
+    cleaned = re.sub(r"(_.*?_)", "", cleaned)
+    cleaned = re.sub(r"~~.*?~~", "", cleaned)
+    cleaned = re.sub(r"^>\s*", "", cleaned, flags=re.MULTILINE)
+    cleaned = re.sub(r"`.*?`", "", cleaned)
+    cleaned = re.sub(r"```[\s\S]*?```", "", cleaned)
+    cleaned = re.sub(r"^\d+\.\s*", "", cleaned, flags=re.MULTILINE)
+    cleaned = re.sub(r"^[-*+]\s*", "", cleaned, flags=re.MULTILINE)
+    cleaned = cleaned.strip()
+    return cleaned[:max_length]
 
-# 遍历所有mcpX文件
-mcp_dirs_path = list(UPLOAD_DIR_PATH.glob('mcp*/'))
 
-if not mcp_dirs_path:
-    print('未找到任何mcp*文件')
-    exit()
+def process_uploads():
+    upload_path = Path("/Users/wangbo/Documents/uploads")
+    if not upload_path.exists():
+        print(f"错误：上传目录不存在：{upload_path}")
+        return
 
-# 遍历所有的mcp文件夹
-for mcp_dir_path in mcp_dirs_path:
-    print('='*60)
-    print(f'正在处理markdown文件：{mcp_dir_path.name}')
+    for folder in upload_path.iterdir():
+        folder_name = folder.name.strip()
+        if not folder.is_dir() or folder_name.endswith('_uploaded') or folder_name.endswith('_preparation'):
+            continue
 
-    # 获取.md的路径
-    md_file_list = list(mcp_dir_path.glob('*.md'))
-    if not md_file_list:
-        print(f'未在{mcp_dir_path}中找到.md文件')
-        continue
-    md_file_path = md_file_list[0]
-    print(f'找到markdown文件：{md_file_path.name}')
+        print(f'\n\u2728 开始处理：{folder_name}')
 
-    # 获取封面cover路径
-    cover_file_path = mcp_dir_path / 'cover.jpg'
-    # 上传cover到OSS
-    if cover_file_path.exists():
-        oss_cover_key = f'note_covers/{mcp_dir_path.name}/cover.jpg'
-        oss_cover_url = upload_file_to_oss(cover_file_path, oss_cover_key)
-        print(f'找到封面图：{oss_cover_url}')
-    else:
-        oss_cover_url = None
-        print('未找到封面图 cover.jpg')
+        is_note = folder_name.startswith('note')
+        is_diary = folder_name.startswith('diary')
+        if not is_note and not is_diary:
+            print(f'跳过{folder_name}，不是note或diary')
 
-    # 获取.md的内容
-    with open(md_file_path, 'r', encoding='utf-8') as f:
-        markdown_content = f.read()
+        # 获取路径
+        md_file = None
+        for f in folder.iterdir():
+            if f.suffix == '.md':
+                md_file = f
+                break
 
-    # 获取.md内容中的pictures
-    local_image_files_list = re.findall(r"!\[.*?]\((.*?)\)", markdown_content)
+        cover_path = folder / 'cover.jpg'
+        pictures_path = folder / 'pictures'
+        meta_path = folder / 'meta.json'
 
-    # 构造本地pictures地址 --> OSS地址的映射
-    image_mapping = {}
-    for local_image_file in local_image_files_list:
-        image_name = Path(local_image_file).name
-        oss_image_url = f'{OSS_PREFIX}/{mcp_dir_path.name}/{image_name}'
-        image_mapping[local_image_file] = oss_image_url
+        if not md_file or not cover_path.exists() or not meta_path.exists():
+            print(f'缺少必要文件，跳过{folder_name}')
+            continue
 
-    # 替换.md中所有pictures地址为oss地址
-    for local_image_file, oss_image_url in image_mapping.items():
-        markdown_content = markdown_content.replace(f'{local_image_file}', f'{oss_image_url}')
+        # 读取meta.json
+        with meta_path.open('r', encoding='utf-8') as f:
+            meta = json.load(f)
 
-    # 上传所有pictures到OSS
-    for local_image_file in image_mapping.keys():
-        image_name = Path(local_image_file).name
-        local_image_path = mcp_dir_path / 'pic' / image_name
-        oss_image_key = f'note_images/{mcp_dir_path.name}/{image_name}'
-        upload_file_to_oss(local_image_path, oss_image_key)
+        # 上传封面图
+        cover_url = upload_to_oss(cover_path, f'images/{folder_name}/cover.jpg')
 
-    # 打印结果
-    print(f'封面图OSS链接：{oss_cover_url if oss_cover_url else "无"}')
-    print('markdown插图映射：')
-    for k, v in image_mapping.items():
-        print(f'{k} --> {v}')
-    print('内容(前300字)：')
-    print(markdown_content[:300])
-    print('='*60)
+        # 上传插图并建立映射
+        image_mapping = {}
+        if pictures_path.exists():
+            for image_file in pictures_path.iterdir():
+                if image_file.suffix.lower() not in {'.jpg', '.jpeg', '.png', '.gif', '.webp'}:
+                    continue
+                oss_key = f'images/{folder_name}/pictures/{image_file.name}'
+                oss_url = upload_to_oss(image_file, oss_key)
+                image_mapping[image_file.name] = oss_url
+        image_urls = list(image_mapping.values())
 
-    # 写入数据库
-    default_second_classification = models.SecondClassification.objects.filter(id=406).first()
-    default_tags = models.Tag.objects.filter(id__in=[286, 287])
-    title = md_file_path.stem
+        # 读取markdown内容并替换插图路径为oss_url
+        with md_file.open('r', encoding='utf-8') as f:
+            md_content = f.read()
 
-    create_note_and_list(
-        title=title,
-        markdown_content=markdown_content,
-        image_urls=list(image_mapping.values()),
-        cover_img=oss_cover_url or '',
-        second_classification=default_second_classification,
-        tag_list=default_tags
-    )
+        for image_name, oss_url in image_mapping.items():
+            md_content = md_content.replace(f'pictures/{image_name}', oss_url)
+
+        # 通用字段
+        title = md_file.stem
+
+        if is_note:
+            brief_quote = ''
+            for line in md_content.splitlines():
+                if line.strip().startswith('>'):
+                    brief_quote = line
+                    break
+            brief = extract_text(brief_quote)
+            create_note_and_list(
+                title=title,
+                subtitle=meta.get('subtitle', ''),
+                brief=brief,
+                content=md_content,
+                cover_url=cover_url,
+                image_urls=image_urls,
+                first_classification=meta.get('first_classification', ''),
+                second_classification=meta.get('second_classification', ''),
+                tags=meta.get('tags', [])
+            )
+        elif is_diary:
+            create_diary_and_list(
+                title=title,
+                motion=meta.get('motion', ''),
+                brief=meta.get('brief', ''),
+                content=md_content,
+                cover_url=cover_url,
+                image_urls=image_urls
+            )
+
+        # 重命名文件夹
+        new_folder = folder.with_name(folder_name + '_uploaded')
+        folder.rename(new_folder)
+        print(f'\u2705 处理完毕并已重新命名：{new_folder.name}')
+
+
+if __name__ == '__main__':
+    process_uploads()

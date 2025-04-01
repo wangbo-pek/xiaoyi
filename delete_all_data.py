@@ -1,7 +1,5 @@
-import os
-import django
-
 from faker import Faker
+
 faker = Faker('zh_CN')
 
 # 清除旧数据
