@@ -6,7 +6,6 @@ class Diary(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     markdown_content = models.TextField(verbose_name='渲染前的md', blank=True, null=True)
     image_urls = models.JSONField(verbose_name='插图链接列表', blank=True, null=True)
-    html_content = models.TextField(verbose_name='渲染后的HTML', blank=True, null=True)
 
     def __str__(self):
         return self.diarylist.title
@@ -16,7 +15,6 @@ class DiaryList(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     brief = models.CharField(verbose_name='摘要', max_length=128, blank=True, null=True)
     is_show = models.BooleanField(verbose_name='是否显示', default=True)
-    viewed_count = models.IntegerField(verbose_name='被浏览次数', default=0)
     created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
     modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
     cover_img = models.ImageField(verbose_name='封面图', max_length=512, blank=True, null=True,
@@ -67,7 +65,6 @@ class Note(models.Model):
     title = models.CharField(verbose_name='标题', max_length=32)
     markdown_content = models.TextField(verbose_name='渲染前的md', blank=True, null=True)
     image_urls = models.JSONField(verbose_name='插图链接列表', blank=True, null=True)
-    table_of_content = models.TextField(verbose_name='文章目录', blank=True, null=True)
 
     def __str__(self):
         return self.notelist.title
@@ -126,7 +123,6 @@ class FirstClassification(models.Model):
 # 二级分类
 class SecondClassification(models.Model):
     name = models.CharField(verbose_name='二级分类', max_length=16)
-    # 如果一级分类被隐藏，则该一级分类下所有二级分类也需要隐藏
     is_show = models.BooleanField(verbose_name='是否显示', default=True)
     created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
     modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)

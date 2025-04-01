@@ -67,6 +67,7 @@
         height: 250px;
         margin: 0 auto;
         border-radius: 5px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
         overflow: hidden;
         background-size: cover;
         background-position: center;
@@ -137,10 +138,6 @@
                     .created-date-text {
                         font-size: 14px;
                     }
-
-                    .created-date-icon {
-
-                    }
                 }
 
                 .second-class {
@@ -151,12 +148,7 @@
                     .second-class-text {
                         font-size: 14px;
                     }
-
-                    .second-class-icon {
-
-                    }
                 }
-
             }
 
             // 分割线
@@ -180,9 +172,6 @@
 
                     .tag-icon {
                         font-size: 14px;
-                    }
-
-                    .tag-text {
                     }
                 }
             }

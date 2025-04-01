@@ -10,12 +10,12 @@ export interface DiaryListItem {
 }
 
 export interface DiaryContentItem {
-    "diaryListId":string,
+    "diaryListId":number,
     "title":string,
     "brief":string,
     "coverImg":string,
     "isShow":boolean,
-    "viewedCount": string,
+    "viewedCount": number,
     "createdTime": string,
     "modifiedTime": string,
     "markdownContent": string,

@@ -1,35 +1,49 @@
 <template>
-    <v-timeline align="start">
-        <v-timeline-item
-            v-for="(year, i) in years"
-            :key="i"
-            :dot-color="year.color"
-            size="small"
-        >
-            <template v-slot:opposite>
-                <div
-                    :class="`pt-1 headline font-weight-bold text-${year.color}`"
-                    v-text="year.year"
-                ></div>
-            </template>
-            <div>
-                <h2 :class="`mt-n1 headline font-weight-light mb-4 text-${year.color}`">
-                    Lorem ipsum
-                </h2>
-                <div>
-                    Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod
-                    convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an
-                    salutandi sententiae.
-                </div>
-            </div>
-        </v-timeline-item>
-    </v-timeline>
+    <div class="container">
+
+        <div class="diary-timeline">
+            <v-timeline class="diary-timeline" align="start">
+                <v-timeline-item
+                    v-for="(diary, i) in testDiaryList"
+                    :key="i"
+                    :dot-color="diary.timelinePointColor"
+                    size="small"
+                    fill-dot
+                >
+                    <template v-slot:opposite>
+                        <div class="diary-date" :style="{color:diary.timelinePointColor}">
+                            <v-chip class="diary-date-chip" variant="tonal" label :style="{color:diary.timelinePointColor}">
+                                {{ diary.createdTime }}
+                                &nbsp;
+                                {{ diary.title }}
+                            </v-chip>
+                        </div>
+                    </template>
+                    <div class="diary-item" :style="{background:diary.timelinePointColor}">
+                        <div class="cover-container">
+                            <v-img
+                                class="cover"
+                                :width="400"
+                                cover
+                                src="https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/note_covers/mcp1/cover.jpg"
+                            ></v-img>
+                        </div>
+                        <div class="brief-container">
+                            <p class="brief-text">{{ diary.brief }}... ...</p>
+                        </div>
+                    </div>
+                </v-timeline-item>
+            </v-timeline>
+        </div>
+    </div>
+
+
 </template>
 
 <script setup lang='ts'>
     import {onMounted, onUnmounted} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
-    import {useDiaryStore} from "@/store/diary.ts";
+    import testDiaryList from "@/mock/diaryMock.ts";
 
     defineOptions({
         name: 'Diary',
@@ -37,7 +51,7 @@
     })
 
     let appearanceStore = useAppearanceStore()
-    let diaryStore = useDiaryStore()
+
 
     onMounted(() => {
         appearanceStore.isShowHomeCover = false
@@ -48,32 +62,62 @@
         appearanceStore.isShowHomeCover = true
     })
 
-    const years = [
-        {
-            color: 'cyan',
-            year: '1960',
-        },
-        {
-            color: 'green',
-            year: '1970',
-        },
-        {
-            color: 'pink',
-            year: '1980',
-        },
-        {
-            color: 'amber',
-            year: '1990',
-        },
-        {
-            color: 'orange',
-            year: '2000',
-        },
-    ]
-
 
 </script>
 
 <style scoped lang='scss'>
+    .container {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 100px;
+
+        .diary-timeline {
+            position: relative;
+            top: 2rem;
+            padding: 0 25px 25px 25px;
+
+            .diary-item {
+                border-radius: 5px;
+                padding: 30px;
+                margin-bottom: 50px;
+                box-shadow: 5px 5px 5px rgba(98, 98, 98, 0.5);
+
+                .diary-info-container {
+
+                    .weather {
+                    }
+
+                    .motion {
+
+                    }
+                }
+
+                .cover-container {
+                    display: flex;
+                    justify-content: center;
+                    .cover {
+                        border-radius: 5px;
+                        border: 5px solid white;
+                        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+                    }
+                }
+
+                .brief-container {
+                    margin-top: 15px;
+
+                    .brief-text {
+                        text-align: left;
+                        color: white;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .diary-date-chip {
+        font-size: 1rem;
+    }
 
 </style>

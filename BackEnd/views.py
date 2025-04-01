@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.db import DatabaseError
@@ -74,7 +74,7 @@ def get_note_all_content(request):
     except models.NoteList.DoesNotExist as e:
         return JsonResponse({
             "code": 1,
-            "msg": 'notelist not found'
+            "msg": f"notelist not found {e}"
         })
     except (DatabaseError, FieldError) as e:
         return JsonResponse({
@@ -112,7 +112,6 @@ def get_note_all_content(request):
         "firstClassification": note_list_obj.second_classification.first_classification.name,
         "secondClassification": note_list_obj.second_classification.name,
         "markdownContent": note_obj.markdown_content,
-        "tableOfContent": note_obj.table_of_content,
         "imageUrls": note_obj.image_urls
     }
 
@@ -121,3 +120,39 @@ def get_note_all_content(request):
         "msg": "success",
         "data": note_item
     })
+
+
+def get_all_diay_list(request):
+    try:
+        diary_list_query_set = models.DiaryList.objects.all()
+
+        # 把数据转换为列表 (将QuerySet转换为List)
+        diary_list_data = []
+        for diary_list_object in diary_list_query_set:
+            temp_created_time = diary_list_object.created_time
+            temp_modified_time = diary_list_object.modified_time
+
+            diary_list_data.append({
+                "diaryListId": diary_list_object.id,
+                "title": diary_list_object.title,
+                "brief": diary_list_object.brief,
+                "coverImg": diary_list_object.cover_img,
+                "isShow": diary_list_object.is_show,
+                "createdTime": f"{temp_created_time.year}-{temp_created_time.month}-{temp_created_time.day}",
+                "modifiedTime": f"{temp_modified_time.year}-{temp_modified_time.month}-{temp_modified_time.day}"
+            })
+
+        return JsonResponse({
+            "code": 0,
+            "msg": "success",
+            "data": diary_list_data
+        })
+    except (ObjectDoesNotExist, DatabaseError) as e:
+        return JsonResponse({
+            "code": 1,
+            "msg": f"failed{e}"
+        })
+
+
+
+
