@@ -58,7 +58,6 @@
 
 </script>
 
-
 <style scoped lang='scss'>
     .card-container {
         position: relative;
@@ -74,11 +73,13 @@
         display: flex;
         align-items: stretch;
         justify-content: flex-start;
-        transition: transform 0.3s ease;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         &:hover {
-            transform: scale(1.03);
-            z-index: 3;
+            transform: scale(1.05); // 放大 5%
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.35);
+            z-index: 1;
         }
 
         .overlay {

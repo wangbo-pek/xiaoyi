@@ -62,6 +62,7 @@
                 margin: 10px 0 10px 0;
 
                 .my-name-text {
+                    color: white;
                     font-size: 1.5rem;
                     font-weight: 200;
                 }
@@ -73,6 +74,7 @@
                 margin: 10px 0 10px 0;
 
                 .what-i-wanna-say-text {
+                    color: white;
                     max-width: 15rem;
                     font-size: 0.8rem;
                     font-weight: 700;
@@ -118,8 +120,9 @@
             }
 
             .coffee-text {
+                color: white;
                 font-size: 1rem;
-                font-weight: 200;
+                font-weight: 800;
             }
         }
     }

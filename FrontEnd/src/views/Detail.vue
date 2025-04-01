@@ -672,8 +672,9 @@
         }
 
         .coffee-text {
+            color: white;
             font-size: 1rem;
-            font-weight: 200;
+            font-weight: 800;
         }
     }
 

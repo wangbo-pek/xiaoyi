@@ -15,7 +15,6 @@ class DiaryList(models.Model):
     title = models.CharField(verbose_name='标题', max_length=64)
     brief = models.CharField(verbose_name='摘要', max_length=128, blank=True, null=True)
     is_show = models.BooleanField(verbose_name='是否显示', default=True)
-    motion = models.CharField(verbose_name='心情', max_length=32, blank=True, null=True)
     created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
     modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
     cover_img = models.URLField(verbose_name='封面图', max_length=512, blank=True, null=True)

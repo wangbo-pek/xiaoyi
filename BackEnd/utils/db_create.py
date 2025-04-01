@@ -40,7 +40,7 @@ def create_note_and_list(title, subtitle, brief, image_urls, content, cover_url,
         note_list.tags.add(tag)
 
 
-def create_diary_and_list(title, motion, brief, image_urls, content, cover_url):
+def create_diary_and_list(title, brief, image_urls, content, cover_url):
     diary = Diary.objects.create(
         title=title,
         markdown_content=content,
@@ -50,7 +50,6 @@ def create_diary_and_list(title, motion, brief, image_urls, content, cover_url):
     DiaryList.objects.create(
         title=title,
         brief=brief,
-        motion=motion,
         cover_img=cover_url,
         diary=diary
     )

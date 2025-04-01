@@ -106,7 +106,6 @@ def process_uploads():
         elif is_diary:
             create_diary_and_list(
                 title=title,
-                motion=meta.get('motion', ''),
                 brief=meta.get('brief', ''),
                 content=md_content,
                 cover_url=cover_url,

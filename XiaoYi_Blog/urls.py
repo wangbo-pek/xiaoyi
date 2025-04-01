@@ -11,5 +11,5 @@ urlpatterns = [
     # 根据note list id，获取相关联的note content
     path('getNoteAllContent/', BackEnd.views.get_note_all_content, name='get_note'),
     # 获取所有的日记列表信息 DiaryList
-    path('getAllDiaryList/', BackEnd.views.get_all_diay_list, name='get_all_diay_list'),
+    path('getAllDiaryList/', BackEnd.views.get_all_diary_list, name='get_all_diary_list'),
 ]

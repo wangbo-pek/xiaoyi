@@ -20,13 +20,9 @@ const useDiaryStore = defineStore('diary', {
                 "renderedMarkdown": ''
             },
             timelinePointColor: [
-                '#1c4948',
-                '#0f3554',
-                '#8a1919',
-                '#8a3b19',
-                '#8a5d19',
-                '#7f8a19',
-                '#198a5f',
+                '#3ba48c',
+                '#298aa1',
+                '#3370b6',
             ]
         }
     }

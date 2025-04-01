@@ -122,7 +122,7 @@ def get_note_all_content(request):
     })
 
 
-def get_all_diay_list(request):
+def get_all_diary_list(request):
     try:
         diary_list_query_set = models.DiaryList.objects.all()
 
@@ -152,7 +152,3 @@ def get_all_diay_list(request):
             "code": 1,
             "msg": f"failed{e}"
         })
-
-
-
-
