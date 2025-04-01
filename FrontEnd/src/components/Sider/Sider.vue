@@ -120,7 +120,7 @@
             }
 
             .coffee-text {
-                color: white;
+                color: #c3effa;
                 font-size: 1rem;
                 font-weight: 800;
             }

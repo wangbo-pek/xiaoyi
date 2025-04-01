@@ -83,7 +83,7 @@
                 border-radius: 5px;
                 padding: 20px;
                 margin-bottom: 50px;
-                box-shadow: 2px 2px 2px rgba(171, 171, 171, 0.75);
+                box-shadow: 2px 2px 2px rgba(171, 171, 171, 0.25);
                 cursor: pointer;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
 
@@ -99,7 +99,7 @@
 
                     .cover {
                         border-radius: 10px;
-                        border: 5px solid rgba(255, 255, 255, 0.5);
+                        border: 1px solid rgba(255, 255, 255, 0.2);
                         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
                     }
                 }
@@ -109,7 +109,7 @@
 
                     .brief-text {
                         text-align: left;
-                        color: #173838;
+                        color: #5a9b9b;
                         font-size: 1rem;
                     }
                 }

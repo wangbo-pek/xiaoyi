@@ -89,8 +89,8 @@
                 <div v-html="toc"></div>
             </div>
 
-
             <div class="divider2"></div>
+
             <div class="article-footer-container">
                 <div class="author-container">
                     <span class="author">
@@ -112,40 +112,41 @@
                 </div>
             </div>
 
+            <div class="share-container">
+                <div class="tags">
+                    <span class="tag" v-for="(tag, index) in noteStore.currentNote.tagsName" :key="index">{{
+                            tag
+                        }}</span>
+                </div>
+                <div class="share-icon">
+                    <v-img class="wechat-icon"
+                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/wechat.svg'"></v-img>
+                    <v-img class="twitter-icon"
+                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/twitter.svg'"></v-img>
+                    <v-img class="github-icon"
+                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/github.svg'"></v-img>
+                    <v-img class="google-plus-icon"
+                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/google_plus.svg'"></v-img>
+                    <v-img class="linkedin-icon"
+                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/linkedin.svg'"></v-img>
+                    <v-img class="weibo-icon"
+                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/weibo.svg'"></v-img>
+                    <v-img class="zhihu-icon"
+                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/zhihu.svg'"></v-img>
+                </div>
+            </div>
+
+            <div class="coffee-container">
+                <span class="coffee-text">COFFEE ME &nbsp;</span>
+                <v-img class="coffee-icon"
+                       :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/coffee.svg'"></v-img>
+            </div>
         </div>
     </div>
 
-    <div class="share-container">
-        <div class="tags">
-            <span class="tag" v-for="(tag, index) in noteStore.currentNote.tagsName" :key="index">{{ tag }}</span>
-        </div>
-        <div class="share-icon">
-            <v-img class="wechat-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/wechat.svg'"></v-img>
-            <v-img class="twitter-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/twitter.svg'"></v-img>
-            <v-img class="github-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/github.svg'"></v-img>
-            <v-img class="google-plus-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/google_plus.svg'"></v-img>
-            <v-img class="linkedin-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/linkedin.svg'"></v-img>
-            <v-img class="weibo-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/weibo.svg'"></v-img>
-            <v-img class="zhihu-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/zhihu.svg'"></v-img>
-        </div>
+    <div class="recommend-note-container">
+        222
     </div>
-
-    <div class="coffee-container">
-        <span class="coffee-text">COFFEE ME &nbsp;</span>
-        <v-img class="coffee-icon"
-               :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/coffee.svg'"></v-img>
-    </div>
-
-    <div class="divider3"></div>
-
-    <div class="recommend-note-container"></div>
 
 </template>
 
@@ -185,6 +186,7 @@
         }
     }
 
+    // 前端展示table of contents的内容
     const toc = ref('');
 
     onMounted(async () => {
@@ -351,9 +353,6 @@
             width: 75%;
             position: relative;
             top: -8.5em;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px 10px 10px 10px;
-            box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
 
             .tags-classification-container {
                 display: flex;
@@ -424,12 +423,12 @@
                     gap: 4px;
 
                     .created-date-icon {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
 
                     .created-date-text {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
                 }
@@ -440,12 +439,12 @@
                     gap: 4px;
 
                     .modified-date-icon {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
 
                     .modified-date-text {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
                 }
@@ -456,12 +455,12 @@
                     gap: 4px;
 
                     .viewed-icon {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
 
                     .viewed-text {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
                 }
@@ -472,12 +471,12 @@
                     gap: 4px;
 
                     .liked-icon {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
 
                     .liked-text {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
                 }
@@ -488,12 +487,12 @@
                     gap: 4px;
 
                     .disgusted-icon {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
 
                     .disgusted-text {
-                        color: #515c7a;
+                        color: #8ab9a8;
                         font-size: 1rem;
                     }
                 }
@@ -521,13 +520,10 @@
             .article-footer-container {
                 padding: 15px;
                 border-radius: 5px;
-                box-shadow: 0 2px 5px rgba(150, 150, 150, 0.3);
-                //display: flex;
-                flex-wrap: wrap;
-                //gap: 15px;
+                box-shadow: 1px 2px 3px rgba(138, 185, 168, 0.3);
                 margin: 30px 0 20px 0;
-                background-color: rgba(250, 250, 250, 0.2);
-                border: 1px solid rgba(150, 150, 150, 0.3);
+                background-color: rgba(138, 185, 168, 0.1);
+                border: 1px solid rgba(138, 185, 168, 0.5);
 
                 .author-container {
                     .author {
@@ -537,13 +533,13 @@
                         margin: 15px;
 
                         .author-icon {
-                            color: #113c46;
-                            font-size: 0.8em;
+                            color: #8ab9a8;
+                            font-size: 0.9em;
                         }
 
                         .author-text {
-                            color: #113c46;
-                            font-size: 0.8em;
+                            color: #8ab9a8;
+                            font-size: 0.85em;
                             font-weight: 800;
                         }
                     }
@@ -557,13 +553,13 @@
                         margin: 15px;
 
                         .link-icon {
-                            color: #113c46;
-                            font-size: 0.8em;
+                            color:#8ab9a8;
+                            font-size:  0.9em;
                         }
 
                         .link-text {
-                            color: #113c46;
-                            font-size: 0.8em;
+                            color: #8ab9a8;
+                            font-size: 0.85em;
                             font-weight: 800;
                         }
                     }
@@ -577,104 +573,107 @@
                         margin: 15px;
 
                         .copy-right-icon {
-                            color: #113c46;
-                            font-size: 0.8em;
+                            color: #8ab9a8;
+                            font-size:  0.9em;
                         }
 
                         .copy-right-text {
-                            color: #113c46;
-                            font-size: 0.8em;
+                            color: #8ab9a8;
+                            font-size: 0.85em;
                             font-weight: 800;
                         }
                     }
                 }
             }
-        }
-    }
 
-    .share-container {
-        position: relative;
-        top: -130px;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
+            .share-container {
+                    position: relative;
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
 
-        .tags {
-            width: 30%;
-            display: flex;
-            justify-content: flex-start;
-            gap: 10px;
-            position: relative;
-            top: -6px;
+                    .tags {
+                        width: 30%;
+                        display: flex;
+                        justify-content: flex-start;
+                        gap: 10px;
+                        position: relative;
+                        top: -20px;
+                        left: -120px;
 
-            .tag {
-                background-color: #113c46;
-                color: white;
-                padding: 6px 10px;
-                border-radius: 5px;
-                font-size: 0.8em;
-            }
-        }
+                        .tag {
+                            background-color: #113c46;
+                            color: white;
+                            padding: 6px 10px;
+                            border-radius: 5px;
+                            font-size: 0.8em;
+                        }
+                    }
 
-        .share-icon {
-            width: 30%;
-            display: flex;
-            justify-content: flex-end;
-            padding: 15px;
+                    .share-icon {
+                        width: 30%;
+                        display: flex;
+                        justify-content: flex-end;
+                        padding: 15px;
+                        position: relative;
+                        top: -12px;
+                        left: 150px;
 
-            .wechat-icon {
-                margin: 0 15px 15px 0;
-                max-width: 7%;
-            }
+                        .wechat-icon {
+                            margin: 0 15px 15px 0;
+                            max-width: 10%;
+                        }
 
-            .twitter-icon {
-                margin: 0 15px 15px 0;
-                max-width: 7%;
-            }
+                        .twitter-icon {
+                            margin: 0 15px 15px 0;
+                            max-width: 10%;
+                        }
 
-            .github-icon {
-                margin: 0 15px 15px 0;
-                max-width: 7%;
-            }
+                        .github-icon {
+                            margin: 0 15px 15px 0;
+                            max-width: 10%;
+                        }
 
-            .google-plus-icon {
-                margin: 0 15px 15px 0;
-                max-width: 7%;
-            }
+                        .google-plus-icon {
+                            margin: 0 15px 15px 0;
+                            max-width: 10%;
+                        }
 
-            .linkedin-icon {
-                margin: 0 15px 15px 0;
-                max-width: 7%;
-            }
+                        .linkedin-icon {
+                            margin: 0 15px 15px 0;
+                            max-width: 10%;
+                        }
 
-            .weibo-icon {
-                margin: 0 15px 15px 0;
-                max-width: 7%;
-            }
+                        .weibo-icon {
+                            margin: 0 15px 15px 0;
+                            max-width: 10%;
+                        }
 
-            .zhihu-icon {
-                margin: 0 15px 15px 0;
-                max-width: 7%;
-            }
+                        .zhihu-icon {
+                            margin: 0 15px 15px 0;
+                            max-width: 10%;
+                        }
 
-        }
-    }
+                    }
+                }
 
-    .coffee-container {
-        position: relative;
-        top: -100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            .coffee-container {
+                    position: relative;
+                    top: -10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
 
-        .coffee-icon {
-            max-width: 1.5%;
-        }
+                    .coffee-icon {
+                        max-width: 2.5%;
+                    }
 
-        .coffee-text {
-            color: white;
-            font-size: 1rem;
-            font-weight: 800;
+                    .coffee-text {
+                        color: #c3effa;
+                        font-size: 1rem;
+                        font-weight: 800;
+                    }
+                }
         }
     }
 
@@ -692,204 +691,11 @@
         background-color: #113c46;
     }
 
-    /* 样式调整：设置 Markdown 中的图片样式 */
-    :deep(.markdown-content img) {
-        max-width: 90%; // 限制图片宽度为容器的最大宽度的 90%
-        display: block; // 将图片设置为块级元素
-        margin: 20px auto; // 上下边距 20px，左右居中
-        border-radius: 5px; // 添加圆角效果
-        border: 5px solid  rgba(17, 60, 70, 0.75);
-        box-shadow: 8px 8px 8px rgba(17, 60, 70, 0.5); // 给图片添加阴影效果
-    }
-
-    /* 设置 markdown-content 中的 h1 ~ h4 标题样式 */
-    :deep(.markdown-content h1) {
-        font-size: 2em; // 设置 h1 字体大小
-        color: #003366; // 设置 h1 字体颜色
-        margin: 30px 0; // 设置上下间距
-        font-weight: 800; // 设置加粗
-        text-align: center; // 设置居中对齐
-    }
-
-    :deep(.markdown-content h2) {
-        font-size: 1.75em; // 设置 h2 字体大小
-        color: #005b99; // 设置 h2 字体颜色
-        margin: 20px 0; // 设置上下间距
-        font-weight: 700; // 设置加粗
-    }
-
-    :deep(.markdown-content h3) {
-        font-size: 1.5em; // 设置 h3 字体大小
-        color: #007bb5; // 设置 h3 字体颜色
-        margin: 16px 0; // 设置上下间距
-        font-weight: 600; // 设置加粗
-        text-align: left; // 设置左对齐
-    }
-
-    :deep(.markdown-content h4) {
-        font-size: 1.25em; // 设置 h4 字体大小
-        color: #0099cc; // 设置 h4 字体颜色
-        margin: 15px 0; // 设置上下间距
-        font-weight: 400; // 设置加粗
-        text-align: left; // 设置左对齐
-    }
-
-    /* 设置 markdown-content 中的段落样式 */
-    :deep(.markdown-content p) {
-        font-size: 16px; // 设置段落字体大小
-        color: #555555; // 设置段落字体颜色
-        line-height: 1.5; // 设置行高
-        margin: 10px 0; // 设置上下边距
-        padding: 0 10px; // 设置左右内边距
-        text-align: justify; // 设置文本对齐方式，自动调整左右边距
-    }
-
-    /* 设置无序列表（ul）样式 */
-    :deep(.markdown-content ul) {
-        list-style-type: disc; /* 使用圆点样式 */
-        padding-left: 50px; /* 给无序列表增加左边距 */
-        margin: 10px 0; /* 给无序列表设置上下间距 */
-    }
-
-    /* 设置无序列表项（li）样式 */
-    :deep(.markdown-content ul li) {
-        font-size: 16px; /* 设置字体大小 */
-        color: #555555; /* 设置文本颜色 */
-        margin-bottom: 8px; /* 设置列表项之间的间距 */
-        line-height: 1.6; /* 设置行高 */
-    }
-
-    /* 设置有序列表（ol）样式 */
-    :deep(.markdown-content ol) {
-        list-style-type: decimal; /* 使用数字样式 */
-        padding-left: 50px; /* 给有序列表增加左边距 */
-        margin: 10px 0; /* 给有序列表设置上下间距 */
-    }
-
-    /* 设置有序列表项（li）样式 */
-    :deep(.markdown-content ol li) {
-        font-size: 16px; /* 设置字体大小 */
-        color: #555555; /* 设置文本颜色 */
-        margin-bottom: 8px; /* 设置列表项之间的间距 */
-        line-height: 1.6; /* 设置行高 */
-    }
-
-    /* 设置代码块的背景颜色、内边距、圆角和阴影效果 */
-    :deep(.markdown-content pre) {
-        font-size: 0.95rem; /* 调整字体大小 */
-        line-height: 1.6; /* 增加行高 */
-        font-family: 'Courier New', Courier, monospace;
-        background-color: #f5f5f5; /* 轻灰色背景 */
-        padding: 15px; /* 添加内边距 */
-        border-radius: 8px; /* 圆角效果 */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-        overflow-x: auto; /* 超出宽度时，出现水平滚动条 */
-    }
-
-    /* 设置代码块内部代码的样式 */
-    :deep(.markdown-content code) {
-        font-family: 'Fira Code', Courier, monospace; /* 等宽字体 */
-        font-size: 0.9rem; /* 字体大小 */
-        background-color: #f5f5f5; /* 背景色与pre背景一致 */
-        padding: 2px 6px; /* 小的内边距 */
-        border-radius: 5px; /* 圆角效果 */
-        color: #d9534f; /* 代码内容的颜色 */
-    }
-
-    /* 自定义关键字样式 */
-    :deep(.markdown-content .hljs-keyword) {
-        color: #d58052; /* 关键字使用红色 */
-        font-weight: bold;
-    }
-
-    /* 自定义字符串样式 */
-    :deep(.markdown-content .hljs-string) {
-        color: #276751; /* 字符串使用蓝色 */
-    }
-
-    /* 自定义函数名样式 */
-    :deep(.markdown-content .hljs-function) {
-        color: #f0ad4e; /* 函数名使用黄色 */
-    }
-
-    /* 自定义斜体样式 */
-    :deep(.markdown-content em) {
-        font-style: italic;
-        color: #626262; /* 你可以设置其他颜色 */
-    }
-
-    /* 下划线样式 */
-    :deep(.markdown-content u) {
-        text-decoration: underline;
-        color: #626262; /* 下划线文本的颜色 */
-        font-weight: 700;
-    }
-
-    /* 删除线样式 */
-    :deep(.markdown-content del) {
-        text-decoration: line-through;
-        color: #a2a2a2; /* 删除线文本的颜色 */
-    }
-
-    /* 引用样式 */
-    :deep(.markdown-content blockquote) {
-        padding: 10px 20px; /* 给引用框添加内边距 */
-        border-left: 5px solid #3fb2ae; /* 添加左侧边框来区分引用 */
-        background-color: rgba(63, 178, 174, 0.2); /* 设置背景颜色 */
-        margin: 15px 0; /* 设置上下外边距 */
-        font-weight: 800;
-    }
-
-    /* 引用样式 */
-    :deep(.markdown-content blockquote p) {
-        color: #1c4948; /* 引用文本的颜色 */
-        font-weight: 800;
-        margin: 0; /* 移除引用内部段落的默认外边距 */
+    @import "@/styles/markdown";
+    :deep(.markdown-content) {
     }
 
     :deep(.toc) {
-        position: fixed;
-        bottom: 10rem;
-        right: 0.5rem;
-        background-color: #113c46; /* 设置目录背景色 */
-        padding: 10px;
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
-        z-index: 10;
-        border-radius: 5px; /* 给目录容器加圆角 */
-    }
-
-    :deep(.toc h2) {
-        font-size: 1rem;
-        margin-bottom: 10px;
-    }
-
-    :deep(.toc ul) {
-        list-style: none; /* 移除默认的小圆点 */
-        padding: 0; /* 移除默认的内边距 */
-        margin: 0; /* 移除默认的外边距 */
-    }
-
-    :deep(.toc a) {
-        color: white;
-        text-decoration: none; /* 移除默认的下划线 */
-        font-size: 0.8em; /* 设置字体大小 */
-        font-weight: 700; /* 设置字体加粗 */
-        transition: color 0.3s ease; /* 添加过渡效果 */
-    }
-
-    :deep(.toc a:hover) {
-        color: #ff6600; /* 鼠标悬停时改变颜色 */
-        text-decoration: underline; /* 添加下划线 */
-    }
-
-    :deep(.toc-title) {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        margin: 5px auto 10px 10px;
-        font-size: 0.85em; /* 设置字体大小 */
-        font-weight: 700; /* 设置字体加粗 */
-        color: white;
     }
 
 </style>

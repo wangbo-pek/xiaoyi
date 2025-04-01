@@ -20,9 +20,10 @@ const useDiaryStore = defineStore('diary', {
                 "renderedMarkdown": ''
             },
             timelinePointColor: [
-                '#3ba48c',
-                '#298aa1',
-                '#3370b6',
+                'rgba(106,164,59,0.5)',
+                'rgba(41,138,161,0.5)',
+                'rgba(138,51,182,0.5)',
+                'rgba(182,90,51,0.5)',
             ]
         }
     }
