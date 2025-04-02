@@ -19,11 +19,13 @@ const useDiaryStore = defineStore('diary', {
                 "imageUrls": [],
                 "renderedMarkdown": ''
             },
-            timelinePointColor: [
-                'rgba(106,164,59,0.5)',
-                'rgba(41,138,161,0.5)',
-                'rgba(138,51,182,0.5)',
-                'rgba(182,90,51,0.5)',
+            timelineColors: [
+                {pointColor: 'rgba(231,156,115,0.2)', textColor: 'rgba(231,156,115,0.8)'},
+                {pointColor: 'rgba(200,229,115,0.2)', textColor: 'rgba(200,229,115,0.8)'},
+                {pointColor: 'rgba(113,224,131,0.2)', textColor: 'rgba(113,224,131,0.8)'},
+                {pointColor: 'rgba(113,198,229,0.2)', textColor: 'rgba(113,198,229,0.8)'},
+                {pointColor: 'rgba(177,113,229,0.2)', textColor: 'rgba(177,113,229,0.8)'},
+                {pointColor: 'rgba(229,113,157,0.2)', textColor: 'rgba(229,113,157,0.8)'}
             ]
         }
     }

@@ -1,3 +1,8 @@
+interface TimelineColor {
+    pointColor: string,
+    textColor: string
+}
+
 export interface DiaryListItem {
     "diaryListId": string,
     "title": string,
@@ -7,7 +12,7 @@ export interface DiaryListItem {
     "viewedCount": string,
     "createdTime": string,
     "modifiedTime": string,
-    "timelinePointColor": string
+    "timelineColor": TimelineColor,
 }
 
 export interface DiaryContentItem {

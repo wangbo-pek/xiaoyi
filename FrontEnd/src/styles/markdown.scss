@@ -42,12 +42,12 @@
 
 /* 设置 markdown-content 中的段落样式 */
 :deep(.markdown-content p) {
-    font-size: 16px; // 设置段落字体大小
+    font-size: 1rem; // 设置段落字体大小
     color: rgba(222, 222, 222, 0.9); // 设置段落字体颜色
     line-height: 1.5; // 设置行高
     margin: 10px 0; // 设置上下边距
     padding: 0 10px; // 设置左右内边距
-    text-align: justify; // 设置文本对齐方式，自动调整左右边距
+    text-align: left; // 设置文本对齐方式，自动调整左右边距
 }
 
 /* 设置无序列表（ul）样式 */
@@ -59,7 +59,7 @@
 
 /* 设置无序列表项（li）样式 */
 :deep(.markdown-content ul li) {
-    font-size: 16px; /* 设置字体大小 */
+    font-size: 1rem; /* 设置字体大小 */
     color: white; /* 设置文本颜色 */
     margin-bottom: 8px; /* 设置列表项之间的间距 */
     line-height: 1.6; /* 设置行高 */
@@ -74,7 +74,7 @@
 
 /* 设置有序列表项（li）样式 */
 :deep(.markdown-content ol li) {
-    font-size: 16px; /* 设置字体大小 */
+    font-size: 1rem; /* 设置字体大小 */
     color: white; /* 设置文本颜色 */
     margin-bottom: 8px; /* 设置列表项之间的间距 */
     line-height: 1.6; /* 设置行高 */
@@ -110,7 +110,7 @@
 
 /* 自定义字符串样式 */
 :deep(.markdown-content .hljs-string) {
-    color: #276751; /* 字符串使用蓝色 */
+    color: #54b996; /* 字符串使用蓝色 */
 }
 
 /* 自定义函数名样式 */
@@ -121,34 +121,35 @@
 /* 自定义斜体样式 */
 :deep(.markdown-content em) {
     font-style: italic;
-    color: red; /* 你可以设置其他颜色 */
+    color: #f63c3c;
 }
 
 /* 下划线样式 */
 :deep(.markdown-content u) {
     text-decoration: underline;
-    color: #a2a2a2; /* 下划线文本的颜色 */
+    color: #a2a2a2;
     font-weight: 700;
 }
 
 /* 删除线样式 */
 :deep(.markdown-content del) {
     text-decoration: line-through;
-    color: #a2a2a2; /* 删除线文本的颜色 */
+    color: #a2a2a2;
 }
 
 /* 引用样式 */
 :deep(.markdown-content blockquote) {
-    padding: 10px 20px; /* 给引用框添加内边距 */
-    border-left: 5px solid #3fb2ae; /* 添加左侧边框来区分引用 */
-    background-color: rgba(63, 178, 174, 0.2); /* 设置背景颜色 */
+    padding: 10px 20px;
+    border-left: 5px solid #3fb2ae;
+    background-color: rgba(63, 178, 174, 0.2);
     margin: 15px 0; /* 设置上下外边距 */
     font-weight: 800;
 }
 
 /* 引用样式 */
 :deep(.markdown-content blockquote p) {
-    color: #5dd5d2; /* 引用文本的颜色 */
+    color: #5dd5d2;
+    font-size: 0.95rem;
     font-weight: 800;
     margin: 0; /* 移除引用内部段落的默认外边距 */
 }

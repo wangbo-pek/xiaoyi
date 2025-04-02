@@ -145,7 +145,6 @@
     </div>
 
     <div class="recommend-note-container">
-        222
     </div>
 
 </template>
@@ -163,7 +162,7 @@
     import 'highlight.js/styles/github.css'
 
     defineOptions({
-        name: 'Detail',
+        name: 'NoteDetail',
         inheritAttrs: false
     })
 
@@ -189,22 +188,7 @@
     // 前端展示table of contents的内容
     const toc = ref('');
 
-    onMounted(async () => {
-        // 页面加载时，从后端获取文章content
-        const result = await axios_server.get('getNoteAllContent/', {
-            params: {
-                noteListId
-            }
-        })
-        console.log('result ~~~~~')
-        console.log(result)
-        Object.assign(noteStore.currentNote, result.data)
-
-        // 将markdown进行渲染，渲染为html
-        noteStore.currentNote.renderedMarkdown = md.render(noteStore.currentNote.markdownContent)
-        console.log('renderedMarkdown ~~~~~~ ')
-        console.log(noteStore.currentNote.renderedMarkdown)
-
+    const handleTableOfContents = () => {
         const regex = /<h1>(.*?)<\/h1>/g;
         let match;
         let tocHtml = '<ul>';
@@ -226,10 +210,27 @@
         }
 
         tocHtml += '</ul>';
-
         // 更新 markdown 和 TOC 内容
         noteStore.currentNote.renderedMarkdown = updatedMarkdown;
         toc.value = tocHtml;
+    }
+
+
+
+    onMounted(async () => {
+        // 页面加载时，从后端获取文章content
+        const result = await axios_server.get('getNoteAllContent/', {
+            params: {
+                noteListId
+            }
+        })
+        Object.assign(noteStore.currentNote, result.data)
+
+        // 将markdown进行渲染
+        noteStore.currentNote.renderedMarkdown = md.render(noteStore.currentNote.markdownContent)
+
+        // 调用 handleTableOfContents 来处理table of contents
+        handleTableOfContents()
 
         // 调用 highlightCode 来处理代码高亮
         highlightCode();
@@ -553,8 +554,8 @@
                         margin: 15px;
 
                         .link-icon {
-                            color:#8ab9a8;
-                            font-size:  0.9em;
+                            color: #8ab9a8;
+                            font-size: 0.9em;
                         }
 
                         .link-text {
@@ -574,7 +575,7 @@
 
                         .copy-right-icon {
                             color: #8ab9a8;
-                            font-size:  0.9em;
+                            font-size: 0.9em;
                         }
 
                         .copy-right-text {
@@ -587,93 +588,93 @@
             }
 
             .share-container {
-                    position: relative;
+                position: relative;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+
+                .tags {
+                    width: 30%;
                     display: flex;
-                    justify-content: space-evenly;
-                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 10px;
+                    position: relative;
+                    top: -20px;
+                    left: -120px;
 
-                    .tags {
-                        width: 30%;
-                        display: flex;
-                        justify-content: flex-start;
-                        gap: 10px;
-                        position: relative;
-                        top: -20px;
-                        left: -120px;
-
-                        .tag {
-                            background-color: #113c46;
-                            color: white;
-                            padding: 6px 10px;
-                            border-radius: 5px;
-                            font-size: 0.8em;
-                        }
-                    }
-
-                    .share-icon {
-                        width: 30%;
-                        display: flex;
-                        justify-content: flex-end;
-                        padding: 15px;
-                        position: relative;
-                        top: -12px;
-                        left: 150px;
-
-                        .wechat-icon {
-                            margin: 0 15px 15px 0;
-                            max-width: 10%;
-                        }
-
-                        .twitter-icon {
-                            margin: 0 15px 15px 0;
-                            max-width: 10%;
-                        }
-
-                        .github-icon {
-                            margin: 0 15px 15px 0;
-                            max-width: 10%;
-                        }
-
-                        .google-plus-icon {
-                            margin: 0 15px 15px 0;
-                            max-width: 10%;
-                        }
-
-                        .linkedin-icon {
-                            margin: 0 15px 15px 0;
-                            max-width: 10%;
-                        }
-
-                        .weibo-icon {
-                            margin: 0 15px 15px 0;
-                            max-width: 10%;
-                        }
-
-                        .zhihu-icon {
-                            margin: 0 15px 15px 0;
-                            max-width: 10%;
-                        }
-
+                    .tag {
+                        background-color: #113c46;
+                        color: white;
+                        padding: 6px 10px;
+                        border-radius: 5px;
+                        font-size: 0.8em;
                     }
                 }
+
+                .share-icon {
+                    width: 30%;
+                    display: flex;
+                    justify-content: flex-end;
+                    padding: 15px;
+                    position: relative;
+                    top: -12px;
+                    left: 150px;
+
+                    .wechat-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                    }
+
+                    .twitter-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                    }
+
+                    .github-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                    }
+
+                    .google-plus-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                    }
+
+                    .linkedin-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                    }
+
+                    .weibo-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                    }
+
+                    .zhihu-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                    }
+
+                }
+            }
 
             .coffee-container {
-                    position: relative;
-                    top: -10px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
+                position: relative;
+                top: -10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
-                    .coffee-icon {
-                        max-width: 2.5%;
-                    }
-
-                    .coffee-text {
-                        color: #c3effa;
-                        font-size: 1rem;
-                        font-weight: 800;
-                    }
+                .coffee-icon {
+                    max-width: 2.5%;
                 }
+
+                .coffee-text {
+                    color: #c3effa;
+                    font-size: 1rem;
+                    font-weight: 800;
+                }
+            }
         }
     }
 
@@ -688,7 +689,7 @@
     }
 
     .change-bgcolor {
-        background-color: #113c46;
+        background-color: #071417;
     }
 
     @import "@/styles/markdown";

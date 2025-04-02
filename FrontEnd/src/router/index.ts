@@ -14,9 +14,17 @@ const router = createRouter({
         {
             path: '/note/detail/:id',
             name: 'noteDetail',
-            component: () => import('@/views/Detail.vue'),
+            component: () => import('@/views/NoteDetail.vue'),
             meta: {
                 title: "笔记内容"
+            }
+        },
+        {
+            path: '/diary/detail/:id',
+            name: 'diaryDetail',
+            component: () => import('@/views/DiaryDetail.vue'),
+            meta: {
+                title: "日记内容"
             }
         },
         {

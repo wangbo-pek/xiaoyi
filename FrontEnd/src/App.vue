@@ -37,7 +37,9 @@
                     // 把文章列表信息保存到diaryStore仓库中
                     diaryStore.diaryList = response.data
                     diaryStore.diaryList.forEach((value) => {
-                        value.timelinePointColor = diaryStore.timelinePointColor[Math.floor(Math.random() * diaryStore.timelinePointColor.length)]
+                        // value.timelineColor = diaryStore.timelinePointColor[Math.floor(Math.random() * diaryStore.timelinePointColor.length)]
+                        // Object.assign(value.timelineColor, diaryStore.timelineColors[Math.floor(Math.random() * diaryStore.timelineColors.length)])
+                        value.timelineColor = diaryStore.timelineColors[Math.floor(Math.random() * diaryStore.timelineColors.length)]
                     })
                     console.log('>>>> diaryStore.diaryList <<<<')
                     console.log(diaryStore.diaryList)
@@ -100,10 +102,10 @@
         z-index: 0;
         background: radial-gradient(ellipse at center,
             rgba(17, 60, 70, 0.1) 0%,
-            rgba(17, 60, 70, 0.2) 25%,
-            rgba(17, 60, 70, 0.3) 50%,
-            rgba(17, 60, 70, 0.4) 75%,
-            rgba(17, 60, 70, 0.5) 100%);
+            rgba(17, 60, 70, 0.15) 25%,
+            rgba(17, 60, 70, 0.2) 50%,
+            rgba(17, 60, 70, 0.25) 75%,
+            rgba(17, 60, 70, 0.3) 100%);
         pointer-events: none;
     }
 </style>

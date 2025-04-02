@@ -4,22 +4,23 @@
         <div class="diary-timeline">
             <v-timeline class="diary-timeline" align="start" line-color="rgba(255, 255, 255, 0.5)">
                 <v-timeline-item
-                    v-for="(diary, i) in diaryStore.diaryList"
-                    :key="i"
-                    :dot-color="diary.timelinePointColor"
+                    v-for="(diary, index) in diaryStore.diaryList"
+                    :key="index"
+                    :dot-color="diary.timelineColor.pointColor"
                     size="small"
                     fill-dot
+                    @click="jumpToDiaryDetail(diary.diaryListId)"
                 >
                     <template v-slot:opposite>
-                        <div class="diary-date" :style="{color:diary.timelinePointColor}">
+                        <div class="diary-date" :style="{color:diary.timelineColor.textColor}">
                             <v-chip class="diary-date-chip" variant="tonal" label
-                                    :style="{color:diary.timelinePointColor}">
+                                    :style="{color:diary.timelineColor.textColor}">
                                 {{ diary.createdTime }}
-                                「{{ diary.title }}」
+                                「 {{ diary.title }} 」
                             </v-chip>
                         </div>
                     </template>
-                    <div class="diary-item" :style="{background:diary.timelinePointColor}">
+                    <div class="diary-item" :style="{background:diary.timelineColor.pointColor}">
                         <div class="cover-container">
                             <v-img
                                 class="cover"
@@ -42,15 +43,25 @@
     import {onMounted, onUnmounted} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
     import useDiaryStore from "@/store/diary.ts";
+    import {useRouter} from "vue-router";
 
     defineOptions({
         name: 'Diary',
         inheritAttrs: false
     })
 
+    const $router = useRouter()
     let appearanceStore = useAppearanceStore()
     let diaryStore = useDiaryStore()
 
+    const jumpToDiaryDetail =  (diaryListId: number) => {
+         $router.push({
+            name: 'diaryDetail',
+            params: {
+                id: diaryListId
+            }
+        })
+    }
 
     onMounted(() => {
         appearanceStore.isShowHomeCover = false
