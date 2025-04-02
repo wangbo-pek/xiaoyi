@@ -94,13 +94,13 @@
                 border-radius: 5px;
                 padding: 20px;
                 margin-bottom: 50px;
-                box-shadow: 2px 2px 2px rgba(171, 171, 171, 0.25);
+                box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.05);
                 cursor: pointer;
                 transition: transform 0.3s ease, box-shadow 0.3s ease;
 
                 &:hover {
                     transform: scale(1.05);
-                    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.35);
+                    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.2);
                     z-index: 1;
                 }
 

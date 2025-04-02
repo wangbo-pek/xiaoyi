@@ -188,7 +188,7 @@
             height: 40em;
             position: fixed;
             top: 6em;
-            background-color: rgba(255, 255, 255, 0.99);
+            background-color: rgba(255, 255, 255, 0.5);
             border-radius: 10px 10px 10px 10px;
 
             .dialog-cover-container {
@@ -203,7 +203,7 @@
 
             .dialog-content-container {
                 width: 80%;
-                background: rgba(255, 255, 255, 0.85);
+                background: rgba(255, 255, 255, 0.75);
                 border-radius: 10px;
                 padding: 20px;
                 position: relative;

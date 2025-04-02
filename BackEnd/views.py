@@ -69,12 +69,12 @@ def get_note_all_content(request):
         })
 
     try:
-        # 查询 NoteList 对象（通过主键 ID 查找）
+        # 查询 NoteList 对象 (通过主键 ID 查找)
         note_list_obj = models.NoteList.objects.filter(id=note_list_id).first()
     except models.NoteList.DoesNotExist as e:
         return JsonResponse({
             "code": 1,
-            "msg": f"notelist not found {e}"
+            "msg": f"note_list not found {e}"
         })
     except (DatabaseError, FieldError) as e:
         return JsonResponse({
@@ -88,7 +88,7 @@ def get_note_all_content(request):
             "msg": "note not found"
         })
 
-    # 取出note实例
+    # 取出 note 实例
     note_obj = note_list_obj.note
 
     # 将返回的数据拼装为一个字典
@@ -122,6 +122,7 @@ def get_note_all_content(request):
     })
 
 
+# 获取所有的日记列表信息 DiaryList
 def get_all_diary_list(request):
     try:
         diary_list_query_set = models.DiaryList.objects.all()
@@ -152,3 +153,59 @@ def get_all_diary_list(request):
             "code": 1,
             "msg": f"failed{e}"
         })
+
+
+# 根据diaryListId，获取该日记所有的内容
+def get_diary_all_content(request):
+    try:
+        # 从请求中获取参数 diaryListId，并转换为 int 类型
+        diary_list_id = int(request.GET.get('diaryListId'))
+    except (TypeError, ValueError):
+        return JsonResponse({
+            "code": 1,
+            "msg": "invalid diaryId"
+        })
+
+    try:
+        # 查询 DiaryList 对象 (通过主键 ID 查找)
+        diary_list_obj = models.DiaryList.objects.filter(id=diary_list_id).first()
+    except models.DiaryList.DoesNotExist as e:
+        return JsonResponse({
+            "code": 1,
+            "msg": f"diary_list not found {e}"
+        })
+    except (DatabaseError, FieldError) as e:
+        return JsonResponse({
+            "code": 1,
+            "msg": f"failed{e}"
+        })
+
+    if not hasattr(diary_list_obj, 'diary'):
+        return JsonResponse({
+            "code": 1,
+            "msg": "diary not found"
+        })
+
+    # 取出 diary 实例
+    diary_obj = diary_list_obj.diary
+
+    # 将返回的数据拼装为一个字典
+    temp_created_time = diary_list_obj.created_time
+    temp_modified_time = diary_list_obj.modified_time
+    diary_item = {
+        "diaryListId": diary_list_obj.id,
+        "title": diary_list_obj.title,
+        "brief": diary_list_obj.brief,
+        "coverImg": diary_list_obj.cover_img,
+        "isShow": diary_list_obj.is_show,
+        "createdTime": f"{temp_created_time.year}-{temp_created_time.month}-{temp_created_time.day}",
+        "modifiedTime": f"{temp_modified_time.year}-{temp_modified_time.month}-{temp_modified_time.day}",
+        "markdownContent": diary_obj.markdown_content,
+        "imageUrls": diary_obj.image_urls
+    }
+
+    return JsonResponse({
+        "code": 0,
+        "msg": "success",
+        "data": diary_item
+    })

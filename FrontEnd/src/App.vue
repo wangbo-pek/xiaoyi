@@ -88,6 +88,8 @@
 
 <style lang="scss">
     #stars {
+        width: 100vw;
+        height: 100vh;
         position: fixed;
         inset: 0;
         z-index: 0;
@@ -97,6 +99,8 @@
     }
 
     .bg-overlay {
+        width: 100vw;
+        height: 100vh;
         position: fixed;
         inset: 0;
         z-index: 0;

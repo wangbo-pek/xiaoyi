@@ -215,8 +215,6 @@
         toc.value = tocHtml;
     }
 
-
-
     onMounted(async () => {
         // 页面加载时，从后端获取文章content
         const result = await axios_server.get('getNoteAllContent/', {
@@ -301,7 +299,9 @@
         }
 
         .change-bgcolor {
-            background-color: #113c46;
+            background-color: #071417;
+            box-shadow: 5px 0 10px rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
     }
 
@@ -319,13 +319,13 @@
     .article-title-container {
 
         .article-title {
-            padding: 10px 300px 10px 10px;
-            border-radius: 2px 10px 2px 2px;
+            padding: 2px 10px 2px 100px;
+            border-radius: 10px 10px 2px 0;
             position: relative;
-            top: -1100%;
-            left: 15%;
+            top: -8rem;
+            left: 20rem;
             font-size: 1.5rem;
-            background-color: rgba(58, 136, 136, 0.75);
+            background-color: rgba(7, 20, 23, 0.75);
             color: #cccccc;
         }
     }
@@ -333,14 +333,14 @@
     .article-subtitle-container {
 
         .article-subtitle {
-            padding: 10px 10px 10px 300px;
-            border-radius: 2px 2px 2px 10px;
+            padding: 2px 10px 2px 100px;
+            border-radius: 0 2px 2px 10px;
             position: relative;
-            top: -1130%;
-            left: 20%;
-            font-size: 1.3rem;
-            background-color: rgba(238, 238, 238, 0.75);
-            color: #113c46;
+            top: -7.23rem;
+            left: 20rem;
+            font-size: 1.2rem;
+            background-color: rgba(7, 20, 23, 0.75);
+            color: #cccccc;
         }
     }
 
@@ -688,9 +688,6 @@
         margin: 10px 0 10px 0;
     }
 
-    .change-bgcolor {
-        background-color: #071417;
-    }
 
     @import "@/styles/markdown";
     :deep(.markdown-content) {

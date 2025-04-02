@@ -4,7 +4,7 @@ interface TimelineColor {
 }
 
 export interface DiaryListItem {
-    "diaryListId": string,
+    "diaryListId": number,
     "title": string,
     "brief": string,
     "coverImg": string,

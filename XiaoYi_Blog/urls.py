@@ -8,8 +8,10 @@ urlpatterns = [
     path('csrf/', BackEnd.views.get_csrf_token, name='get_csrf_token'),
     # 获取所有的笔记列表信息 NoteList
     path('getAllNoteList/', BackEnd.views.get_all_note_list, name='get_all_note_list'),
-    # 根据note list id，获取相关联的note content
+    # 根据noteListId，获取该文章所有的内容
     path('getNoteAllContent/', BackEnd.views.get_note_all_content, name='get_note'),
     # 获取所有的日记列表信息 DiaryList
     path('getAllDiaryList/', BackEnd.views.get_all_diary_list, name='get_all_diary_list'),
+    # 根据diaryListId，获取该日记所有的内容
+    path('getDiaryAllContent/', BackEnd.views.get_diary_all_content, name='get_diary_all_content'),
 ]
