@@ -185,7 +185,7 @@
 
         .dialog-background {
             width: 50%;
-            height: 40em;
+            height: 42em;
             position: fixed;
             top: 6em;
             background-color: rgba(255, 255, 255, 0.95);

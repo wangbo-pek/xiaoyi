@@ -60,7 +60,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 10vh;
+        height: 8vh;
         z-index: 1000;
     }
 
@@ -79,16 +79,16 @@
             border-radius: 5px;
             padding: 2px 10px;
             position: relative;
-            left: -1.5rem
+            left: 1rem
         }
 
         .sider {
-            flex: 0 0 20%;
+            flex: 0 0 25%;
             height: 100%;
             padding: 10px;
             overflow-y: auto;
             position: relative;
-            left: -0.15rem;
+            left: -1rem;
         }
     }
 
