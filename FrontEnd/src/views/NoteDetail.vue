@@ -154,9 +154,9 @@
     import {onMounted, onUnmounted, ref, watchEffect} from "vue";
     import useNoteStore from "@/store/note.ts";
     import axios_server from "@/utils/axios_server.ts";
-    import HeaderNav from "@/components/Header/HeaderNav.vue";
-    import HeaderTitle from "@/components/Header/HeaderTitle.vue";
-    import HeaderWidget from "@/components/Header/HeaderWidget.vue";
+    import HeaderNav from "@/components/header/HeaderNav.vue";
+    import HeaderTitle from "@/components/header/HeaderTitle.vue";
+    import HeaderWidget from "@/components/header/HeaderWidget.vue";
     import MarkdownIt from 'markdown-it';
     import hljs from 'highlight.js'
     import 'highlight.js/styles/github.css'
@@ -270,7 +270,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 5vh;
+        height: 10vh;
         z-index: 1000;
 
         .header {

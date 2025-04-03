@@ -23,9 +23,9 @@
 
 <script setup lang='ts'>
     // import {useDisplay} from "vuetify";
-    import HeaderNav from "@/components/Header/HeaderNav.vue";
-    import HeaderTitle from "@/components/Header/HeaderTitle.vue";
-    import HeaderWidget from "@/components/Header/HeaderWidget.vue";
+    import HeaderNav from "@/components/header/HeaderNav.vue";
+    import HeaderTitle from "@/components/header/HeaderTitle.vue";
+    import HeaderWidget from "@/components/header/HeaderWidget.vue";
     import useAppearanceStore from "@/store/appearance.ts";
 
     defineOptions({
@@ -43,7 +43,7 @@
         align-items: stretch;
         height: 100%;
         width: 100%;
-        background-color: rgba(100, 100, 100, 0.5);
+        background-color: rgba(100, 100, 100, 0.15);
 
         .title-big {
             width: 35%;

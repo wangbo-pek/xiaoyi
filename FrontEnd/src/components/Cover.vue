@@ -1,82 +1,63 @@
 <template>
     <div class="cover-area" ref="coverAreaRef">
         <transition name="fade-slide" mode="out-in">
-            <div class="cover-text" :key="displayedTitle">
-                <h1 class="title">{{ displayedTitle }}</h1>
-                <h3 class="subtitle">{{ displayedSubtitle }}</h3>
-                <v-btn class="cover-btn" variant="outlined" :prepend-icon="displayedButtonPrependIcon"
-                       @click="jumpTo(displayedButtonText)">
-                    {{ displayedButtonText }}
+            <div class="cover-text" :key="coverStore.coverCurrentContent.currentDisplayedTitle">
+                <h1 class="title">{{ coverStore.coverCurrentContent.currentDisplayedTitle }}</h1>
+                <h3 class="subtitle">{{ coverStore.coverCurrentContent.currentDisplayedBrief }}</h3>
+                <v-btn class="cover-btn" variant="outlined"
+                       :prepend-icon="coverStore.coverCurrentContent.currentDisplayedButton.buttonIcon"
+                       @click="jumpTo(coverStore.coverCurrentContent.currentDisplayedId)">
+                    {{ coverStore.coverCurrentContent.currentDisplayedButton.buttonText }}
                 </v-btn>
             </div>
         </transition>
-        <v-img class="cover-img" :src="displayedCovers" cover></v-img>
+        <v-img class="cover-img" :src="coverStore.coverCurrentContent.currentDisplayedCover" cover></v-img>
     </div>
 </template>
 
 <script setup lang='ts'>
-    import {ref, onMounted, onUnmounted} from "vue";
-    import cover1 from '@/assets/1.jpg'
-    import cover2 from '@/assets/2.jpg'
-    import cover3 from '@/assets/3.jpg'
-    import cover4 from '@/assets/4.jpg'
+    import {ref, onMounted, onUnmounted, watch} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
+    import useNoteStore from "@/store/note.ts";
+    import useCoverStore from "@/store/cover.ts";
+    import {useRouter} from "vue-router";
 
     defineOptions({
         name: 'Cover',
         inheritAttrs: false
     })
 
-    const coverObject = {
-        covers: [cover1, cover2, cover3, cover4],
-        titles: [
-            '「輕薄之態，施之君子，則喪吾德；施之小人，則殺吾身」',
-            '精华一下喜欢',
-            '方法记者阿萨德',
-            '大学其他环境'
-        ],
-        subtitles: [
-            ' ',
-            '还是这些有限网站朋友成为.市场可是出现感觉.规定商品加入提高人民很多. 基本之后情况注册论坛工具.方式影响就是积分最新那么开始现...',
-            '问题一些作者研究有限.您的点击不是开始只是最大各种.点击点击事情女人. 作为问题必须的话.学校应该个人最新觉得. 一直组织大学...',
-            '免费的话一直制作成为认为一些直接.部门网络会员一些世界.需要进入日期那么地址问题技术. 精华大学那么现在一次商品其实.也是分析...',
-        ],
-        buttonPrependIcons: [
-            'mdi-pan-down',
-            'mdi-eye-outline',
-            'mdi-eye-outline',
-            'mdi-eye-outline',
-        ],
-        buttonTexts: [
-            '开始',
-            '阅读',
-            '阅读',
-            '阅读',
-        ]
-    }
-    let displayedCovers = ref<string>('')
-    let displayedTitle = ref<string>('')
-    let displayedSubtitle = ref<string>('')
-    let displayedButtonPrependIcon = ref<string>('')
-    let displayedButtonText = ref<string>('')
-    let autoSwitchCoverContent = 0
+    const emit = defineEmits<{
+        (e: 'jump-to', noteListId: number): void
+    }>()
+
+    let noteStore = useNoteStore()
+    let coverStore = useCoverStore()
+    const $router = useRouter()
+
+    let currentContentIndex = 0
     const switchCoverContent = () => {
-        displayedCovers.value = coverObject.covers[autoSwitchCoverContent]
-        displayedTitle.value = coverObject.titles[autoSwitchCoverContent]
-        displayedSubtitle.value = coverObject.subtitles[autoSwitchCoverContent]
-        displayedButtonPrependIcon.value = coverObject.buttonPrependIcons[autoSwitchCoverContent]
-        displayedButtonText.value = coverObject.buttonTexts[autoSwitchCoverContent]
-        autoSwitchCoverContent++
-        if (autoSwitchCoverContent > 3) {
-            autoSwitchCoverContent = 0
+        coverStore.coverCurrentContent.currentDisplayedId = coverStore.coverContents.noteListId[currentContentIndex]
+        coverStore.coverCurrentContent.currentDisplayedCover = coverStore.coverContents.covers[currentContentIndex]
+        coverStore.coverCurrentContent.currentDisplayedTitle = coverStore.coverContents.titles[currentContentIndex]
+        coverStore.coverCurrentContent.currentDisplayedBrief = coverStore.coverContents.briefs[currentContentIndex]
+        coverStore.coverCurrentContent.currentDisplayedButton.buttonIcon = coverStore.coverContents.buttonIcons[currentContentIndex]
+        coverStore.coverCurrentContent.currentDisplayedButton.buttonText = coverStore.coverContents.buttonTexts[currentContentIndex]
+        currentContentIndex++
+        if (currentContentIndex > 2) {
+            currentContentIndex = 0
         }
     }
 
-    const mainContentRef = ref<HTMLElement | null>(null)
-    const jumpTo = (btnText: string) => {
-        if (btnText === '开始') {
-            mainContentRef.value?.scrollIntoView({
-                behavior: 'smooth'
+    const jumpTo = (noteListId: number) => {
+        if (noteListId === -1) {
+            emit('jump-to', noteListId)
+        } else {
+            $router.push({
+                name: 'noteDetail',
+                params: {
+                    id: noteListId
+                }
             })
         }
     }
@@ -85,9 +66,6 @@
     let coverAreaRef = ref<HTMLElement | null>(null)
     // 是否滚动过封面区域
     let appearanceStore = useAppearanceStore()
-
-    switchCoverContent()
-    setInterval(switchCoverContent, 10000)
 
     // 滚动监听函数
     const handleScroll = () => {
@@ -102,12 +80,30 @@
         window.addEventListener('scroll', handleScroll)
         const rect = coverAreaRef.value!.getBoundingClientRect()
         appearanceStore.isScrollOverViewport = rect.bottom <= 55;
+
     })
 
     // 页面卸载时移除监听
     onUnmounted(() => {
         window.removeEventListener('scroll', handleScroll)
     })
+
+    // 监听App.vue是否拿到了NoteList，如果拿到了，就获取被置顶的文章
+    watch(() => noteStore.noteList, () => {
+        const result = noteStore.noteList.filter((value) => {
+            return value.isPinned === true
+        })
+        result.forEach((value) => {
+            coverStore.coverContents.noteListId.push(value.noteListId)
+            coverStore.coverContents.covers.push(value.coverImg)
+            coverStore.coverContents.titles.push(value.title)
+            coverStore.coverContents.briefs.push(value.brief)
+        })
+        console.log(coverStore.coverContents)
+        switchCoverContent()
+        setInterval(switchCoverContent, 5000)
+    })
+
 </script>
 
 <style scoped lang='scss'>

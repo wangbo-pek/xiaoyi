@@ -14,7 +14,7 @@ def get_csrf_token(request):
 # 获取所有的笔记列表信息 NoteList
 def get_all_note_list(request):
     try:
-        note_list_query_set = models.NoteList.objects.all()
+        note_list_query_set = models.NoteList.objects.all().order_by('-created_time')
 
         # 把数据转换为列表 (将QuerySet转换为List)
         note_list_data = []

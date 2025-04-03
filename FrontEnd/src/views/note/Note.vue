@@ -167,7 +167,7 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             column-gap: 34px;
             row-gap: 40px;
-            padding: 80px 20px 30px 20px;
+            padding: 120px 20px 30px 20px;
             justify-items: center;
         }
     }
@@ -188,7 +188,7 @@
             height: 40em;
             position: fixed;
             top: 6em;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.95);
             border-radius: 10px 10px 10px 10px;
 
             .dialog-cover-container {
@@ -203,7 +203,7 @@
 
             .dialog-content-container {
                 width: 80%;
-                background: rgba(255, 255, 255, 0.75);
+                background: rgba(255, 255, 255, 0.85);
                 border-radius: 10px;
                 padding: 20px;
                 position: relative;

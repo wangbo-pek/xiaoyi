@@ -86,7 +86,7 @@
         .diary-timeline {
             position: relative;
             top: 2rem;
-            padding: 0 25px 25px 25px;
+            padding: 30px 25px 25px 25px;
             transition: transform 0.3s ease;
 
             .diary-item {

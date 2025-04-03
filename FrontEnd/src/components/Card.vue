@@ -46,7 +46,6 @@
         inheritAttrs: false
     })
 
-    // title、subtitle、bgImage、createdDate、secondClassification、tags
     defineProps<{
         title: string
         subtitle: string

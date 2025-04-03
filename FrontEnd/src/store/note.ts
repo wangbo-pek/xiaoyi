@@ -28,7 +28,9 @@ const useNoteStore = defineStore('note', {
                 "imageUrls": [],
                 "renderedMarkdown": '',
                 "tableOfContent":''
-            }
+            },
+            recommendedNoteList: [] as NoteListItem[],
+            latestNoteList: [] as NoteListItem[]
         }
     }
 })

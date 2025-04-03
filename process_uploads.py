@@ -7,7 +7,7 @@ from BackEnd.utils.db_create import create_note_and_list, create_diary_and_list
 
 
 # 用于提取markdown中的纯文本摘要
-def extract_text(md_text: str, max_length: int = 30) -> str:
+def extract_text(md_text: str, max_length: int = 100) -> str:
     cleaned = re.sub(r"!\[.*?]\(.*?\)", "", md_text)
     cleaned = re.sub(r"^#{1,6}\s*", "", cleaned, flags=re.MULTILINE)
     cleaned = re.sub(r"\*\*.*?\*\*", "", cleaned)
