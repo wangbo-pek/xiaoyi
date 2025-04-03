@@ -11,7 +11,7 @@ const useCoverStore = defineStore('cover', {
                     '「 輕薄之態，施之君子，則喪吾德；施之小人，則殺吾身 」',],
                 briefs: ['—— 蒲松龄',],
                 buttonIcons: [
-                    'mdi-atom',
+                    'mdi-menu-down',
                     'mdi-eye-outline',
                     'mdi-eye-outline'],
                 buttonTexts: [
