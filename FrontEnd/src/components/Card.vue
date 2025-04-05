@@ -12,10 +12,10 @@
                         <v-icon class="created-date-icon" icon="mdi-alarm" size="small" start></v-icon>
                         <span class="created-date-text">{{ createdDate }}</span>
                     </span>
-                    <span class="second-class">
-                        <v-icon class="second-class-icon" icon="mdi-hexagon-multiple-outline" size="small"
+                    <span class="category">
+                        <v-icon class="category-icon" icon="mdi-hexagon-multiple-outline" size="small"
                                 start></v-icon>
-                         <span class="second-class-text">{{ category }}</span>
+                         <span class="category-text">{{ category }}</span>
                     </span>
                 </div>
 
@@ -58,7 +58,7 @@
         position: relative;
         width: 100%;
         max-width: 360px;
-        height: 250px;
+        height: 15rem;
         margin: 0 auto;
         border-radius: 5px;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
@@ -105,15 +105,9 @@
 
             .title-text {
                 margin: 0 0 10px 10px;
-                font-size: 18px;
+                font-size: 1.25rem;
                 font-weight: bold;
                 color: white;
-            }
-
-            .subtitle-text {
-                margin: 20px 0 10px 10px;
-                font-size: 14px;
-                color: #bbbbbb;
             }
         }
 
@@ -124,7 +118,7 @@
             .info-row {
                 display: flex;
                 justify-content: space-between;
-                font-size: 12px;
+                font-size: 0.7rem;
 
                 .created-date {
                     color: #bbbbbb;
@@ -132,17 +126,17 @@
                     align-items: center;
 
                     .created-date-text {
-                        font-size: 14px;
+                        font-size: 0.75rem;
                     }
                 }
 
-                .second-class {
+                .category {
                     color: #bbbbbb;
                     display: flex;
                     align-items: center;
 
-                    .second-class-text {
-                        font-size: 14px;
+                    .category-text {
+                        font-size: 0.75rem;
                     }
                 }
             }
@@ -164,10 +158,10 @@
                     background: rgba(255, 255, 255, 0.2);
                     padding: 2px 5px;
                     border-radius: 4px;
-                    font-size: 12px;
+                    font-size: 0.75rem;
 
                     .tag-icon {
-                        font-size: 14px;
+                        font-size: 0.75rem;
                     }
                 }
             }

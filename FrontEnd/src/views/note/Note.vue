@@ -4,10 +4,9 @@
             <template v-for="item in noteStore.noteList" :key="item.noteListId">
                 <Card
                     :title="item.title"
-                    :subtitle="item.subtitle"
                     :bgImage="item.coverImg"
                     :createdDate="item.createdTime"
-                    :secondClassification="item.secondClassification"
+                    :category="item.category"
                     :tags="item.tagsName"
                     @click="() => openDialog(item.noteListId)"
                 ></Card>
@@ -27,17 +26,17 @@
             </div>
             <!-- 内容展示区域 -->
             <div class="dialog-content-container">
-                <!-- 标签、二级分类展示区域 -->
-                <div class="tags-classification-container">
+                <!-- 标签、分类展示区域 -->
+                <div class="tags-category-container">
                     <div class="tags-container">
                     <span class="tag" v-for="(tag, index) in currentDetail?.tagsName" :key="index">
                         {{ tag }}
                     </span>
                     </div>
-                    <div class="classification-container">
-                        <span class="classification">
-                            <v-icon class="classification-icon" icon="mdi-bookmark-multiple"></v-icon>
-                            <span class="classification-text">{{ currentDetail?.secondClassification }}</span>
+                    <div class="category-container">
+                        <span class="category">
+                            <v-icon class="category-icon" icon="mdi-bookmark-multiple"></v-icon>
+                            <span class="category-text">{{ currentDetail?.category }}</span>
                         </span>
                     </div>
                 </div>
@@ -211,7 +210,7 @@
                 left: 5.6em;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
-                .tags-classification-container {
+                .tags-category-container {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
@@ -227,13 +226,13 @@
                             color: white;
                             padding: 6px 10px;
                             border-radius: 10px;
-                            font-size: 0.7rem;
+                            font-size: 0.65rem;
                         }
                     }
 
-                    .classification-container {
+                    .category-container {
 
-                        .classification {
+                        .category {
                             background-color: white;
                             padding: 6px 10px;
                             border-radius: 10px;
@@ -241,13 +240,13 @@
                             align-items: center;
                             gap: 4px;
 
-                            .classification-icon {
-                                font-size: 0.7rem;
+                            .category-icon {
+                                font-size: 0.65rem;
                                 color: #113c46;
                             }
 
-                            .classification-text {
-                                font-size: 0.7rem;
+                            .category-text {
+                                font-size: 0.65rem;
                                 color: #113c46;
                             }
                         }
