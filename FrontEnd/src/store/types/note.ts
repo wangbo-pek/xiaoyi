@@ -1,7 +1,6 @@
 export interface NoteListItem {
     "noteListId": number,
     "title": string,
-    "subtitle": string,
     "brief": string,
     "coverImg": string,
     "isShow": boolean,
@@ -14,14 +13,12 @@ export interface NoteListItem {
     "createdTime": string,
     "modifiedTime": string,
     "tagsName": string[],
-    "firstClassification": string,
-    "secondClassification": string,
+    "category": string,
 }
 
 export interface NoteContentItem {
     "noteListId": number,
     "title": string,
-    "subtitle": string,
     "brief": string,
     "coverImg": string,
     "isShow": boolean,
@@ -34,8 +31,7 @@ export interface NoteContentItem {
     "createdTime": string,
     "modifiedTime": string,
     "tagsName": string[],
-    "firstClassification": string,
-    "secondClassification": string,
+    "category": string,
     "markdownContent": string,
     "htmlContent": string,
     "imageUrls": string[],

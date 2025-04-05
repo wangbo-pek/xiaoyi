@@ -25,6 +25,7 @@ def extract_text(md_text: str, max_length: int = 100) -> str:
 
 
 def process_uploads():
+    print('1')
     upload_path = Path("/Users/wangbo/Documents/uploads")
     if not upload_path.exists():
         print(f"错误：上传目录不存在：{upload_path}")
@@ -94,13 +95,11 @@ def process_uploads():
             brief = extract_text(brief_quote)
             create_note_and_list(
                 title=title,
-                subtitle=meta.get('subtitle', ''),
                 brief=brief,
                 content=md_content,
                 cover_url=cover_url,
                 image_urls=image_urls,
-                first_classification=meta.get('first_classification', ''),
-                second_classification=meta.get('second_classification', ''),
+                category=meta.get('category', ''),
                 tags=meta.get('tags', [])
             )
         elif is_diary:

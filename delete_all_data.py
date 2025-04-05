@@ -11,8 +11,7 @@ def delete_all_faker_data():
     models.NoteList.objects.all().delete()
     models.Note.objects.all().delete()
     models.Tag.objects.all().delete()
-    models.SecondClassification.objects.all().delete()
-    models.FirstClassification.objects.all().delete()
+    models.Category.objects.all().delete()
     print('✅ 数据清除完毕')
 
 delete_all_faker_data()

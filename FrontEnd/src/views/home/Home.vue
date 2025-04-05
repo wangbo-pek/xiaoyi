@@ -9,10 +9,9 @@
                 <template v-for="item in noteStore.recommendedNoteList" :key="item">
                     <Card
                         :title="item.title"
-                        :subtitle="item.subtitle"
                         :bgImage="item.coverImg"
                         :createdDate="item.createdTime"
-                        :secondClassification="item.secondClassification"
+                        :category="item.category"
                         :tags="item.tagsName"
                     ></Card>
                 </template>
@@ -27,10 +26,9 @@
                 <template v-for="item in noteStore.latestNoteList" :key="item">
                     <Card
                         :title="item.title"
-                        :subtitle="item.subtitle"
                         :bgImage="item.coverImg"
                         :createdDate="item.createdTime"
-                        :secondClassification="item.secondClassification"
+                        :category="item.category"
                         :tags="item.tagsName"
                     ></Card>
                 </template>
@@ -51,7 +49,6 @@
     })
 
     const noteStore = useNoteStore()
-
 
     // 监听App.vue是否拿到了NoteList，如果拿到了，就获取被置顶的文章、最新的文章
     watch(() => noteStore.noteList, () => {

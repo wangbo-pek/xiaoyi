@@ -37,8 +37,6 @@
                     // 把文章列表信息保存到diaryStore仓库中
                     diaryStore.diaryList = response.data
                     diaryStore.diaryList.forEach((value) => {
-                        // value.timelineColor = diaryStore.timelinePointColor[Math.floor(Math.random() * diaryStore.timelinePointColor.length)]
-                        // Object.assign(value.timelineColor, diaryStore.timelineColors[Math.floor(Math.random() * diaryStore.timelineColors.length)])
                         value.timelineColor = diaryStore.timelineColors[Math.floor(Math.random() * diaryStore.timelineColors.length)]
                     })
                     console.log('>>>> diaryStore.diaryList <<<<')
@@ -70,8 +68,8 @@
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
                     ctx.fillStyle = "white";
-                    ctx.shadowColor = "white";         // ⭐ 添加这一行
-                    ctx.shadowBlur = s.r * 4;          // ⭐ 发光强度随星星大小
+                    ctx.shadowColor = "white";
+                    ctx.shadowBlur = s.r * 5;
                     ctx.fill();
                     s.x += s.vx;
                     s.y += s.vy;

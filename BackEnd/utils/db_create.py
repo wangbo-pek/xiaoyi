@@ -1,20 +1,13 @@
-from BackEnd.models import Note, NoteList, Diary, DiaryList, Tag, FirstClassification, SecondClassification
+from BackEnd.models import Note, NoteList, Diary, DiaryList, Tag, Category
 
 
-def create_note_and_list(title, subtitle, brief, image_urls, content, cover_url, first_classification,
-                         second_classification, tags):
-    # 获取二级分类
+def create_note_and_list(title, brief, image_urls, content, cover_url, category, tags):
+    print('create_note_and_list >>>>>> begin')
+    # 获取分类
     try:
-        first_obj = FirstClassification.objects.get(name=first_classification)
-        second_obj = SecondClassification.objects.get(
-            name=second_classification,
-            first_classification=first_obj
-        )
-    except FirstClassification.DoesNotExist:
-        print(f'一级分类不存在：{first_classification}')
-        return
-    except SecondClassification.DoesNotExist:
-        print(f'二级分类不存在：{second_classification}')
+        category_obj = Category.objects.get(name=category,)
+    except Category.DoesNotExist:
+        print(f'分类不存在：{category}')
         return
 
     # 创建Note
@@ -27,11 +20,10 @@ def create_note_and_list(title, subtitle, brief, image_urls, content, cover_url,
     # 创建NoteList
     note_list = NoteList.objects.create(
         title=title,
-        subtitle=subtitle,
         brief=brief,
         cover_img=cover_url,
         note=note,
-        second_classification=second_obj
+        category=category_obj
     )
 
     # 添加标签
@@ -41,6 +33,7 @@ def create_note_and_list(title, subtitle, brief, image_urls, content, cover_url,
 
 
 def create_diary_and_list(title, brief, image_urls, content, cover_url):
+    print('create_diary_and_list >>>>>> begin')
     diary = Diary.objects.create(
         title=title,
         markdown_content=content,

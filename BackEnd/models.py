@@ -37,7 +37,6 @@ class Note(models.Model):
 
 class NoteList(models.Model):
     title = models.CharField(verbose_name='标题', max_length=64)
-    subtitle = models.CharField(verbose_name='副标题', max_length=32)
     brief = models.CharField(verbose_name='摘要', max_length=128, blank=True, null=True)
     is_show = models.BooleanField(verbose_name='是否显示', default=True)
     viewed_count = models.IntegerField(verbose_name='被浏览次数', default=0)
@@ -51,16 +50,13 @@ class NoteList(models.Model):
 
     # 笔记 1:1 笔记列表
     note = models.OneToOneField(to='Note', on_delete=models.CASCADE)
-    # 笔记 1:n 二级分类
-    second_classification = models.ForeignKey(to='SecondClassification', on_delete=models.CASCADE)
+    # 笔记 1:n 分类
+    category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
     # 笔记 n:n 标签
     tags = models.ManyToManyField(to='Tag')
 
     def __str__(self):
         return f'{self.title}的列表'
-
-    def get_note_first_classification(self):
-        return self.second_classification.first_classification
 
 
 # 标签
@@ -74,9 +70,9 @@ class Tag(models.Model):
         return self.name
 
 
-# 一级分类
-class FirstClassification(models.Model):
-    name = models.CharField(verbose_name='一级分类', max_length=16)
+# 分类
+class Category(models.Model):
+    name = models.CharField(verbose_name='分类', max_length=16, default='default')
     is_show = models.BooleanField(verbose_name='是否显示', default=True)
     created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
     modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
@@ -85,15 +81,11 @@ class FirstClassification(models.Model):
         return self.name
 
 
-# 二级分类
-class SecondClassification(models.Model):
-    name = models.CharField(verbose_name='二级分类', max_length=16)
-    is_show = models.BooleanField(verbose_name='是否显示', default=True)
-    created_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
-    modified_time = models.DateTimeField(verbose_name='修改时间', auto_now=True)
-
-    # 一级分类 1:n 二级分类
-    first_classification = models.ForeignKey(to='FirstClassification', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
+# 网站信息
+class BlogInfo(models.Model):
+    blog_name = models.CharField(verbose_name='博客名称', max_length=32, default='XiaoYi_Blog')
+    my_name = models.CharField(verbose_name='我的名字', max_length=32, default='Wang')
+    blog_article_count = models.IntegerField(verbose_name='总文章数', default=0)
+    blog_words_count = models.IntegerField(verbose_name='总字数', default=0)
+    blog_viewed_count = models.IntegerField(verbose_name='总访问量', default=0)
+    blog_duration_running = models.IntegerField(verbose_name='已运行天数', default=0)

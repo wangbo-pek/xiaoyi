@@ -8,7 +8,6 @@ const useNoteStore = defineStore('note', {
             currentNote: {
                 "noteListId": 0,
                 "title": '',
-                "subtitle": '',
                 "brief": '',
                 "coverImg": '',
                 "isShow": false,
@@ -21,8 +20,7 @@ const useNoteStore = defineStore('note', {
                 "createdTime": '',
                 "modifiedTime": '',
                 "tagsName": [],
-                "firstClassification": '',
-                "secondClassification": '',
+                "category": '',
                 "markdownContent": '',
                 "htmlContent": '',
                 "imageUrls": [],

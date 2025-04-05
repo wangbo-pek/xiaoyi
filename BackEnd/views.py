@@ -19,8 +19,6 @@ def get_all_note_list(request):
         # 把数据转换为列表 (将QuerySet转换为List)
         note_list_data = []
         for note_list_object in note_list_query_set:
-            second_classification = note_list_object.second_classification.name
-            first_classification = note_list_object.second_classification.first_classification.name
             tags_name = list(note_list_object.tags.values_list('name', flat=True))
 
             temp_created_time = note_list_object.created_time
@@ -29,7 +27,6 @@ def get_all_note_list(request):
             note_list_data.append({
                 "noteListId": note_list_object.id,
                 "title": note_list_object.title,
-                "subtitle": note_list_object.subtitle,
                 "brief": note_list_object.brief,
                 "coverImg": note_list_object.cover_img,
                 "isShow": note_list_object.is_show,
@@ -41,10 +38,9 @@ def get_all_note_list(request):
                 "createdTime": f"{temp_created_time.year}-{temp_created_time.month}-{temp_created_time.day}",
                 "modifiedTime": f"{temp_modified_time.year}-{temp_modified_time.month}-{temp_modified_time.day}",
                 "tagsName": tags_name,
-                "firstClassification": first_classification,
-                "secondClassification": second_classification
+                "category": note_list_object.category.name,
             })
-
+        print('note_list_data~~~~', note_list_data)
         return JsonResponse({
             "code": 0,
             "msg": "success",
@@ -97,7 +93,6 @@ def get_note_all_content(request):
     note_item = {
         "noteListId": note_list_obj.id,
         "title": note_list_obj.title,
-        "subtitle": note_list_obj.subtitle,
         "brief": note_list_obj.brief,
         "coverImg": note_list_obj.cover_img,
         "isShow": note_list_obj.is_show,
@@ -109,8 +104,7 @@ def get_note_all_content(request):
         "createdTime": f"{temp_created_time.year}-{temp_created_time.month}-{temp_created_time.day}",
         "modifiedTime": f"{temp_created_time.year}-{temp_modified_time.month}-{temp_modified_time.day}",
         "tagsName": list(note_list_obj.tags.values_list('name', flat=True)),
-        "firstClassification": note_list_obj.second_classification.first_classification.name,
-        "secondClassification": note_list_obj.second_classification.name,
+        "category": note_list_obj.category.name,
         "markdownContent": note_obj.markdown_content,
         "imageUrls": note_obj.image_urls
     }

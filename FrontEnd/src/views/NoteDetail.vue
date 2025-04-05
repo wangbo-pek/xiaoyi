@@ -22,26 +22,20 @@
         <span class="article-title">{{ noteStore.currentNote.title }}</span>
     </div>
 
-    <div class="article-subtitle-container">
-        <span class="article-subtitle">{{ noteStore.currentNote.subtitle }}</span>
-    </div>
-
     <div class="article-content-container">
         <div class="article-background">
 
             <!-- 标签、二级分类区域 -->
-            <div class="tags-classification-container">
+            <div class="tags-category-container">
                 <div class="tags-container">
                     <span class="tag" v-for="(tag, index) in noteStore.currentNote.tagsName" :key="index">
                         {{ tag }}
                     </span>
                 </div>
-                <div class="classification-container">
-                    <span class="classification">
-                        <v-icon class="classification-icon" icon="mdi-bookmark-multiple"></v-icon>
-                        <span class="first-classification-text">{{ noteStore.currentNote.firstClassification }}</span>
-                        <span> / </span>
-                        <span class="second-classification-text">{{ noteStore.currentNote.secondClassification }}</span>
+                <div class="category-container">
+                    <span class="category">
+                        <v-icon class="category-icon" icon="mdi-bookmark-multiple"></v-icon>
+                        <span class="category-text">{{ noteStore.currentNote.category }}</span>
                     </span>
                 </div>
             </div>
@@ -328,20 +322,6 @@
         }
     }
 
-    .article-subtitle-container {
-
-        .article-subtitle {
-            padding: 2px 10px 2px 100px;
-            border-radius: 0 2px 2px 10px;
-            position: relative;
-            top: -7.23rem;
-            left: 20rem;
-            font-size: 1.2rem;
-            background-color: rgba(7, 20, 23, 0.75);
-            color: #cccccc;
-        }
-    }
-
     .article-content-container {
         display: flex;
         justify-content: center;
@@ -353,7 +333,7 @@
             position: relative;
             top: -8.5em;
 
-            .tags-classification-container {
+            .tags-category-container {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -373,9 +353,9 @@
                     }
                 }
 
-                .classification-container {
+                .category-container {
 
-                    .classification {
+                    .category {
                         padding: 6px 10px;
                         border-radius: 10px;
                         background-color: white;
@@ -383,20 +363,14 @@
                         align-items: center;
                         gap: 5px;
 
-                        .classification-icon {
+                        .category-icon {
                             font-size: 0.8em;
                             color: #113c46;
                         }
 
-                        .first-classification-text {
+                        .category-text {
                             font-size: 0.8rem;
                             font-weight: 700;
-                            color: #113c46;
-                        }
-
-                        .second-classification-text {
-                            font-size: 0.8rem;
-                            font-weight: 400;
                             color: #113c46;
                         }
                     }

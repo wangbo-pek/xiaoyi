@@ -2,10 +2,7 @@
     <div class="card-container" :style="{ backgroundImage: `url(${encodeURI(bgImage)})` }" @click="$emit('click')">
         <div class="overlay">
             <div class="text-container">
-                <!-- title -->
                 <h2 class="title-text">{{ title }}</h2>
-                <!-- subtitle -->
-                <p class="subtitle-text">{{ subtitle }}</p>
             </div>
 
             <div class="footer-container">
@@ -18,7 +15,7 @@
                     <span class="second-class">
                         <v-icon class="second-class-icon" icon="mdi-hexagon-multiple-outline" size="small"
                                 start></v-icon>
-                         <span class="second-class-text">{{ secondClassification }}</span>
+                         <span class="second-class-text">{{ category }}</span>
                     </span>
                 </div>
 
@@ -48,10 +45,9 @@
 
     defineProps<{
         title: string
-        subtitle: string
         bgImage: string
         createdDate: string
-        secondClassification: string
+        category: string
         tags: string[]
     }>()
 
