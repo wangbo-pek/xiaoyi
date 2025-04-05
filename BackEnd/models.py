@@ -89,3 +89,7 @@ class BlogInfo(models.Model):
     blog_words_count = models.IntegerField(verbose_name='总字数', default=0)
     blog_viewed_count = models.IntegerField(verbose_name='总访问量', default=0)
     blog_duration_running = models.IntegerField(verbose_name='已运行天数', default=0)
+    my_wechat = models.CharField(verbose_name='我的微信', max_length=64, default='wboo1225')
+    my_mail = models.EmailField(verbose_name='我的邮箱', max_length=64, default='wangbo.pek@gmail.com')
+    coffee_wechat = models.URLField(verbose_name='微信支付', max_length=512, blank=True, null=True)
+    coffee_alipay = models.URLField(verbose_name='支付宝', max_length=512, blank=True, null=True)
