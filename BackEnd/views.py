@@ -1,4 +1,5 @@
-from django.http import JsonResponse
+from django.db.models import Sum
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core.exceptions import ObjectDoesNotExist, FieldError
 from django.db import DatabaseError
@@ -40,7 +41,6 @@ def get_all_note_list(request):
                 "tagsName": tags_name,
                 "category": note_list_object.category.name,
             })
-        print('note_list_data~~~~', note_list_data)
         return JsonResponse({
             "code": 0,
             "msg": "success",
@@ -203,3 +203,38 @@ def get_diary_all_content(request):
         "msg": "success",
         "data": diary_item
     })
+
+
+# 获取博客网站的相关信息
+def get_blog_info(request):
+    try:
+        blog_info_obj = models.BlogInfo.objects.all().first()
+        blog_info_obj.blog_viewed_count += 1
+        blog_info_data = {
+            "blogName": blog_info_obj.blog_name,
+            "myName": blog_info_obj.my_name,
+            "myMotto": blog_info_obj.my_motto,
+            "myWisdom": blog_info_obj.my_wisdom,
+            "myLocation": blog_info_obj.my_location,
+            "myCareer": blog_info_obj.my_career,
+            "myShortIntro": blog_info_obj.my_short_intro,
+            "myFormalIntro": blog_info_obj.my_formal_intro,
+            "blogArticlesCount": models.NoteList.objects.count(),
+            "blogWordsCount": blog_info_obj.blog_words_count,
+            "blogViewedCount": blog_info_obj.blog_viewed_count,
+            "blogDurationRunning": blog_info_obj.blog_duration_running,
+            "myWechat": blog_info_obj.my_wechat,
+            "myMail": blog_info_obj.my_mail,
+            "coffeeByWechat": blog_info_obj.coffee_by_wechat,
+            "coffeeByAlipay": blog_info_obj.coffee_by_alipay
+        }
+        return JsonResponse({
+            "code": 0,
+            "msg": "success",
+            "data": blog_info_data
+        })
+    except (ObjectDoesNotExist, DatabaseError) as e:
+        return JsonResponse({
+            "code": 1,
+            "msg": f"failed{e}"
+        })

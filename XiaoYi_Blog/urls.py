@@ -14,4 +14,6 @@ urlpatterns = [
     path('getAllDiaryList/', BackEnd.views.get_all_diary_list, name='get_all_diary_list'),
     # 根据diaryListId，获取该日记所有的内容
     path('getDiaryAllContent/', BackEnd.views.get_diary_all_content, name='get_diary_all_content'),
+    # 获取博客网站的相关信息
+    path('getBlogInfo/', BackEnd.views.get_blog_info, name='get_blog_info'),
 ]

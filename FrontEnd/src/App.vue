@@ -10,6 +10,7 @@
     import {onMounted} from "vue";
     import useNoteStore from "@/store/note.ts";
     import useDiaryStore from "@/store/diary.ts";
+    import useBlogStore from "@/store/blog.ts";
     import axios_server from "./utils/axios_server.ts";
 
     defineOptions({
@@ -19,6 +20,7 @@
 
     let noteStore = useNoteStore()
     let diaryStore = useDiaryStore()
+    let blogStore = useBlogStore()
 
     onMounted(() => {
         // 每次App.vue加载，都会发送请求，设置csrf_token
@@ -28,8 +30,6 @@
                 (response) => {
                     // 把文章列表信息保存到noteStore仓库中
                     noteStore.noteList = response.data
-                    console.log('>>>> noteStore.noteList <<<<')
-                    console.log(noteStore.noteList)
                 }
             )
             axios_server.get('getAllDiaryList/').then(
@@ -39,8 +39,11 @@
                     diaryStore.diaryList.forEach((value) => {
                         value.timelineColor = diaryStore.timelineColors[Math.floor(Math.random() * diaryStore.timelineColors.length)]
                     })
-                    console.log('>>>> diaryStore.diaryList <<<<')
-                    console.log(diaryStore.diaryList)
+                }
+            )
+            axios_server.get('getBlogInfo/').then(
+                (response) => {
+                    blogStore.blogInfo = response.data
                 }
             )
 

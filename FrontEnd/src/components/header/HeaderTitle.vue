@@ -7,7 +7,7 @@
 
         <div class="title">
             <v-btn variant="text" class="my-btn" @click="jumpTo">
-                XiaoYi_Blog
+                {{ blogStore.blogInfo.blogName }}
             </v-btn>
         </div>
     </div>
@@ -15,13 +15,14 @@
 
 <script setup lang='ts'>
     import {useRouter} from "vue-router";
+    import useBlogStore from "@/store/blog.ts";
 
     defineOptions({
         name: 'HeaderTitle',
         inheritAttrs: false
     })
 
-
+    const blogStore = useBlogStore()
     const $router = useRouter()
     const jumpTo = () => {
         $router.push({

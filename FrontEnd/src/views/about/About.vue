@@ -10,9 +10,9 @@
         <div class="my-name">
             <span class="my-name-text">Wang</span>
         </div>
-        <div class="what-i-wanna-say">
-            <div class="what-i-wanna-say-text">
-                人的一生就应该像一条河，开始是涓涓细流，被狭窄的河岸所束缚，然后，它激烈地奔过巨石，冲越瀑布。渐渐地，河流变宽了，两边的堤岸也远去，河水流动得更加平静。最后，它自然地融入了大海，并毫无痛苦地消失了自我。
+        <div class="my-formal-intro">
+            <div class="my-formal-intro-text">
+                {{ blogStore.blogInfo.myFormalIntro }}
             </div>
         </div>
         <div class="touch-me">
@@ -105,6 +105,7 @@
 <script setup lang='ts'>
     import {onMounted, onUnmounted, ref} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
+    import useBlogStore from "@/store/blog.ts";
     import Footer from "@/components/footer/Footer.vue";
     import Header from "@/components/header/Header.vue";
     import MyAbilitiesRadar from "@/components/MyAbilitiesRadar.vue"
@@ -116,6 +117,7 @@
     })
 
     let appearanceStore = useAppearanceStore()
+    const blogStore = useBlogStore()
     const abilityTab = ref(0)
     const skillTab = ref(0)
     const myAbilitiesDescriptions = [
@@ -205,12 +207,12 @@
             }
         }
 
-        .what-i-wanna-say {
+        .my-formal-intro {
             display: flex;
             justify-content: center;
             margin: 10px 0 30px 0;
 
-            .what-i-wanna-say-text {
+            .my-formal-intro-text {
                 color: white;
                 max-width: 50rem;
                 font-size: 1rem;
@@ -228,17 +230,17 @@
 
             .wechat-icon {
                 margin: 0 20px 0 20px;
-                max-width: 2.5rem;
+                max-width: 2rem;
             }
 
             .mail-icon {
                 margin: 0 20px 0 20px;
-                max-width: 2.5rem;
+                max-width: 2rem;
             }
 
             .twitter-icon {
                 margin: 0 20px 0 20px;
-                max-width: 2.5rem;
+                max-width: 2rem;
             }
         }
 

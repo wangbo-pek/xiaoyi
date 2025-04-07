@@ -5,26 +5,26 @@
                 <span class="info-text">Copyright</span>
                 <v-icon class="info-icon" icon="mdi-copyright"></v-icon>
                 <span class="info-text">2023 - 2025 &nbsp;&nbsp;</span>
-                <span class="info-text strong-text">Wang</span>
+                <span class="info-text strong-text">{{ blogStore.blogInfo.myName }}</span>
                 <span class="info-text">&nbsp;&nbsp;|&nbsp;&nbsp;Powered By </span>
                 <span class="info-text strong-text">Django + Vue</span>
             </div>
             <div class="second-line">
                 <v-icon class="info-icon" icon="mdi-text-long"></v-icon>
                 <span class="info-text">站点总文章数：</span>
-                <span class="info-text strong-text">27篇</span>
+                <span class="info-text strong-text">{{ blogStore.blogInfo.blogArticlesCount }}篇</span>
                 <span class="info-text">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                 <v-icon class="info-icon" icon="mdi-chart-areaspline"></v-icon>
                 <span class="info-text">站点总字数：</span>
-                <span class="info-text strong-text">1023.2K</span>
+                <span class="info-text strong-text">{{ blogStore.blogInfo.blogWordsCount }}字</span>
                 <span class="info-text">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                 <v-icon class="info-icon" icon="mdi-eye-outline"></v-icon>
                 <span class="info-text">总访问量：</span>
-                <span class="info-text strong-text">283人</span>
+                <span class="info-text strong-text">{{ blogStore.blogInfo.blogViewedCount }}人</span>
                 <span class="info-text">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                 <v-icon class="info-icon" icon="mdi-cloud-outline"></v-icon>
                 <span class="info-text">本站已运行：</span>
-                <span class="info-text strong-text">20天</span>
+                <span class="info-text strong-text">{{ blogStore.blogInfo.blogDurationRunning }}天</span>
             </div>
         </div>
         <div class="touch-me">
@@ -40,10 +40,14 @@
 </template>
 
 <script setup lang='ts'>
+    import useBlogStore from "@/store/blog.ts";
+
     defineOptions({
         name: 'Footer',
         inheritAttrs: false
     })
+
+    const blogStore = useBlogStore()
 </script>
 
 <style scoped lang='scss'>

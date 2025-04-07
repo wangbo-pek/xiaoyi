@@ -8,8 +8,8 @@ const useCoverStore = defineStore('cover', {
                 noteListId:[-1,],
                 covers: [cover,],
                 titles: [
-                    '「 輕薄之態，施之君子，則喪吾德；施之小人，則殺吾身 」',],
-                briefs: ['—— 蒲松龄',],
+                    '欢迎来到一只产品狗的小天地，博客简陋，照顾不周，望请海涵。',],
+                briefs: [' —— Wang (北京)',],
                 buttonIcons: [
                     'mdi-menu-down',
                     'mdi-eye-outline',

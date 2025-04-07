@@ -1,9 +1,18 @@
 <template>
     <div class="home-container">
 
+        <div class="my-wisdom-container">
+            <div class="wisdom-tab">
+                My Widsom
+            </div>
+            <div class="my-wisdom">
+                {{ blogStore.blogInfo.myWisdom }}
+            </div>
+        </div>
+
         <div class="recommended-container">
             <div class="recommended-tab">
-                推荐文章
+                Recommended
             </div>
             <div class="recommended-list">
                 <template v-for="item in noteStore.recommendedNoteList" :key="item">
@@ -20,7 +29,7 @@
 
         <div class="random-note-container">
             <div class="random-note-tab">
-                最新文章
+                Latest
             </div>
             <div class="random-note-list">
                 <template v-for="item in noteStore.latestNoteList" :key="item">
@@ -40,6 +49,7 @@
 
 <script setup lang='ts'>
     import useNoteStore from "@/store/note.ts";
+    import useBlogStore from "@/store/blog.ts";
     import Card from "@/components/Card.vue";
     import {watch} from "vue";
 
@@ -49,6 +59,7 @@
     })
 
     const noteStore = useNoteStore()
+    const blogStore = useBlogStore()
 
     // 监听App.vue是否拿到了NoteList，如果拿到了，就获取被置顶的文章、最新的文章
     watch(() => noteStore.noteList, () => {
@@ -69,8 +80,31 @@
         border-radius: 5px;
         padding: 2px 10px;
 
+        .my-wisdom-container {
+            background-color: rgba(0, 35, 35, 0.2);
+            padding: 50px;
+            margin: 25px;
+            border-radius: 20px;
+
+            .wisdom-tab {
+                color: white;
+                text-align: center;
+                font-size: 2rem;
+                font-weight: 800;
+                margin-bottom: 30px;
+            }
+
+            .my-wisdom {
+                color: white;
+                text-align: left;
+                font-size: 1.25rem;
+                font-weight: 800;
+            }
+        }
+
+
         .recommended-container {
-            background-color:rgba(0, 35, 35, 0.2);
+            background-color: rgba(0, 35, 35, 0.2);
             padding: 50px;
             margin: 25px;
             border-radius: 20px;
@@ -78,7 +112,7 @@
             .recommended-tab {
                 color: white;
                 text-align: center;
-                font-size: 25px;
+                font-size: 2rem;
                 font-weight: 800;
                 margin-bottom: 30px;
             }
@@ -94,7 +128,7 @@
         }
 
         .random-note-container {
-            background-color:rgba(0, 35, 35, 0.2);
+            background-color: rgba(0, 35, 35, 0.2);
             padding: 50px;
             margin: 25px;
             border-radius: 20px;
@@ -102,7 +136,7 @@
             .random-note-tab {
                 color: white;
                 text-align: center;
-                font-size: 25px;
+                font-size: 2rem;
                 font-weight: 800;
                 margin-bottom: 30px;
             }

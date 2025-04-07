@@ -6,13 +6,16 @@
                        :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/my_only_girl.png'"></v-img>
             </div>
             <div class="my-name">
-                <span class="my-name-text">Wang</span>
+                <span class="my-name-text">{{ blogStore.blogInfo.myName }}</span>
             </div>
-            <div class="what-i-wanna-say">
-                <div class="what-i-wanna-say-text">
-                    人的一生就应该像一条河，开始是涓涓细流，被狭窄的河岸所束缚，然后，它激烈地奔过巨石，冲越瀑布。渐渐地，河流变宽了，两边的堤岸也远去，河水流动得更加平静。最后，它自然地融入了大海，并毫无痛苦地消失了自我。
+
+            <div class="my-short-intro">
+                <div class="my-short-intro-text">
+                    {{ blogStore.blogInfo.myShortIntro }}
                 </div>
             </div>
+
+
         </div>
         <div class="touch-me">
             <v-img class="wechat-icon"
@@ -32,6 +35,7 @@
 
 <script setup lang='ts'>
     import {useRouter} from "vue-router";
+    import useBlogStore from "@/store/blog.ts";
 
     defineOptions({
         name: 'Sider',
@@ -39,6 +43,7 @@
     })
 
     const $router = useRouter()
+    const blogStore = useBlogStore()
 
     const jumpToAbout = () => {
         $router.push({
@@ -81,12 +86,12 @@
                 }
             }
 
-            .what-i-wanna-say {
+            .my-short-intro {
                 display: flex;
                 justify-content: center;
                 margin: 10px 0 10px 0;
 
-                .what-i-wanna-say-text {
+                .my-short-intro-text {
                     color: white;
                     max-width: 15rem;
                     font-size: 0.8rem;
@@ -95,6 +100,8 @@
                     line-height: 20px;
                 }
             }
+
+
         }
 
         .touch-me {

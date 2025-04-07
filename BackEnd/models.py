@@ -83,13 +83,32 @@ class Category(models.Model):
 
 # 网站信息
 class BlogInfo(models.Model):
-    blog_name = models.CharField(verbose_name='博客名称', max_length=32, default='XiaoYi_Blog')
-    my_name = models.CharField(verbose_name='我的名字', max_length=32, default='Wang')
-    blog_article_count = models.IntegerField(verbose_name='总文章数', default=0)
+    blog_name = models.CharField(verbose_name='博客名称', max_length=64, default='XiaoYi_Blog')
+    my_name = models.CharField(verbose_name='我的名字', max_length=64, default='Wang')
+    my_motto = models.CharField(verbose_name='我的座右铭', max_length=128, default='')
+    my_wisdom = models.CharField(verbose_name='我的警示名言', max_length=256, default='')
+    my_location = models.CharField(verbose_name='我的所在地', max_length=64, default='北京')
+    my_career = models.CharField(verbose_name='我的职业', max_length=64, default='产品经理')
+    my_short_intro = models.CharField(verbose_name='我的简短介绍', max_length=128, default='')
+    my_formal_intro = models.CharField(verbose_name='我的介绍', max_length=256, default='')
+    blog_articles_count = models.IntegerField(verbose_name='总文章数', default=0)
     blog_words_count = models.IntegerField(verbose_name='总字数', default=0)
     blog_viewed_count = models.IntegerField(verbose_name='总访问量', default=0)
     blog_duration_running = models.IntegerField(verbose_name='已运行天数', default=0)
     my_wechat = models.CharField(verbose_name='我的微信', max_length=64, default='wboo1225')
     my_mail = models.EmailField(verbose_name='我的邮箱', max_length=64, default='wangbo.pek@gmail.com')
-    coffee_wechat = models.URLField(verbose_name='微信支付', max_length=512, blank=True, null=True)
-    coffee_alipay = models.URLField(verbose_name='支付宝', max_length=512, blank=True, null=True)
+    coffee_by_wechat = models.URLField(verbose_name='微信支付', max_length=512, blank=True, null=True)
+    coffee_by_alipay = models.URLField(verbose_name='支付宝', max_length=512, blank=True, null=True)
+
+
+# 访客记录
+class VisitorLog(models.Model):
+    uuid = models.CharField(verbose_name='访客唯一标识', max_length=64, db_index=True)
+    ip_addr = models.GenericIPAddressField()
+    user_agent = models.TextField()
+    referer = models.TextField(blank=True, null=True)
+    path = models.CharField(verbose_name='访问路径', max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.uuid} - {self.path}@{self.timestamp}'
