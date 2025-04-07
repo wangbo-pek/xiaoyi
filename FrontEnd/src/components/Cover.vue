@@ -101,7 +101,7 @@
         })
         console.log(coverStore.coverContents)
         switchCoverContent()
-        setInterval(switchCoverContent, 5000)
+        setInterval(switchCoverContent, 10000)
     })
 
 </script>
@@ -184,11 +184,9 @@
         justify-content: right;
         align-items: flex-start;
         gap: 10px;
-        background-color: lightseagreen;
         z-index: 900;
 
         .content {
-            //background-color: aliceblue;
             flex: 0 0 75%;
             height: 100%;
             border-radius: 5px;
@@ -198,7 +196,6 @@
         }
 
         .siderbar {
-            background-color: lightblue;
             flex: 0 0 15%;
             height: 100%;
             border-radius: 5px;

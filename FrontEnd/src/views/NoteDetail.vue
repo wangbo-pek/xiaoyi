@@ -271,7 +271,7 @@
             align-items: stretch;
             height: 100%;
             width: 100%;
-            background-color: rgba(100, 100, 100, 0.5);
+            background-color: rgba(100, 100, 100, 0.25);
 
             .title-big {
                 width: 35%;
@@ -291,9 +291,9 @@
         }
 
         .change-bgcolor {
-            background-color: #071417;
+            background-color: rgb(0, 35, 35);
             box-shadow: 5px 0 10px rgba(255, 255, 255, 0.5);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(0, 35, 35, 0.5);
         }
     }
 
@@ -316,9 +316,9 @@
             position: relative;
             top: -8rem;
             left: 20rem;
-            font-size: 1.5rem;
-            background-color: rgba(7, 20, 23, 0.75);
-            color: #cccccc;
+            font-size: 2rem;
+            background-color: rgba(0, 75, 57, 0.75);
+            color: #ffffff;
         }
     }
 
@@ -345,11 +345,12 @@
                     gap: 20px;
 
                     .tag {
-                        background-color: #113c46;
+                        background-color: rgba(0, 75, 57);
                         color: white;
                         padding: 6px 10px;
                         border-radius: 5px;
                         font-size: 0.8em;
+                        font-weight: 800;
                     }
                 }
 
@@ -365,23 +366,16 @@
 
                         .category-icon {
                             font-size: 0.8em;
-                            color: #113c46;
+                            color: rgba(0, 75, 57);
                         }
 
                         .category-text {
                             font-size: 0.8rem;
-                            font-weight: 700;
-                            color: #113c46;
+                            font-weight: 800;
+                            color: rgba(0, 75, 57);
                         }
                     }
                 }
-            }
-
-            .divider1 {
-                width: 100%;
-                height: 2px;
-                background-color: #515c7a;;
-                margin: 10px 0 10px 0;
             }
 
             .article-info-container {
@@ -396,12 +390,12 @@
                     gap: 4px;
 
                     .created-date-icon {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
 
                     .created-date-text {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
                 }
@@ -412,12 +406,12 @@
                     gap: 4px;
 
                     .modified-date-icon {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
 
                     .modified-date-text {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
                 }
@@ -428,12 +422,12 @@
                     gap: 4px;
 
                     .viewed-icon {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
 
                     .viewed-text {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
                 }
@@ -444,12 +438,12 @@
                     gap: 4px;
 
                     .liked-icon {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
 
                     .liked-text {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
                 }
@@ -460,15 +454,22 @@
                     gap: 4px;
 
                     .disgusted-icon {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
 
                     .disgusted-text {
-                        color: #8ab9a8;
+                        color: rgb(20, 100, 90);
                         font-size: 1rem;
                     }
                 }
+            }
+
+            .divider1 {
+                width: 100%;
+                height: 2px;
+                background-color: rgba(0, 75, 57);
+                margin: 10px 0 10px 0;
             }
 
             .article-body-container {
@@ -486,7 +487,7 @@
             .divider2 {
                 width: 100%;
                 height: 2px;
-                background-color: #515c7a;;
+                background-color: rgba(0, 75, 57);
                 margin: 20px 0 20px 0;
             }
 
@@ -495,8 +496,8 @@
                 border-radius: 5px;
                 box-shadow: 1px 2px 3px rgba(138, 185, 168, 0.3);
                 margin: 30px 0 20px 0;
-                background-color: rgba(138, 185, 168, 0.1);
-                border: 1px solid rgba(138, 185, 168, 0.5);
+                background-color: rgba(0, 75, 57, 0.15);;
+                border: 1px solid rgba(0, 75, 57);;
 
                 .author-container {
                     .author {
@@ -506,12 +507,12 @@
                         margin: 15px;
 
                         .author-icon {
-                            color: #8ab9a8;
+                            color: rgb(10, 90, 110);
                             font-size: 0.9em;
                         }
 
                         .author-text {
-                            color: #8ab9a8;
+                            color: rgb(10, 110, 90);
                             font-size: 0.85em;
                             font-weight: 800;
                         }
@@ -526,12 +527,12 @@
                         margin: 15px;
 
                         .link-icon {
-                            color: #8ab9a8;
+                            color: rgb(10, 90, 110);
                             font-size: 0.9em;
                         }
 
                         .link-text {
-                            color: #8ab9a8;
+                            color: rgb(10, 110, 90);
                             font-size: 0.85em;
                             font-weight: 800;
                         }
@@ -546,12 +547,12 @@
                         margin: 15px;
 
                         .copy-right-icon {
-                            color: #8ab9a8;
+                            color: rgb(10, 90, 110);
                             font-size: 0.9em;
                         }
 
                         .copy-right-text {
-                            color: #8ab9a8;
+                            color: rgb(10, 110, 90);
                             font-size: 0.85em;
                             font-weight: 800;
                         }
@@ -575,11 +576,12 @@
                     left: -120px;
 
                     .tag {
-                        background-color: #113c46;
+                        background-color: rgba(0, 75, 57);
                         color: white;
                         padding: 6px 10px;
                         border-radius: 5px;
                         font-size: 0.8em;
+                        font-weight: 800;
                     }
                 }
 
@@ -642,7 +644,7 @@
                 }
 
                 .coffee-text {
-                    color: #c3effa;
+                    color: rgb(10, 110, 90);
                     font-size: 1rem;
                     font-weight: 800;
                 }

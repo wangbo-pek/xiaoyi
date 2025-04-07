@@ -70,7 +70,7 @@
         padding: 2px 10px;
 
         .recommended-container {
-            background-color: rgba(3, 27, 31, 0.5);
+            background-color:rgba(0, 35, 35, 0.2);
             padding: 50px;
             margin: 25px;
             border-radius: 20px;
@@ -94,7 +94,7 @@
         }
 
         .random-note-container {
-            background-color: rgba(3, 27, 31, 0.5);
+            background-color:rgba(0, 35, 35, 0.2);
             padding: 50px;
             margin: 25px;
             border-radius: 20px;

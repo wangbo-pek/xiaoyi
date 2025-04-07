@@ -73,10 +73,6 @@
                 <div class="title-container">
                     <span class="title">{{ currentDetail?.title }}</span>
                 </div>
-                <!-- 文章副标题展示区域 -->
-                <div class="subtitle-container">
-                    <span class="subtitle">{{ currentDetail?.subtitle }}</span>
-                </div>
                 <!-- 文章摘要展示区域 -->
                 <div class="brief-container">
                     <span class="brief">{{ currentDetail?.brief }}</span>
@@ -85,13 +81,13 @@
                 <!-- 按钮展示区域-->
                 <div class="action-container">
                     <div class="read-more">
-                        <v-btn class="read-more-btn" variant="outlined"
+                        <v-btn class="read-more-btn" variant="flat"
                                @click="jumpToNoteDetail(currentDetail.noteListId)">
                             <span class="read-more-text">阅读</span>
                         </v-btn>
                     </div>
                     <div class="exit">
-                        <v-btn class="exit-btn" variant="outlined" @click="closeDialog">
+                        <v-btn class="exit-btn" variant="flat" @click="closeDialog">
                             <span class="exit-text">离开</span>
                         </v-btn>
                     </div>
@@ -135,8 +131,8 @@
         currentDetail.value = null
     }
 
-    const jumpToNoteDetail =  (noteListId: number) => {
-         $router.push({
+    const jumpToNoteDetail = (noteListId: number) => {
+        $router.push({
             name: 'noteDetail',
             params: {
                 id: noteListId
@@ -174,7 +170,7 @@
     .card-dialog {
         position: fixed;
         inset: 0;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0.3);
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -187,7 +183,7 @@
             height: 42em;
             position: fixed;
             top: 6em;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255);
             border-radius: 10px 10px 10px 10px;
 
             .dialog-cover-container {
@@ -206,8 +202,8 @@
                 border-radius: 10px;
                 padding: 20px;
                 position: relative;
-                top: -8em;
-                left: 5.6em;
+                top: -7.5em;
+                left: 4.5em;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
                 .tags-category-container {
@@ -222,11 +218,12 @@
                         gap: 6px;
 
                         .tag {
-                            background-color: #113c46;
+                            background-color: rgb(0, 100, 100);
                             color: white;
                             padding: 6px 10px;
                             border-radius: 10px;
                             font-size: 0.65rem;
+                            font-weight: 800;
                         }
                     }
 
@@ -242,12 +239,13 @@
 
                             .category-icon {
                                 font-size: 0.65rem;
-                                color: #113c46;
+                                color: rgb(0, 100, 100);
                             }
 
                             .category-text {
                                 font-size: 0.65rem;
-                                color: #113c46;
+                                font-weight: 800;
+                                color: rgb(0, 100, 100);
                             }
                         }
                     }
@@ -266,12 +264,12 @@
                     gap: 4px;
 
                     .created-date-icon {
-                        color: #515c7a;
-                        font-size:0.9rem;
+                        color: rgba(0, 40, 40, 0.75);
+                        font-size: 0.9rem;
                     }
 
                     .created-date-text {
-                        color: #515c7a;
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
                     }
                 }
@@ -282,13 +280,13 @@
                     gap: 4px;
 
                     .modified-date-icon {
-                        color: #515c7a;
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
                     }
 
                     .modified-date-text {
-                        color: #515c7a;
-                        font-size:0.9rem;
+                        color: rgba(0, 40, 40, 0.75);
+                        font-size: 0.9rem;
                     }
                 }
 
@@ -298,12 +296,12 @@
                     gap: 4px;
 
                     .viewed-icon {
-                        color: #515c7a;
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
                     }
 
                     .viewed-text {
-                        color: #515c7a;
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
                     }
                 }
@@ -314,12 +312,12 @@
                     gap: 4px;
 
                     .liked-icon {
-                        color: #515c7a;
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
                     }
 
                     .liked-text {
-                        color: #515c7a;
+                        color:rgba(0, 40, 40, 0.75);
                         font-size: 14px;
                     }
                 }
@@ -330,12 +328,12 @@
                     gap: 4px;
 
                     .disgusted-icon {
-                        color: #515c7a;
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
                     }
 
                     .disgusted-text {
-                        color: #515c7a;
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
                     }
                 }
@@ -347,17 +345,7 @@
                 .title {
                     font-size: 1.75rem;
                     font-weight: 900;
-                }
-            }
-
-            .subtitle-container {
-                margin: 25px 0 0 0;
-
-                .subtitle {
-                    font-size: 1.25rem;
-                    font-weight: 600;
-                    color: #666;
-                    margin-bottom: 16px;
+                    color: rgba(0, 100, 100);;
                 }
             }
 
@@ -366,7 +354,7 @@
 
                 .brief {
                     font-size: 1rem;
-                    color: #888888;
+                    color: rgba(0, 40, 40, 0.9);
                     line-height: 1.6;
                 }
             }
@@ -385,9 +373,10 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        background-color: rgba(0, 100, 100);
 
                         .read-more-text {
-                            color: #515c7a;
+                            color: white;
                             font-size: 0.85rem;
                         }
                     }
@@ -400,10 +389,11 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        background-color:  rgba(0, 100, 100);
 
                         .exit-text {
-                            color: #515c7a;
-                             font-size: 0.85rem;
+                            color: white;
+                            font-size: 0.85rem;
                         }
                     }
                 }

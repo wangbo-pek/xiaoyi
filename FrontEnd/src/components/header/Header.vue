@@ -63,9 +63,9 @@
     }
 
     .change-bgcolor {
-        background-color: #071417;
+        background-color: rgb(0, 35, 35);
         box-shadow: 5px 0 10px rgba(255, 255, 255, 0.5);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        border-bottom: 1px solid rgba(0, 35, 35, 0.5);
     }
 
 </style>

@@ -36,7 +36,15 @@ const router = createRouter({
             path: '/:pathMatch(.*)*',
             name: 'not-found',
             redirect: '/404'
-        }
+        },
+        {
+            path: '/about',
+            name: 'about',
+            component: () => import('@/views/about/About.vue'),
+            meta: {
+                title: "关于"
+            }
+        },
     ]
 })
 

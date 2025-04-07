@@ -1,6 +1,6 @@
 <template>
     <div class="sider-container">
-        <div class="introduction">
+        <div class="introduction" @click="jumpToAbout">
             <div class="my-avatar">
                 <v-img class="my-avatar-icon"
                        :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/my_only_girl.png'"></v-img>
@@ -31,10 +31,22 @@
 </template>
 
 <script setup lang='ts'>
+    import {useRouter} from "vue-router";
+
     defineOptions({
         name: 'Sider',
         inheritAttrs: false
     })
+
+    const $router = useRouter()
+
+    const jumpToAbout = () => {
+        $router.push({
+            name: 'about',
+        })
+    }
+
+
 </script>
 
 <style scoped lang='scss'>
@@ -44,10 +56,11 @@
         height: 100%;
 
         .introduction {
-            text-align: center; /* 如果需要，确保文本水平居中 */
+            text-align: center;
             position: relative;
             top: 5rem;
             width: 100%;
+            cursor: pointer;
 
             .my-avatar {
                 display: flex;

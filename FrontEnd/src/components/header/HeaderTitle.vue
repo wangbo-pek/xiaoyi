@@ -53,7 +53,6 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            //margin-right: 25px;
 
             .my-btn {
                 width: 120px;

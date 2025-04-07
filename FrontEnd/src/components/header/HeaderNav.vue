@@ -36,7 +36,6 @@
             font-weight: 900;
             color: white;
             margin: 0 5px;
-            //background-color: rgba(255, 255, 255, 0.15)
         }
     }
 </style>

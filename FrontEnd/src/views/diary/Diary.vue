@@ -130,6 +130,7 @@
 
     .diary-date-chip {
         font-size: 1rem;
+        font-weight: 900;
     }
 
 </style>

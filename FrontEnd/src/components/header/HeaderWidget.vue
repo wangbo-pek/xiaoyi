@@ -1,8 +1,6 @@
 <template>
     <div class="widget-container">
-        <!--<div class="widget-weather">天气挂件</div>-->
-        <!--<div class="widget-date">今日日期</div>-->
-        <!--<div class="widget-func">coffee me</div>-->
+
     </div>
 </template>
 

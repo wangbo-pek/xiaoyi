@@ -4,14 +4,13 @@
     display: block; // 将图片设置为块级元素
     margin: 20px auto; // 上下边距 20px，左右居中
     border-radius: 5px; // 添加圆角效果
-    border: 5px solid rgba(17, 60, 70, 0.75);
-    box-shadow: 8px 8px 8px rgba(17, 60, 70, 0.5); // 给图片添加阴影效果
+    border: 5px solid rgba(0, 75, 57);
 }
 
 /* 设置 markdown-content 中的 h1 ~ h4 标题样式 */
 :deep(.markdown-content h1) {
     font-size: 2em; // 设置 h1 字体大小
-    color: white; // 设置 h1 字体颜色
+    color:  rgb(10, 110, 90); // 设置 h1 字体颜色
     margin: 30px 0; // 设置上下间距
     font-weight: 800; // 设置加粗
     text-align: center; // 设置居中对齐
@@ -19,14 +18,14 @@
 
 :deep(.markdown-content h2) {
     font-size: 1.75em; // 设置 h2 字体大小
-    color: white; // 设置 h2 字体颜色
+    color: rgba(10, 110, 90, 0.95); // 设置 h2 字体颜色
     margin: 20px 0; // 设置上下间距
     font-weight: 700; // 设置加粗
 }
 
 :deep(.markdown-content h3) {
     font-size: 1.5em; // 设置 h3 字体大小
-    color: white; // 设置 h3 字体颜色
+    color: rgba(10, 110, 90, 0.9);  // 设置 h3 字体颜色
     margin: 16px 0; // 设置上下间距
     font-weight: 600; // 设置加粗
     text-align: left; // 设置左对齐
@@ -34,7 +33,7 @@
 
 :deep(.markdown-content h4) {
     font-size: 1.25em; // 设置 h4 字体大小
-    color: white; // 设置 h4 字体颜色
+    color: rgba(10, 110, 90, 0.85);  // 设置 h4 字体颜色
     margin: 15px 0; // 设置上下间距
     font-weight: 400; // 设置加粗
     text-align: left; // 设置左对齐
@@ -43,7 +42,7 @@
 /* 设置 markdown-content 中的段落样式 */
 :deep(.markdown-content p) {
     font-size: 1rem; // 设置段落字体大小
-    color: rgba(222, 222, 222, 0.9); // 设置段落字体颜色
+    color: rgba(222, 222, 222, 0.75); // 设置段落字体颜色
     line-height: 1.5; // 设置行高
     margin: 10px 0; // 设置上下边距
     padding: 0 10px; // 设置左右内边距
@@ -140,15 +139,15 @@
 /* 引用样式 */
 :deep(.markdown-content blockquote) {
     padding: 10px 20px;
-    border-left: 5px solid #3fb2ae;
-    background-color: rgba(63, 178, 174, 0.2);
+    border-left: 5px solid rgba(0, 75, 57);
+    background-color: rgba(0, 75, 57, 0.5);
     margin: 15px 0; /* 设置上下外边距 */
     font-weight: 800;
 }
 
 /* 引用样式 */
 :deep(.markdown-content blockquote p) {
-    color: #5dd5d2;
+    color: rgba(255, 255, 255);
     font-size: 0.95rem;
     font-weight: 800;
     margin: 0; /* 移除引用内部段落的默认外边距 */
@@ -158,16 +157,11 @@
     position: fixed;
     bottom: 20rem;
     right: 2rem;
-    background-color: #113c46; /* 设置目录背景色 */
+    background-color: rgba(0, 75, 57, 0.75); /* 设置目录背景色 */
     padding: 10px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
     z-index: 10;
     border-radius: 5px; /* 给目录容器加圆角 */
-}
-
-:deep(.toc h2) {
-    font-size: 1rem;
-    margin-bottom: 10px;
 }
 
 :deep(.toc ul) {
@@ -179,13 +173,13 @@
 :deep(.toc a) {
     color: white;
     text-decoration: none; /* 移除默认的下划线 */
-    font-size: 0.8em; /* 设置字体大小 */
+    font-size: 0.85em; /* 设置字体大小 */
     font-weight: 700; /* 设置字体加粗 */
     transition: color 0.3s ease; /* 添加过渡效果 */
 }
 
 :deep(.toc a:hover) {
-    color: #ff6600; /* 鼠标悬停时改变颜色 */
+    color: rgba(255, 152, 0); /* 鼠标悬停时改变颜色 */
     text-decoration: underline; /* 添加下划线 */
 }
 
@@ -194,7 +188,7 @@
     align-items: center;
     gap: 7px;
     margin: 5px auto 10px 10px;
-    font-size: 0.85em; /* 设置字体大小 */
+    font-size: 0.9em; /* 设置字体大小 */
     font-weight: 700; /* 设置字体加粗 */
     color: white;
 }

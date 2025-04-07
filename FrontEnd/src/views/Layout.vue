@@ -100,6 +100,5 @@
         align-items: flex-start;
         gap: 20px;
         z-index: 900;
-        background-color: white;
     }
 </style>
