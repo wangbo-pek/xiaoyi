@@ -39,10 +39,10 @@
                         data: [
                             {
                                 value: [60, 70, 80, 55, 60],
-                                itemStyle: {color: '#ff9800'}
+                                itemStyle: {color: '#f2cc0f'}
                             }
                         ],
-                        lineStyle: {color: '#ff9800', width: 2},
+                        lineStyle: {color: '#f2cc0f', width: 2},
                         emphasis: {lineStyle: {width: 4}}
                     }
                 ]

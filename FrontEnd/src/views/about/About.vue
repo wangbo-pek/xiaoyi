@@ -33,20 +33,20 @@
             </div>
             <div class="my-ability-text">
                 <v-tabs
-                    v-model="activeTab"
+                    v-model="abilityTab"
                 >
                     <v-tab
                         v-for="(label, index) in myAbilitiesIndicators"
                         :key="index"
-                        base-color="rgb(255, 152, 0)"
-                        color="rgb(255, 152, 0)"
-                        slider-color="rgb(255, 152, 0)"
+                        base-color="rgb(242, 204, 15)"
+                        color="rgb(242, 204, 15)"
+                        slider-color="rgb(242, 204, 15)"
                     >
                         {{ label }}
                     </v-tab>
                 </v-tabs>
 
-                <v-window v-model="activeTab" class="tab-panel-content">
+                <v-window v-model="abilityTab" class="tab-panel-content">
                     <v-window-item v-for="(label, index) in myAbilitiesIndicators" :key="index" :value="index">
                         <div class="tab-description">
                             {{ myAbilitiesDescriptions[index] }}
@@ -67,20 +67,20 @@
             </div>
             <div class="my-skills-text">
                 <v-tabs
-                    v-model="activeTab"
+                    v-model="skillTab"
                 >
                     <v-tab
                         v-for="item in mySkills"
                         :key="item.name"
-                        base-color="rgb(255, 152, 0)"
-                        color="rgb(255, 152, 0)"
-                        slider-color="rgb(255, 152, 0)"
+                        base-color="rgb(242, 204, 15)"
+                        color="rgb(242, 204, 15)"
+                        slider-color="rgb(242, 204, 15)"
                     >
                         {{ item.name }}
                     </v-tab>
                 </v-tabs>
 
-                <v-window v-model="activeTab" class="tab-panel-content">
+                <v-window v-model="skillTab" class="tab-panel-content">
                     <v-window-item v-for="(item, index) in mySkills" :key="index" :value="index">
                         <div class="tab-description">
                             {{ item.description }}
@@ -116,7 +116,8 @@
     })
 
     let appearanceStore = useAppearanceStore()
-    const activeTab = ref(0)
+    const abilityTab = ref(0)
+    const skillTab = ref(0)
     const myAbilitiesDescriptions = [
         '善于从宏观把握市场变化，能洞察业务逻辑并挖掘潜在价值。',
         '熟悉敏捷开发流程，能够协调多方资源高效推进项目。',
@@ -320,7 +321,7 @@
 
     :deep(.v-slide-group__prev),
     :deep(.v-slide-group__next) {
-        color: #ff9800;
+        color: rgb(242, 204, 15);
         opacity: 0.6;
 
         &:hover {

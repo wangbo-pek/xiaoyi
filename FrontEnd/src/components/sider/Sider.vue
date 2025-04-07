@@ -133,7 +133,7 @@
             }
 
             .coffee-text {
-                color: #c3effa;
+                color: rgb(0, 200, 250);
                 font-size: 1rem;
                 font-weight: 800;
             }
