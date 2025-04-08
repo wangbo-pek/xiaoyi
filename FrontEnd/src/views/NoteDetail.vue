@@ -113,20 +113,13 @@
                         }}</span>
                 </div>
                 <div class="share-icon">
-                    <v-img class="wechat-icon"
-                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/wechat.svg'"></v-img>
-                    <v-img class="twitter-icon"
-                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/twitter.svg'"></v-img>
-                    <v-img class="github-icon"
-                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/github.svg'"></v-img>
-                    <v-img class="google-plus-icon"
-                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/google_plus.svg'"></v-img>
-                    <v-img class="linkedin-icon"
-                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/linkedin.svg'"></v-img>
-                    <v-img class="weibo-icon"
-                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/weibo.svg'"></v-img>
-                    <v-img class="zhihu-icon"
-                           :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/zhihu.svg'"></v-img>
+                    <v-img class="shaoshupai-icon" :src="shaoshupai.svgIconUrl" @click="jumpToSocialMedia(shaoshupai.name)"></v-img>
+                    <v-img class="github-icon" :src="github.svgIconUrl" @click="jumpToSocialMedia(github.name)"></v-img>
+                    <v-img class="weibo-icon" :src="weibo.svgIconUrl" @click="jumpToSocialMedia(weibo.name)"></v-img>
+                    <v-img class="douban-icon" :src="douban.svgIconUrl" @click="jumpToSocialMedia(douban.name)"></v-img>
+                    <v-img class="zhihu-icon" :src="zhihu.svgIconUrl" @click="jumpToSocialMedia(zhihu.name)"></v-img>
+                    <v-img class="twitter-icon" :src="twitter.svgIconUrl" @click="jumpToSocialMedia(twitter.name)"></v-img>
+                    <v-img class="facebook-icon" :src="facebook.svgIconUrl" @click="jumpToSocialMedia(facebook.name)"></v-img>
                 </div>
             </div>
 
@@ -147,6 +140,7 @@
     import {useRoute} from "vue-router";
     import {onMounted, onUnmounted, ref, watchEffect} from "vue";
     import useNoteStore from "@/store/note.ts";
+    import {useRouter} from "vue-router";
     import axios_server from "@/utils/axios_server.ts";
     import HeaderNav from "@/components/header/HeaderNav.vue";
     import HeaderTitle from "@/components/header/HeaderTitle.vue";
@@ -154,6 +148,7 @@
     import MarkdownIt from 'markdown-it';
     import hljs from 'highlight.js'
     import 'highlight.js/styles/github.css'
+    import {twitter, facebook, github, douban, weibo, zhihu, shaoshupai} from '@/data/socialMedia.ts'
 
     defineOptions({
         name: 'NoteDetail',
@@ -166,6 +161,7 @@
     const route = useRoute()
     const noteStore = useNoteStore()
     const noteListId = Number(route.params.id)
+    const $router = useRouter()
 
     // 获取class="coverImage"的DOM
     let coverImageRef = ref<HTMLElement | null>(null)
@@ -207,6 +203,24 @@
         // 更新 markdown 和 TOC 内容
         noteStore.currentNote.renderedMarkdown = updatedMarkdown;
         toc.value = tocHtml;
+    }
+
+    const jumpToSocialMedia = (name:string) => {
+        const urlMap:Record<string, string> = {
+            weibo:weibo.linkUrl,
+            douban:douban.linkUrl,
+            zhihu:zhihu.linkUrl,
+            twitter:twitter.linkUrl,
+            facebook:facebook.linkUrl,
+            github:github.linkUrl,
+        }
+
+        const url = urlMap[name]
+        if(url) {
+            window.open(url, '_blank')
+        } else {
+            console.log(`未知社交平台：${name}`)
+        }
     }
 
     onMounted(async () => {
@@ -594,41 +608,47 @@
                     top: -12px;
                     left: 150px;
 
-                    .wechat-icon {
-                        margin: 0 15px 15px 0;
-                        max-width: 10%;
-                    }
-
-                    .twitter-icon {
-                        margin: 0 15px 15px 0;
-                        max-width: 10%;
-                    }
-
-                    .github-icon {
-                        margin: 0 15px 15px 0;
-                        max-width: 10%;
-                    }
-
-                    .google-plus-icon {
-                        margin: 0 15px 15px 0;
-                        max-width: 10%;
-                    }
-
-                    .linkedin-icon {
-                        margin: 0 15px 15px 0;
-                        max-width: 10%;
-                    }
-
                     .weibo-icon {
                         margin: 0 15px 15px 0;
                         max-width: 10%;
+                        cursor: pointer;
+                    }
+
+                    .douban-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                        cursor: pointer;
                     }
 
                     .zhihu-icon {
                         margin: 0 15px 15px 0;
                         max-width: 10%;
+                        cursor: pointer;
                     }
 
+                    .twitter-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                        cursor: pointer;
+                    }
+
+                    .facebook-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                        cursor: pointer;
+                    }
+
+                    .github-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                        cursor: pointer;
+                    }
+
+                    .shaoshupai-icon {
+                        margin: 0 15px 15px 0;
+                        max-width: 10%;
+                        cursor: pointer;
+                    }
                 }
             }
 

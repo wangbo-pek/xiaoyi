@@ -5,14 +5,14 @@
     <div class="about-container">
         <div class="my-avatar">
             <v-img class="my-avatar-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/my_only_girl.png'"></v-img>
+                   :src="wang.avatar"></v-img>
         </div>
         <div class="my-name">
-            <span class="my-name-text">Wang</span>
+            <span class="my-name-text">{{ wang.nickName }}</span>
         </div>
         <div class="my-formal-intro">
             <div class="my-formal-intro-text">
-                {{ blogStore.blogInfo.myFormalIntro }}
+                {{ wang.longIntro }}
             </div>
         </div>
         <div class="touch-me">
@@ -36,7 +36,7 @@
                     v-model="abilityTab"
                 >
                     <v-tab
-                        v-for="(label, index) in myAbilitiesIndicators"
+                        v-for="(label, index) in indicators"
                         :key="index"
                         base-color="rgb(242, 204, 15)"
                         color="rgb(242, 204, 15)"
@@ -47,9 +47,9 @@
                 </v-tabs>
 
                 <v-window v-model="abilityTab" class="tab-panel-content">
-                    <v-window-item v-for="(label, index) in myAbilitiesIndicators" :key="index" :value="index">
+                    <v-window-item v-for="(label, index) in indicators" :key="index" :value="index">
                         <div class="tab-description">
-                            {{ myAbilitiesDescriptions[index] }}
+                            {{ descriptions[index] }}
                         </div>
                     </v-window-item>
                 </v-window>
@@ -61,7 +61,7 @@
         </div>
         <div class="my-skills">
             <div class="my-skills-progress">
-                <template v-for="(item) in mySkills" :key="item.name">
+                <template v-for="(item) in skills" :key="item.name">
                     <MySkillProgress :name="item.name" :level="item.degree"></MySkillProgress>
                 </template>
             </div>
@@ -70,7 +70,7 @@
                     v-model="skillTab"
                 >
                     <v-tab
-                        v-for="item in mySkills"
+                        v-for="item in skills"
                         :key="item.name"
                         base-color="rgb(242, 204, 15)"
                         color="rgb(242, 204, 15)"
@@ -81,7 +81,7 @@
                 </v-tabs>
 
                 <v-window v-model="skillTab" class="tab-panel-content">
-                    <v-window-item v-for="(item, index) in mySkills" :key="index" :value="index">
+                    <v-window-item v-for="(item, index) in skills" :key="index" :value="index">
                         <div class="tab-description">
                             {{ item.description }}
                         </div>
@@ -90,8 +90,49 @@
             </div>
         </div>
 
-        <div class="my-other-title">
-            ——&nbsp;&nbsp;&nbsp;我的其他&nbsp;&nbsp;&nbsp;——
+        <div class="my-current-works-title">
+            ——&nbsp;&nbsp;&nbsp;当前工作内容&nbsp;&nbsp;&nbsp;——
+        </div>
+        <div class="my-current-works">
+            <div class="flip-card" v-for="item in currentWorks" :key="item.title">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <v-icon large color="rgb(242, 204, 15)">{{ item.icon }}</v-icon>
+                        <div class="card-title">{{ item.title }}</div>
+                        <v-progress-linear
+                            :model-value="item.currentProgress"
+                            height="8"
+                            color="rgb(242, 204, 15)"
+                            class="card-progress"
+                            rounded
+                            striped
+                            background-opacity="0.2"
+                        ></v-progress-linear>
+                        <div class="progress-label">{{ item.currentProgress }}%</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-detail">{{ item.detail }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-todo-list-title">
+            ——&nbsp;&nbsp;&nbsp;还未完成的事&nbsp;&nbsp;&nbsp;——
+        </div>
+        <div class="my-todo-list">
+            <div class="todo-item" v-for="item in todoList" :key="item.title">
+                <div class="todo-icon">
+                    <v-icon :icon="item.icon" size="32" color="rgb(242, 204, 15)"></v-icon>
+                </div>
+                <div class="todo-content">
+                    <div class="todo-title-status">
+                        <span class="todo-title">{{ item.title }}</span>
+                        <span class="todo-status" :class="item.status">{{ item.status }}</span>
+                    </div>
+                    <div class="todo-description">{{ item.description }}</div>
+                </div>
+            </div>
         </div>
 
         <div class="placeholder"></div>
@@ -109,7 +150,9 @@
     import Footer from "@/components/footer/Footer.vue";
     import Header from "@/components/header/Header.vue";
     import MyAbilitiesRadar from "@/components/MyAbilitiesRadar.vue"
-    import MySkillProgress from "@/components/MySkillProgress.vue";
+    import MySkillProgress from "@/components/MySkillProgress.vue"
+    import {indicators, descriptions, skills, currentWorks, todoList} from '@/data/about.ts'
+    import {wang} from '@/data/personalDetail.ts'
 
     defineOptions({
         name: 'About',
@@ -120,44 +163,6 @@
     const blogStore = useBlogStore()
     const abilityTab = ref(0)
     const skillTab = ref(0)
-    const myAbilitiesDescriptions = [
-        '善于从宏观把握市场变化，能洞察业务逻辑并挖掘潜在价值。',
-        '熟悉敏捷开发流程，能够协调多方资源高效推进项目。',
-        '能够结构化地收集、分析和管理用户需求，保障产品方向准确。',
-        '具备编程能力，能深入理解技术实现，协助技术方案制定。',
-        '注重沟通与团队协作，同时具备较强的时间与情绪管理能力。'
-    ]
-    const myAbilitiesIndicators = [
-        '市场理解和商业洞察',
-        '敏捷开发和项目管理',
-        '需求分析和需求管理',
-        '编程开发和技术积累',
-        '沟通协作和自我管理'
-    ]
-
-
-    const mySkills = [
-        {
-            name: 'Axure',
-            degree: 93,
-            description: '111善于从宏观把握市场变化，能洞察业务逻辑并挖掘潜在价值。'
-        },
-        {
-            name: 'Python',
-            degree: 75,
-            description: '善于从宏观把握市场变化，能洞察业务逻辑并挖掘潜在价值。'
-        },
-        {
-            name: '数据分析',
-            degree: 70,
-            description: '善于从宏观把握市场变化，能洞察业务逻辑并挖掘潜在价值。'
-        },
-        {
-            name: 'JavaScript',
-            degree: 66,
-            description: '善于从宏观把握市场变化，能洞察业务逻辑并挖掘潜在价值。'
-        },
-    ]
 
     onMounted(() => {
         appearanceStore.isShowHomeCover = false
@@ -285,7 +290,7 @@
         .my-skills {
             display: flex;
             justify-content: center;
-            margin: 20px 0 100px 0;
+            margin: 30px 0 30px 0;
 
             .my-skills-progress {
                 width: 30%;
@@ -310,14 +315,174 @@
             }
         }
 
-        .my-other-title {
+        .my-current-works-title {
             text-align: center;
             color: white;
             font-size: 2rem;
+            margin: 30px 0 50px 0;
+        }
+
+        .my-current-works {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 40px auto;
+            max-width: 1100px;
+
+            .flip-card {
+                background: transparent;
+                width: 280px;
+                height: 220px;
+                perspective: 1000px;
+            }
+
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transition: transform 0.6s ease-in-out;
+                transform-style: preserve-3d;
+                border-radius: 10px;
+            }
+
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-card-front,
+            .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                background-color: rgba(0, 35, 35, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                color: white;
+                border-radius: 16px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .flip-card-front {
+                .card-title {
+                    margin-top: 12px;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    text-align: center;
+                }
+
+                .card-progress {
+                    width: 80%;
+                    margin-top: 1.5rem;
+                }
+
+                .progress-label {
+                    margin-top: 0.25rem;
+                    font-size: 0.85rem;
+                    color: #ccc;
+                }
+            }
+
+            .flip-card-back {
+                transform: rotateY(180deg);
+                font-size: 0.95rem;
+                text-align: left;
+                line-height: 1.6;
+                padding: 1.5rem;
+
+                .card-detail {
+                    color: #f3f3f3;
+                }
+            }
+        }
+
+        .my-todo-list-title {
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            margin: 70px 0 50px 0;
+        }
+
+        .my-todo-list {
+            max-width: 900px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            .todo-item {
+                display: flex;
+                background-color: rgba(0, 35, 35, 0.6);
+                border-radius: 16px;
+                padding: 1.2rem 1.5rem;
+                box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-4px);
+                }
+
+                .todo-icon {
+                    margin-right: 1.2rem;
+                    display: flex;
+                    align-items: start;
+                }
+
+                .todo-content {
+                    flex: 1;
+
+                    .todo-title-status {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 0.5rem;
+
+                        .todo-title {
+                            font-size: 1.1rem;
+                            font-weight: 700;
+                            color: white;
+                        }
+
+                        .todo-status {
+                            font-size: 0.85rem;
+                            padding: 4px 8px;
+                            border-radius: 8px;
+                            color: #fff;
+                            font-weight: 600;
+                        }
+
+                        .未开始 {
+                            background-color: #777;
+                        }
+
+                        .已调研 {
+                            background-color: #ffa500;
+                        }
+
+                        .开发中 {
+                            background-color: #2196f3;
+                        }
+
+                        .已完成 {
+                            background-color: #4caf50;
+                        }
+                    }
+
+                    .todo-description {
+                        font-size: 0.95rem;
+                        color: #ddd;
+                        line-height: 1.5;
+                    }
+                }
+            }
         }
 
         .placeholder {
-            margin-bottom: 300px;
+            margin-bottom: 250px;
         }
     }
 

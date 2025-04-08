@@ -3,11 +3,12 @@
 
         <div class="my-wisdom-container">
             <div class="wisdom-tab">
-                My Widsom
+                My Wisdom
             </div>
-            <div class="my-wisdom">
-                {{ blogStore.blogInfo.myWisdom }}
-            </div>
+            <TypeWriter
+                :text="blogStore.blogInfo.myWisdom"
+                :typingSpeed="222"
+            ></TypeWriter>
         </div>
 
         <div class="recommended-container">
@@ -52,6 +53,7 @@
     import useBlogStore from "@/store/blog.ts";
     import Card from "@/components/Card.vue";
     import {watch} from "vue";
+    import TypeWriter from "@/components/TypeWriter.vue";
 
     defineOptions({
         name: 'Home',
@@ -81,9 +83,10 @@
         padding: 2px 10px;
 
         .my-wisdom-container {
-            background-color: rgba(0, 35, 35, 0.2);
+            height: 25vh;
+            background-color: transparent;
             padding: 50px;
-            margin: 25px;
+            margin: 50px auto;
             border-radius: 20px;
 
             .wisdom-tab {
