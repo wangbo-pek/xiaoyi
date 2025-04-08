@@ -78,9 +78,8 @@
 
 <style scoped lang='scss'>
     .footer-container {
-        background-color: rgb(0, 35, 35);
-        box-shadow: 5px 0 10px rgba(255, 255, 255, 0.5);
-        border-top: 1px solid rgba(0, 35, 35, 0.5);
+        background-color: rgba(0, 23, 26, 0.75);
+        border-top: 1px solid rgba(0, 100, 100, 0.5);
         width: 100%;
         display: flex;
         flex-direction: row;

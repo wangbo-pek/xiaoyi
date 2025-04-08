@@ -344,9 +344,8 @@
         }
 
         .change-bgcolor {
-            background-color: rgb(0, 35, 35);
-            box-shadow: 5px 0 10px rgba(255, 255, 255, 0.5);
-            border-bottom: 1px solid rgba(0, 35, 35, 0.5);
+            background-color: rgba(0, 14, 16, 0.75);
+            border-bottom: 1px solid rgba(0, 100, 100, 0.5);
         }
     }
 

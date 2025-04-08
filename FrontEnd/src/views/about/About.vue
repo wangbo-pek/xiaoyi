@@ -122,7 +122,7 @@
             <div class="flip-card" v-for="item in todoList" :key="item.title">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <v-icon class="card-icon" color="rgb(242, 204, 15)">{{ item.icon }}</v-icon>
+                        <v-icon class="card-icon">{{ item.icon }}</v-icon>
                         <div class="card-title">{{ item.title }}</div>
                     </div>
                     <div class="flip-card-back">
@@ -135,15 +135,11 @@
         <div class="placeholder"></div>
     </div>
 
-    <div class="footer">
-        <Footer></Footer>
-    </div>
 </template>
 
 <script setup lang='ts'>
     import {onMounted, onUnmounted, ref} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
-    import Footer from "@/components/footer/Footer.vue";
     import Header from "@/components/header/Header.vue";
     import MyAbilitiesRadar from "@/components/MyAbilitiesRadar.vue"
     import MySkillProgress from "@/components/MySkillProgress.vue"
@@ -162,6 +158,11 @@
     onMounted(() => {
         appearanceStore.isShowHomeCover = false
         appearanceStore.isScrollOverViewport = true
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // 可选，平滑滚动
+        })
     })
 
     onUnmounted(() => {
@@ -444,8 +445,10 @@
 
             .flip-card-front {
                 .card-icon {
+                    color: rgba(242, 204, 15, 0.75);
                     font-size: 3.5rem;
                 }
+
                 .card-title {
                     margin-top: 12px;
                     font-size: 1rem;
@@ -468,7 +471,7 @@
         }
 
         .placeholder {
-            margin-bottom: 250px;
+            margin-bottom: 75px;
         }
     }
 
@@ -486,14 +489,4 @@
         text-transform: none !important;
     }
 
-    .footer {
-        width: 100%;
-        min-height: 10vh;
-        display: flex;
-        justify-content: right;
-        align-items: flex-start;
-        gap: 20px;
-        z-index: 900;
-        background-color: white;
-    }
 </style>
