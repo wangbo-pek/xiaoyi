@@ -41,7 +41,7 @@ export const currentWorks = [
     {
         title: 'sspai文章',
         status: '准备中',
-        description: '撰写关于产品经理的一篇综合性的文章到少数派，查看未来Axure学习教程的写作相关信息',
+        description: '在sspai中提升账号权限，由新手升阶为sspai作者',
         currentProgress: 5,
     },
     {
