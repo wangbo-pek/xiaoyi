@@ -6,21 +6,10 @@ const useBlogStore = defineStore('blog', {
         return {
             blogInfo: {
                 "blogName": '',
-                "myName": '',
-                "myMotto": '',
-                "myWisdom": '',
-                "myLocation": '',
-                "myCareer": '',
-                "myShortIntro": '',
-                "myFormalIntro": '',
                 "blogArticlesCount": 0,
                 "blogWordsCount": 0,
                 "blogViewedCount":0,
                 "blogDurationRunning": 0,
-                "myWechat": '',
-                "myMain": '',
-                "coffeeByWechat": '',
-                "coffeeByAlipay": ''
             } as BlogInformation
         }
     }

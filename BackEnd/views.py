@@ -212,21 +212,10 @@ def get_blog_info(request):
         blog_info_obj.blog_viewed_count += 1
         blog_info_data = {
             "blogName": blog_info_obj.blog_name,
-            "myName": blog_info_obj.my_name,
-            "myMotto": blog_info_obj.my_motto,
-            "myWisdom": blog_info_obj.my_wisdom,
-            "myLocation": blog_info_obj.my_location,
-            "myCareer": blog_info_obj.my_career,
-            "myShortIntro": blog_info_obj.my_short_intro,
-            "myFormalIntro": blog_info_obj.my_formal_intro,
             "blogArticlesCount": models.NoteList.objects.count(),
             "blogWordsCount": blog_info_obj.blog_words_count,
             "blogViewedCount": blog_info_obj.blog_viewed_count,
             "blogDurationRunning": blog_info_obj.blog_duration_running,
-            "myWechat": blog_info_obj.my_wechat,
-            "myMail": blog_info_obj.my_mail,
-            "coffeeByWechat": blog_info_obj.coffee_by_wechat,
-            "coffeeByAlipay": blog_info_obj.coffee_by_alipay
         }
         return JsonResponse({
             "code": 0,

@@ -6,7 +6,7 @@
                 My Wisdom
             </div>
             <TypeWriter
-                :text="blogStore.blogInfo.myWisdom"
+                :text="wang.myWisdom"
                 :typingSpeed="222"
             ></TypeWriter>
         </div>
@@ -50,10 +50,10 @@
 
 <script setup lang='ts'>
     import useNoteStore from "@/store/note.ts";
-    import useBlogStore from "@/store/blog.ts";
     import Card from "@/components/Card.vue";
     import {watch} from "vue";
     import TypeWriter from "@/components/TypeWriter.vue";
+    import {wang} from "@/data/personalDetail.ts";
 
     defineOptions({
         name: 'Home',
@@ -61,7 +61,6 @@
     })
 
     const noteStore = useNoteStore()
-    const blogStore = useBlogStore()
 
     // 监听App.vue是否拿到了NoteList，如果拿到了，就获取被置顶的文章、最新的文章
     watch(() => noteStore.noteList, () => {

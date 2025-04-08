@@ -1,18 +1,7 @@
 export interface BlogInformation {
     "blogName": string,
-    "myName": string,
-    "myMotto": string,
-    "myWisdom": string,
-    "myLocation": string,
-    "myCareer": string,
-    "myShortIntro": string,
-    "myFormalIntro": string,
     "blogArticlesCount": number,
     "blogWordsCount": number,
     "blogViewedCount": number,
     "blogDurationRunning": number,
-    "myWechat": string,
-    "myMain": string,
-    "coffeeByWechat": string,
-    "coffeeByAlipay": string,
 }
