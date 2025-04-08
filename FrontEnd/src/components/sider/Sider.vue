@@ -22,7 +22,7 @@
             <v-img class="rss-icon" :src="rssMe.svgIconUrl" @click="touchMe(rssMe.name)"></v-img>
         </div>
         <div class="coffee-container" @click="showCoffeeDialog = true">
-            <span class="coffee-text">{{ coffeeMe.title }} &nbsp;</span>
+            <span class="coffee-text">{{ coffeeMe.title }}</span>
             <v-img class="coffee-icon" :src="coffeeMe.svgIconUrl"></v-img>
         </div>
     </div>
@@ -108,11 +108,11 @@
         position: relative;
         width: 100%;
         height: 100%;
+        top: 10rem;
 
         .introduction {
             text-align: center;
             position: relative;
-            top: 5rem;
             width: 100%;
             cursor: pointer;
 
@@ -131,7 +131,7 @@
                 .my-name-text {
                     color: white;
                     font-size: 1.5rem;
-                    font-weight: 200;
+                    font-weight: 700;
                 }
             }
 
@@ -141,10 +141,10 @@
                 margin: 10px 0 10px 0;
 
                 .my-short-intro-text {
-                    color: white;
+                    color: rgba(255, 255, 255, 0.9);
                     max-width: 15rem;
-                    font-size: 0.8rem;
-                    font-weight: 700;
+                    font-size: 0.9rem;
+                    font-weight: 300;
                     text-align: left;
                     line-height: 20px;
                 }
@@ -153,7 +153,7 @@
 
         .touch-me {
             position: relative;
-            top: 5.5rem;
+            top: 1rem;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -180,7 +180,7 @@
 
         .coffee-container {
             position: relative;
-            top: 7.5rem;
+            top: 2.5rem;
             display: flex;
             justify-content: center;
             align-items: center;

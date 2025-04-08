@@ -113,26 +113,52 @@
                         }}</span>
                 </div>
                 <div class="share-icon">
-                    <v-img class="shaoshupai-icon" :src="shaoshupai.svgIconUrl" @click="jumpToSocialMedia(shaoshupai.name)"></v-img>
+                    <v-img class="shaoshupai-icon" :src="shaoshupai.svgIconUrl"
+                           @click="jumpToSocialMedia(shaoshupai.name)"></v-img>
                     <v-img class="github-icon" :src="github.svgIconUrl" @click="jumpToSocialMedia(github.name)"></v-img>
                     <v-img class="weibo-icon" :src="weibo.svgIconUrl" @click="jumpToSocialMedia(weibo.name)"></v-img>
                     <v-img class="douban-icon" :src="douban.svgIconUrl" @click="jumpToSocialMedia(douban.name)"></v-img>
                     <v-img class="zhihu-icon" :src="zhihu.svgIconUrl" @click="jumpToSocialMedia(zhihu.name)"></v-img>
-                    <v-img class="twitter-icon" :src="twitter.svgIconUrl" @click="jumpToSocialMedia(twitter.name)"></v-img>
-                    <v-img class="facebook-icon" :src="facebook.svgIconUrl" @click="jumpToSocialMedia(facebook.name)"></v-img>
+                    <v-img class="twitter-icon" :src="twitter.svgIconUrl"
+                           @click="jumpToSocialMedia(twitter.name)"></v-img>
+                    <v-img class="facebook-icon" :src="facebook.svgIconUrl"
+                           @click="jumpToSocialMedia(facebook.name)"></v-img>
                 </div>
             </div>
 
-            <div class="coffee-container">
-                <span class="coffee-text">COFFEE ME &nbsp;</span>
-                <v-img class="coffee-icon"
-                       :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/coffee.svg'"></v-img>
+            <div class="coffee-container" @click="showCoffeeDialog = true">
+                <span class="coffee-text">{{ coffeeMe.title }}</span>
+                <v-img class="coffee-icon" :src="coffeeMe.svgIconUrl"></v-img>
             </div>
         </div>
     </div>
 
     <div class="recommend-note-container">
     </div>
+
+    <!-- coffee me -->
+    <v-dialog v-model="showCoffeeDialog" width="800">
+        <v-card class="qr-card" color="#1e1e1e">
+            <v-card-title class="text-center text-white">感谢您的支持!</v-card-title>
+            <v-card-text class="text-center">
+                <div style="display: flex; justify-content: center; gap: 20px;">
+                    <v-img
+                        :src="coffeeMe.coffeeMeAlipayInfo"
+                        aspect-ratio="1"
+                        max-width="40%"
+                    />
+                    <v-img
+                        :src="coffeeMe.coffeeMeWechatInfo"
+                        aspect-ratio="1"
+                        max-width="40%"
+                    />
+                </div>
+            </v-card-text>
+            <v-card-actions class="justify-center">
+                <v-btn color="rgb(242, 204, 15)" @click="showCoffeeDialog = false">关闭</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 
 </template>
 
@@ -149,6 +175,7 @@
     import hljs from 'highlight.js'
     import 'highlight.js/styles/github.css'
     import {twitter, facebook, github, douban, weibo, zhihu, shaoshupai} from '@/data/socialMedia.ts'
+    import {coffeeMe, mailMe, rssMe} from "@/data/personalDetail.ts";
 
     defineOptions({
         name: 'NoteDetail',
@@ -205,21 +232,33 @@
         toc.value = tocHtml;
     }
 
-    const jumpToSocialMedia = (name:string) => {
-        const urlMap:Record<string, string> = {
-            weibo:weibo.linkUrl,
-            douban:douban.linkUrl,
-            zhihu:zhihu.linkUrl,
-            twitter:twitter.linkUrl,
-            facebook:facebook.linkUrl,
-            github:github.linkUrl,
+    const jumpToSocialMedia = (name: string) => {
+        const urlMap: Record<string, string> = {
+            weibo: weibo.linkUrl,
+            douban: douban.linkUrl,
+            zhihu: zhihu.linkUrl,
+            twitter: twitter.linkUrl,
+            facebook: facebook.linkUrl,
+            github: github.linkUrl,
         }
 
         const url = urlMap[name]
-        if(url) {
+        if (url) {
             window.open(url, '_blank')
         } else {
             console.log(`未知社交平台：${name}`)
+        }
+    }
+
+    const showCoffeeDialog = ref(false)  // 控制咖啡图片 dialog
+    const touchMe = (name: string) => {
+        const urlMap: Record<string, string> = {
+            mailMe: mailMe.linkUrl,
+            rssMe: rssMe.linkUrl
+        }
+        const url = urlMap[name]
+        if (url) {
+            window.open(url, '_blank')
         }
     }
 
@@ -658,6 +697,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                cursor: pointer;
 
                 .coffee-icon {
                     max-width: 2.5%;
@@ -688,6 +728,21 @@
     }
 
     :deep(.toc) {
+    }
+
+    .qr-card {
+        border-radius: 12px;
+        padding: 1rem;
+
+        .v-card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .v-card-text img {
+            border-radius: 8px;
+            max-width: 100%;
+        }
     }
 
 </style>

@@ -28,26 +28,52 @@
             </div>
         </div>
         <div class="touch-me">
-            <v-img class="wechat-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/wechat.svg'"></v-img>
-            <v-img class="mail-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/gmail.svg'"></v-img>
-            <v-img class="twitter-icon"
-                   :src="'https://xiaoyi-blog.oss-cn-beijing.aliyuncs.com/svg_icons/twitter.svg'"></v-img>
+            <v-img class="wechat-icon" :src="wechatMe.svgIconUrl" @click="showWechatDialog = true"></v-img>
+            <v-img class="mail-icon" :src="mailMe.svgIconUrl" @click="touchMe(mailMe.name)"></v-img>
+            <v-img class="rss-icon" :src="rssMe.svgIconUrl" @click="touchMe(rssMe.name)"></v-img>
         </div>
-
     </div>
+
+    <!-- 我的微信二维码 -->
+    <v-dialog v-model="showWechatDialog" width="500">
+        <v-card class="qr-card" color="#1e1e1e">
+            <v-card-title class="text-center text-white">微信扫一扫</v-card-title>
+            <v-card-text class="text-center">
+                <v-img
+                    :src="wechatMe.wechatInfo"
+                    aspect-ratio="1"
+                    contain
+                />
+            </v-card-text>
+            <v-card-actions class="justify-center">
+                <v-btn color="rgb(242, 204, 15)" @click="showWechatDialog = false">关闭</v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-dialog>
 </template>
 
 <script setup lang='ts'>
     import useBlogStore from "@/store/blog.ts";
+    import {mailMe, rssMe, wechatMe} from "@/data/personalDetail.ts";
+    import {ref} from "vue";
 
     defineOptions({
         name: 'Footer',
         inheritAttrs: false
     })
-
+    const showWechatDialog = ref(false)
     const blogStore = useBlogStore()
+
+    const touchMe = (name: string) => {
+        const urlMap: Record<string, string> = {
+            mailMe: mailMe.linkUrl,
+            rssMe: rssMe.linkUrl
+        }
+        const url = urlMap[name]
+        if (url) {
+            window.open(url, '_blank')
+        }
+    }
 </script>
 
 <style scoped lang='scss'>
@@ -108,19 +134,37 @@
             width: 15%;
 
             .wechat-icon {
-                margin: 0 10px 0 10px;
+                margin: 0 15px 0 15px;
                 max-width: 1.8rem;
+                cursor: pointer;
             }
 
             .mail-icon {
-                margin: 0 10px 0 10px;
+                margin: 0 15px 0 15px;
                 max-width: 1.8rem;
+                cursor: pointer;
             }
 
-            .twitter-icon {
-                margin: 0 10px 0 10px;
+            .rss-icon {
+                margin: 0 15px 0 15px;
                 max-width: 1.8rem;
+                cursor: pointer;
             }
+        }
+    }
+
+    .qr-card {
+        border-radius: 12px;
+        padding: 1rem;
+
+        .v-card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .v-card-text img {
+            border-radius: 8px;
+            max-width: 100%;
         }
     }
 

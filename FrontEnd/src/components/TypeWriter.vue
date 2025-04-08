@@ -71,17 +71,18 @@
 <style scoped lang='scss'>
     .typewriter {
         font-weight: 800;
-        font-size: 1.25rem;
-        color: white;
+        font-size: 1.3rem;
+        color: rgba(250, 250, 250, 0.9);
         white-space: normal;
         word-break: break-word;
-        display: inline;
+        display: inline-block;
+        line-height: 2rem;
     }
 
     .cursor {
         display: inline-block;
         width: 2px;
-        height: 1.25rem;
+        height: 1.2rem;
         background-color: white;
         margin-left: 2px;
         animation: blink 1s steps(2, start) infinite;
