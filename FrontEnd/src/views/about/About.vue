@@ -32,67 +32,15 @@
             <div class="my-ability-radar">
                 <MyAbilitiesRadar></MyAbilitiesRadar>
             </div>
-            <div class="my-ability-text">
-                <v-tabs
-                    v-model="abilityTab"
-                >
-                    <v-tab
-                        v-for="(label, index) in indicators"
-                        :key="index"
-                        base-color="rgb(242, 204, 15)"
-                        color="rgb(242, 204, 15)"
-                        slider-color="rgb(242, 204, 15)"
-                    >
-                        {{ label }}
-                    </v-tab>
-                </v-tabs>
-
-                <v-window v-model="abilityTab" class="tab-panel-content">
-                    <v-window-item v-for="(label, index) in indicators" :key="index" :value="index">
-                        <div class="tab-description">
-                            {{ descriptions[index] }}
-                        </div>
-                    </v-window-item>
-                </v-window>
-            </div>
-        </div>
-
-        <div class="my-skills-title">
-            ——&nbsp;&nbsp;&nbsp;我的技能&nbsp;&nbsp;&nbsp;——
-        </div>
-        <div class="my-skills">
             <div class="my-skills-progress">
                 <template v-for="(item) in skills" :key="item.name">
                     <MySkillProgress :name="item.name" :level="item.degree"></MySkillProgress>
                 </template>
             </div>
-            <div class="my-skills-text">
-                <v-tabs
-                    v-model="skillTab"
-                >
-                    <v-tab
-                        v-for="item in skills"
-                        :key="item.name"
-                        base-color="rgb(242, 204, 15)"
-                        color="rgb(242, 204, 15)"
-                        slider-color="rgb(242, 204, 15)"
-                    >
-                        {{ item.name }}
-                    </v-tab>
-                </v-tabs>
-
-                <v-window v-model="skillTab" class="tab-panel-content">
-                    <v-window-item v-for="(item, index) in skills" :key="index" :value="index">
-                        <div class="tab-description">
-                            {{ item.description }}
-                        </div>
-                    </v-window-item>
-                </v-window>
-            </div>
         </div>
 
         <div class="my-current-works-title">
-            ——&nbsp;&nbsp;&nbsp;当前工作内容&nbsp;&nbsp;&nbsp;——
+            ——&nbsp;&nbsp;&nbsp;我的任务&nbsp;&nbsp;&nbsp;——
         </div>
         <div class="my-current-works">
             <div class="my-current-works-item" v-for="item in currentWorks" :key="item.title">
@@ -115,35 +63,18 @@
             </div>
         </div>
 
-        <div class="my-todo-list-title">
-            ——&nbsp;&nbsp;&nbsp;还未完成的事&nbsp;&nbsp;&nbsp;——
-        </div>
-        <div class="my-todo-list">
-            <div class="flip-card" v-for="item in todoList" :key="item.title">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <v-icon class="card-icon">{{ item.icon }}</v-icon>
-                        <div class="card-title">{{ item.title }}</div>
-                    </div>
-                    <div class="flip-card-back">
-                        <div class="card-detail">{{ item.detail }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="placeholder"></div>
     </div>
 
 </template>
 
 <script setup lang='ts'>
-    import {onMounted, onUnmounted, ref} from "vue";
+    import {onMounted, onUnmounted} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
     import Header from "@/components/header/Header.vue";
     import MyAbilitiesRadar from "@/components/MyAbilitiesRadar.vue"
     import MySkillProgress from "@/components/MySkillProgress.vue"
-    import {indicators, descriptions, skills, currentWorks, todoList} from '@/data/about.ts'
+    import {skills, currentWorks} from '@/data/about.ts'
     import {wang} from '@/data/personalDetail.ts'
 
     defineOptions({
@@ -152,8 +83,6 @@
     })
 
     let appearanceStore = useAppearanceStore()
-    const abilityTab = ref(0)
-    const skillTab = ref(0)
 
     onMounted(() => {
         appearanceStore.isShowHomeCover = false
@@ -246,7 +175,7 @@
         }
 
         .my-ability-title {
-            margin-top: 75px;
+            margin: 100px 0 30px 0;
             text-align: center;
             color: white;
             font-size: 1.75rem;
@@ -255,67 +184,25 @@
         .my-ability {
             display: flex;
             justify-content: center;
-            margin: 20px 0 20px 0;
+            margin: 20px auto;
 
             .my-ability-radar {
                 width: 40%;
             }
 
-            .my-ability-text {
-                width: 40%;
-
-                .tab-panel-content {
-                    margin-top: 1.5rem;
-                    margin-left: 1.5rem;
-                }
-
-                .tab-description {
-                    font-size: 0.9rem;
-                    color: white;
-                    line-height: 1.5;
-                }
-            }
-        }
-
-        .my-skills-title {
-            text-align: center;
-            color: white;
-            font-size: 1.75rem;
-        }
-
-        .my-skills {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0 30px 0;
-
             .my-skills-progress {
-                width: 30%;
-                padding: 30px;
-                margin-right: 30px;
+                width: 40%;
+                padding-top: 65px;
+                padding-left: 150px;
             }
 
-            .my-skills-text {
-                width: 30%;
-                margin-left: 30px;
-
-                .tab-panel-content {
-                    margin-top: 1.5rem;
-                    margin-left: 1.5rem;
-                }
-
-                .tab-description {
-                    font-size: 0.9rem;
-                    color: white;
-                    line-height: 1.5;
-                }
-            }
         }
 
         .my-current-works-title {
             text-align: center;
             color: white;
             font-size: 1.75rem;
-            margin: 30px 0 50px 0;
+            margin: 50px 0 30px 0;
         }
 
         .my-current-works {
@@ -387,85 +274,6 @@
                         margin-top: 1rem;
                         width: 100%;
                     }
-                }
-            }
-        }
-
-        .my-todo-list-title {
-            text-align: center;
-            color: white;
-            font-size: 1.75rem;
-            margin: 70px 0 50px 0;
-        }
-
-        .my-todo-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin: 40px auto;
-            max-width: 1100px;
-
-            .flip-card {
-                background: transparent;
-                width: 15rem;
-                height: 10rem;
-                perspective: 1000px;
-            }
-
-            .flip-card-inner {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                transition: transform 0.6s ease-in-out;
-                transform-style: preserve-3d;
-                border-radius: 10px;
-            }
-
-            .flip-card:hover .flip-card-inner {
-                transform: rotateY(180deg);
-            }
-
-            .flip-card-front,
-            .flip-card-back {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                backface-visibility: hidden;
-                background-color: rgba(0, 35, 35, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                color: white;
-                border-radius: 16px;
-                padding: 20px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .flip-card-front {
-                .card-icon {
-                    color: rgba(242, 204, 15, 0.75);
-                    font-size: 3.5rem;
-                }
-
-                .card-title {
-                    margin-top: 12px;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    text-align: center;
-                }
-            }
-
-            .flip-card-back {
-                transform: rotateY(180deg);
-                font-size: 0.9rem;
-                text-align: left;
-                line-height: 1.5;
-                padding: 1.5rem;
-
-                .card-detail {
-                    color: #f3f3f3;
                 }
             }
         }

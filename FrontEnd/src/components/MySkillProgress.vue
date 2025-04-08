@@ -27,7 +27,7 @@
 
 <style scoped lang='scss'>
     .skill-item {
-        margin-bottom: 16px;
+        margin-bottom: 30px;
 
         .skill-name {
             display: flex;
@@ -35,7 +35,7 @@
             font-size: 15px;
             font-weight: 500;
             color: #fff;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
         }
 
         .progress-bar {

@@ -3,6 +3,7 @@
         <v-btn variant="text" class="my-btn" density="compact" prepend-icon="" @click="jumpTo('note')"><v-icon>mdi-fountain-pen-tip</v-icon>笔记</v-btn>
         <v-btn variant="text" class="my-btn" density="compact" @click="jumpTo('diary')"><v-icon>mdi-ghost</v-icon>日记</v-btn>
         <v-btn variant="text" class="my-btn" density="compact" @click="jumpTo('tags')"><v-icon>mdi-tag-multiple</v-icon>标签</v-btn>
+        <v-btn variant="text" class="my-btn" density="compact" @click="jumpTo('about')"><v-icon>mdi-creation-outline</v-icon>关于我</v-btn>
     </div>
 </template>
 
