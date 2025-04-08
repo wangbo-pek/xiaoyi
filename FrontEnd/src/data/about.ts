@@ -39,36 +39,44 @@ export const skills = [
 
 export const currentWorks = [
     {
-        title: '军队 OA 系统需求迭代',
-        icon: 'mdi-xml',
-        currentProgress: 20,
-        detail: '负责多个表单流程需求设计，整理字段规则，协助开发测试上线，提升系统可用性与流程通顺度。'
+        title: 'sspai文章',
+        status: '准备中',
+        description: '撰写关于产品经理的一篇综合性的文章到少数派，查看未来Axure学习教程的写作相关信息',
+        currentProgress: 5,
     },
     {
-        title: '个人博客开发与重构',
-        icon: 'mdi-laptop-code',
-        currentProgress: 30,
-        detail: '使用 Django + Vue3 构建前后端分离项目，实现 Markdown 渲染、卡片动效、阿里云 OSS 文件上传等功能。'
+        title: 'Swift/SwiftUI',
+        status: '进行中',
+        description: '学习Swift/SwiftUI的相关基础语法、学习笔记，并通过实际项目来验证学习成果',
+        currentProgress: 20,
+    },
+    {
+        title: '撰写博客note和diary',
+        status: '准备中',
+        description: '每天至少有写作积累',
+        currentProgress: 10,
     }
 ]
 
 export const todoList = [
     {
-        title: '完善博客分类标签结构',
-        status: '未开始',
-        description: '分类需支持一二级层级，标签支持多选，前端需改路由展示逻辑。',
-        icon: 'mdi-format-list-bulleted-square'
+        title: '活到公主出嫁',
+        icon: 'mdi-rabbit-variant-outline',
+        detail: '我一定要亲眼看到公主出嫁，至少到了那一天，我再离开，此生不悔。'
     },
     {
-        title: '添加评论系统',
-        status: '已调研',
-        description: '对比 Disqus / Waline，自建方案更适合私有部署，后续开发中。',
-        icon: 'mdi-comment-multiple-outline'
+        title: 'Freelance生活',
+        icon: 'mdi-grain',
+        detail: '可能我最想要的生活，而且对于一个人来说要求最高的生活。拓展自己，奔向freelance。'
     },
     {
-        title: '设计移动端适配布局',
-        status: '开发中',
-        description: 'Header、Card、Footer 等组件需做响应式断点重构。',
-        icon: 'mdi-responsive'
-    }
+        title: '博客系统迭代至v2',
+        icon: 'mdi-reiterate',
+        detail: '我的博客上线后，需要考虑v2的迭代内容。'
+    },
+    {
+        title: '旅居1个月',
+        icon: 'mdi-terrain',
+        detail: '想要去一个地方，住下来，至少1个月。假装当地人生活一阵子。'
+    },
 ]

@@ -10,6 +10,7 @@
         <div class="my-name">
             <span class="my-name-text">{{ wang.nickName }}</span>
         </div>
+
         <div class="my-formal-intro">
             <div class="my-formal-intro-text">
                 {{ wang.longIntro }}
@@ -94,25 +95,22 @@
             ——&nbsp;&nbsp;&nbsp;当前工作内容&nbsp;&nbsp;&nbsp;——
         </div>
         <div class="my-current-works">
-            <div class="flip-card" v-for="item in currentWorks" :key="item.title">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <v-icon large color="rgb(242, 204, 15)">{{ item.icon }}</v-icon>
-                        <div class="card-title">{{ item.title }}</div>
-                        <v-progress-linear
-                            :model-value="item.currentProgress"
-                            height="8"
-                            color="rgb(242, 204, 15)"
-                            class="card-progress"
-                            rounded
-                            striped
-                            background-opacity="0.2"
-                        ></v-progress-linear>
-                        <div class="progress-label">{{ item.currentProgress }}%</div>
+            <div class="my-current-works-item" v-for="item in currentWorks" :key="item.title">
+                <div class="my-current-works-content">
+                    <div class="my-current-works-title-status">
+                        <span class="my-current-works-titles">{{ item.title }}</span>
+                        <span class="my-current-works-status" :class="item.status">{{ item.status }}</span>
                     </div>
-                    <div class="flip-card-back">
-                        <div class="card-detail">{{ item.detail }}</div>
-                    </div>
+                    <div class="my-current-works-description">{{ item.description }}</div>
+                    <v-progress-linear
+                        :model-value="item.currentProgress"
+                        height="8"
+                        color="rgb(242, 204, 15)"
+                        class="current-progress"
+                        rounded
+                        striped
+                        background-opacity="0.2"
+                    ></v-progress-linear>
                 </div>
             </div>
         </div>
@@ -121,16 +119,15 @@
             ——&nbsp;&nbsp;&nbsp;还未完成的事&nbsp;&nbsp;&nbsp;——
         </div>
         <div class="my-todo-list">
-            <div class="todo-item" v-for="item in todoList" :key="item.title">
-                <div class="todo-icon">
-                    <v-icon :icon="item.icon" size="32" color="rgb(242, 204, 15)"></v-icon>
-                </div>
-                <div class="todo-content">
-                    <div class="todo-title-status">
-                        <span class="todo-title">{{ item.title }}</span>
-                        <span class="todo-status" :class="item.status">{{ item.status }}</span>
+            <div class="flip-card" v-for="item in todoList" :key="item.title">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <v-icon class="card-icon" color="rgb(242, 204, 15)">{{ item.icon }}</v-icon>
+                        <div class="card-title">{{ item.title }}</div>
                     </div>
-                    <div class="todo-description">{{ item.description }}</div>
+                    <div class="flip-card-back">
+                        <div class="card-detail">{{ item.detail }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,7 +143,6 @@
 <script setup lang='ts'>
     import {onMounted, onUnmounted, ref} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
-    import useBlogStore from "@/store/blog.ts";
     import Footer from "@/components/footer/Footer.vue";
     import Header from "@/components/header/Header.vue";
     import MyAbilitiesRadar from "@/components/MyAbilitiesRadar.vue"
@@ -160,7 +156,6 @@
     })
 
     let appearanceStore = useAppearanceStore()
-    const blogStore = useBlogStore()
     const abilityTab = ref(0)
     const skillTab = ref(0)
 
@@ -253,7 +248,7 @@
             margin-top: 75px;
             text-align: center;
             color: white;
-            font-size: 2rem;
+            font-size: 1.75rem;
         }
 
         .my-ability {
@@ -284,7 +279,7 @@
         .my-skills-title {
             text-align: center;
             color: white;
-            font-size: 2rem;
+            font-size: 1.75rem;
         }
 
         .my-skills {
@@ -318,11 +313,91 @@
         .my-current-works-title {
             text-align: center;
             color: white;
-            font-size: 2rem;
+            font-size: 1.75rem;
             margin: 30px 0 50px 0;
         }
 
         .my-current-works {
+            max-width: 750px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+
+            .my-current-works-item {
+                display: flex;
+                background-color: rgba(0, 35, 35, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 16px;
+                padding: 1.2rem 1.5rem;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-4px);
+                }
+
+                .my-current-works-content {
+                    flex: 1;
+
+                    .my-current-works-title-status {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 0.5rem;
+
+                        .my-current-works-titles {
+                            font-size: 1.1rem;
+                            font-weight: 700;
+                            color: white;
+                        }
+
+                        .my-current-works-status {
+                            font-size: 0.85rem;
+                            padding: 4px 8px;
+                            border-radius: 8px;
+                            color: #fff;
+                            font-weight: 600;
+                        }
+
+                        .未开始 {
+                            background-color: #777;
+                        }
+
+                        .准备中 {
+                            background-color: #ffa500;
+                        }
+
+                        .进行中 {
+                            background-color: #2196f3;
+                        }
+
+                        .已完成 {
+                            background-color: #4caf50;
+                        }
+                    }
+
+                    .my-current-works-description {
+                        font-size: 0.95rem;
+                        color: #ddd;
+                        line-height: 1.5;
+                    }
+
+                    .current-progress {
+                        margin-top: 1rem;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .my-todo-list-title {
+            text-align: center;
+            color: white;
+            font-size: 1.75rem;
+            margin: 70px 0 50px 0;
+        }
+
+        .my-todo-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -332,8 +407,8 @@
 
             .flip-card {
                 background: transparent;
-                width: 280px;
-                height: 220px;
+                width: 15rem;
+                height: 10rem;
                 perspective: 1000px;
             }
 
@@ -356,8 +431,8 @@
                 width: 100%;
                 height: 100%;
                 backface-visibility: hidden;
-                background-color: rgba(0, 35, 35, 0.6);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                background-color: rgba(0, 35, 35, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
                 color: white;
                 border-radius: 16px;
                 padding: 20px;
@@ -368,115 +443,26 @@
             }
 
             .flip-card-front {
+                .card-icon {
+                    font-size: 3.5rem;
+                }
                 .card-title {
                     margin-top: 12px;
-                    font-size: 1.1rem;
+                    font-size: 1rem;
                     font-weight: 600;
                     text-align: center;
-                }
-
-                .card-progress {
-                    width: 80%;
-                    margin-top: 1.5rem;
-                }
-
-                .progress-label {
-                    margin-top: 0.25rem;
-                    font-size: 0.85rem;
-                    color: #ccc;
                 }
             }
 
             .flip-card-back {
                 transform: rotateY(180deg);
-                font-size: 0.95rem;
+                font-size: 0.9rem;
                 text-align: left;
-                line-height: 1.6;
+                line-height: 1.5;
                 padding: 1.5rem;
 
                 .card-detail {
                     color: #f3f3f3;
-                }
-            }
-        }
-
-        .my-todo-list-title {
-            text-align: center;
-            color: white;
-            font-size: 2rem;
-            margin: 70px 0 50px 0;
-        }
-
-        .my-todo-list {
-            max-width: 900px;
-            margin: 2rem auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-
-            .todo-item {
-                display: flex;
-                background-color: rgba(0, 35, 35, 0.6);
-                border-radius: 16px;
-                padding: 1.2rem 1.5rem;
-                box-shadow: 0 2px 12px rgba(255, 255, 255, 0.05);
-                transition: transform 0.3s ease;
-
-                &:hover {
-                    transform: translateY(-4px);
-                }
-
-                .todo-icon {
-                    margin-right: 1.2rem;
-                    display: flex;
-                    align-items: start;
-                }
-
-                .todo-content {
-                    flex: 1;
-
-                    .todo-title-status {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 0.5rem;
-
-                        .todo-title {
-                            font-size: 1.1rem;
-                            font-weight: 700;
-                            color: white;
-                        }
-
-                        .todo-status {
-                            font-size: 0.85rem;
-                            padding: 4px 8px;
-                            border-radius: 8px;
-                            color: #fff;
-                            font-weight: 600;
-                        }
-
-                        .未开始 {
-                            background-color: #777;
-                        }
-
-                        .已调研 {
-                            background-color: #ffa500;
-                        }
-
-                        .开发中 {
-                            background-color: #2196f3;
-                        }
-
-                        .已完成 {
-                            background-color: #4caf50;
-                        }
-                    }
-
-                    .todo-description {
-                        font-size: 0.95rem;
-                        color: #ddd;
-                        line-height: 1.5;
-                    }
                 }
             }
         }
