@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core.exceptions import ObjectDoesNotExist, FieldError
@@ -229,3 +229,39 @@ def get_blog_info(request):
             "code": 1,
             "msg": f"failed{e}"
         })
+
+
+# 获取所有文章分类，并计算每个分类所对应的文章数量
+def get_all_category_count(request):
+    categories = models.Category.objects.annotate(note_count=Count('notelist__note')).values('name', 'note_count')
+
+    category_count = []
+    for category in categories:
+        category_count.append({
+            "category": category['name'],
+            "note_count": category['note_count']
+        })
+
+    return JsonResponse({
+        "code": 0,
+        "msg": "success",
+        "data": category_count
+    })
+
+
+# 获取所有文章标签，并计算每个标签所对应的文章数量
+def get_all_tag_count(request):
+    tags = models.Tag.objects.annotate(note_count=Count('notelist__note')).values('name', 'note_count')
+
+    tag_count = []
+    for tag in tags:
+        tag_count.append({
+            "tag": tag['name'],
+            "tag_count": tag['note_count']
+        })
+
+    return JsonResponse({
+        "code": 0,
+        "msg": "success",
+        "data": tag_count
+    })
