@@ -23,6 +23,7 @@
                         :createdDate="item.createdTime"
                         :category="item.category"
                         :tags="item.tagsName"
+                        @click="jumpToNoteDetail(item.noteListId)"
                     ></Card>
                 </template>
             </div>
@@ -40,6 +41,7 @@
                         :createdDate="item.createdTime"
                         :category="item.category"
                         :tags="item.tagsName"
+                        @click="jumpToNoteDetail(item.noteListId)"
                     ></Card>
                 </template>
             </div>
@@ -50,6 +52,7 @@
 
 <script setup lang='ts'>
     import useNoteStore from "@/store/note.ts";
+    import {useRouter} from "vue-router";
     import Card from "@/components/Card.vue";
     import {watch} from "vue";
     import TypeWriter from "@/components/TypeWriter.vue";
@@ -61,6 +64,16 @@
     })
 
     const noteStore = useNoteStore()
+    const $router = useRouter()
+
+    const jumpToNoteDetail = (noteListId: number) => {
+        $router.push({
+            name: 'noteDetail',
+            params: {
+                id: noteListId
+            }
+        })
+    }
 
     // 监听App.vue是否拿到了NoteList，如果拿到了，就获取被置顶的文章、最新的文章
     watch(() => noteStore.noteList, () => {

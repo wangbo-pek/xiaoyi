@@ -251,16 +251,16 @@
     }
 
     const showCoffeeDialog = ref(false)  // 控制咖啡图片 dialog
-    const touchMe = (name: string) => {
-        const urlMap: Record<string, string> = {
-            mailMe: mailMe.linkUrl,
-            rssMe: rssMe.linkUrl
-        }
-        const url = urlMap[name]
-        if (url) {
-            window.open(url, '_blank')
-        }
-    }
+    // const touchMe = (name: string) => {
+    //     const urlMap: Record<string, string> = {
+    //         mailMe: mailMe.linkUrl,
+    //         rssMe: rssMe.linkUrl
+    //     }
+    //     const url = urlMap[name]
+    //     if (url) {
+    //         window.open(url, '_blank')
+    //     }
+    // }
 
     onMounted(async () => {
         // 页面加载时，从后端获取文章content
@@ -284,6 +284,13 @@
         window.addEventListener('scroll', handleScroll)
         const rect = coverImageRef.value!.getBoundingClientRect()
         isScrollOverViewport.value = rect.bottom <= 55
+
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
+        }, 10)
     })
 
     onUnmounted(() => {
@@ -383,7 +390,7 @@
             padding: 50px 80px 20px 80px;
             width: 75%;
             position: relative;
-            top: -8.5em;
+            top: -8em;
 
             .tags-category-container {
                 display: flex;

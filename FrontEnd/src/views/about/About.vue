@@ -136,7 +136,7 @@
                 top: 0,
                 behavior: 'smooth'
             })
-        }, 700)
+        }, 10)
     })
 
     onUnmounted(() => {

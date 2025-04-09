@@ -181,7 +181,7 @@
         top: 1rem;
 
         .my-category-title {
-            margin: 100px 0 50px 250px;
+            margin: 100px 0 30px 250px;
             text-align: left;
             color: white;
             font-size: 1.5rem;
@@ -206,7 +206,7 @@
         }
 
         .my-tag-title {
-            margin: 10px 0 50px 250px;
+            margin: 10px 0 30px 250px;
             text-align: left;
             color: white;
             font-size: 1.5rem;
@@ -225,7 +225,7 @@
             }
 
             .tagWordCloudRef {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: rgba(255, 255, 255, 0.05);
                 width: 70%;
                 height: 400px;
                 margin-top: 10px;
