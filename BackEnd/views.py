@@ -119,7 +119,7 @@ def get_note_all_content(request):
 # 获取所有的日记列表信息 DiaryList
 def get_all_diary_list(request):
     try:
-        diary_list_query_set = models.DiaryList.objects.all()
+        diary_list_query_set = models.DiaryList.objects.all().order_by('-created_time')
 
         # 把数据转换为列表 (将QuerySet转换为List)
         diary_list_data = []

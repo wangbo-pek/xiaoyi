@@ -52,15 +52,10 @@ def process_uploads():
 
         cover_path = folder / 'cover.jpg'
         pictures_path = folder / 'pictures'
-        meta_path = folder / 'meta.json'
 
-        if not md_file or not cover_path.exists() or not meta_path.exists():
+        if not md_file or not cover_path.exists():
             print(f'缺少必要文件，跳过{folder_name}')
             continue
-
-        # 读取meta.json
-        with meta_path.open('r', encoding='utf-8') as f:
-            meta = json.load(f)
 
         # 上传封面图
         cover_url = upload_to_oss(cover_path, f'images/{folder_name}/cover.jpg')
@@ -83,29 +78,59 @@ def process_uploads():
         for image_name, oss_url in image_mapping.items():
             md_content = md_content.replace(f'pictures/{image_name}', oss_url)
 
-        # 通用字段
         title = md_file.stem
+        lines = md_content.strip().splitlines()
 
         if is_note:
+            # ✅ 提取最后一行分类/标签
+            category = ''
+            tags = []
+            if lines:
+                last_line = lines[-1]
+                if last_line.startswith('@'):
+                    parts = last_line.split()
+                    if parts:
+                        category = parts[0][1:].strip()
+                        for part in parts[1:]:
+                            if part.startswith('#'):
+                                tags.append(part[1:])
+                    # 删除分类标签行
+                    lines = lines[:-1]
+                    md_content = '\n'.join(lines)
+
+            # ✅ 提取引用作为 brief
             brief_quote = ''
-            for line in md_content.splitlines():
+            for line in lines:
                 if line.strip().startswith('>'):
                     brief_quote = line
                     break
             brief = extract_text(brief_quote)
+
             create_note_and_list(
                 title=title,
                 brief=brief,
                 content=md_content,
                 cover_url=cover_url,
                 image_urls=image_urls,
-                category=meta.get('category', ''),
-                tags=meta.get('tags', [])
+                category=category,
+                tags=tags
             )
+
         elif is_diary:
+            # ✅ 提取第一行 brief
+            brief = ''
+            if lines:
+                first_line = lines[0]
+                if first_line.startswith('@'):
+                    brief = first_line[1:].strip()
+                    lines = lines[1:]
+                    md_content = '\n'.join(lines)
+                else:
+                    brief = extract_text(md_content)
+
             create_diary_and_list(
                 title=title,
-                brief=meta.get('brief', ''),
+                brief=brief,
                 content=md_content,
                 cover_url=cover_url,
                 image_urls=image_urls

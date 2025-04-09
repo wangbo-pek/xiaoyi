@@ -173,10 +173,10 @@
             padding: 5px 15px 5px 200px;
             border-radius: 3px 6px 9px 12px;
             position: relative;
-            top: -2rem;
+            top: -3rem;
             left: 20rem;
-            font-size: 1.3rem;
-            background-color: rgba(7, 20, 23, 0.75);
+            font-size: 1.5rem;
+            background-color: rgba(14, 44, 51, 0.75);
             color: #cccccc;
         }
     }
@@ -195,16 +195,16 @@
             .diary-created-time {
                 display: flex;
                 align-items: center;
-                gap: 4px;
+                gap: 10px;
 
                 .created-date-icon {
                     color: #8ab9a8;
-                    font-size: 1rem;
+                    font-size: 1.3rem;
                 }
 
                 .created-date-text {
                     color: #8ab9a8;
-                    font-size: 1rem;
+                    font-size: 1.3rem;
                 }
             }
 
