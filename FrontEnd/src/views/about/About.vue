@@ -63,19 +63,59 @@
             </div>
         </div>
 
+        <div class="my-favorite-link-title">
+            ——&nbsp;&nbsp;&nbsp;我的收藏&nbsp;&nbsp;&nbsp;——
+        </div>
+        <div class="my-favorite-link">
+            <template v-for="item in links" :key="item.title">
+                <div class="links-container">
+                    <v-img class="link-icon"
+                           :src="item.faviconUrl"></v-img>
+                    <a :href="item.url" class="link-to-out-of-blog" target="_blank"><span
+                        class="link-title">{{ item.title }}</span></a>
+                    <v-icon v-if="item.isOutOfWall" class="need-a-ladder" size="20">mdi-ladder</v-icon>
+                </div>
+            </template>
+        </div>
+
+        <div class="my-all-cover-title">
+            ——&nbsp;&nbsp;&nbsp;我的封面&nbsp;&nbsp;&nbsp;——
+        </div>
+        <div class="my-all-cover">
+            <v-carousel
+                show-arrows="hover"
+                hide-delimiters
+                cycle
+                interval="10000"
+            >
+                <v-carousel-item
+                    v-for="(item, index) in allCover"
+                    :key="index"
+                    :src="item"
+                >
+                </v-carousel-item>
+            </v-carousel>
+        </div>
+
         <div class="placeholder"></div>
+
+        <Footer></Footer>
     </div>
 
 </template>
 
 <script setup lang='ts'>
-    import {onMounted, onUnmounted} from "vue";
+    import {onMounted, onUnmounted, watch} from "vue";
     import useAppearanceStore from "@/store/appearance.ts";
+    import useNoteStore from "@/store/note.ts";
+    import useDiaryStore from "@/store/diary.ts";
     import Header from "@/components/header/Header.vue";
+    import Footer from "@/components/footer/Footer.vue";
     import MyAbilitiesRadar from "@/components/MyAbilitiesRadar.vue"
     import MySkillProgress from "@/components/MySkillProgress.vue"
     import {skills, currentWorks} from '@/data/about.ts'
     import {wang} from '@/data/personalDetail.ts'
+    import {links} from "@/data/favoriteLinks.ts";
 
     defineOptions({
         name: 'About',
@@ -83,20 +123,32 @@
     })
 
     let appearanceStore = useAppearanceStore()
+    const noteStore = useNoteStore()
+    const diaryStore = useDiaryStore()
+    let allCover: string[] = []
 
     onMounted(() => {
         appearanceStore.isShowHomeCover = false
         appearanceStore.isScrollOverViewport = true
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth' // 可选，平滑滚动
-        })
+        setTimeout(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
+        }, 700)
     })
 
     onUnmounted(() => {
         appearanceStore.isShowHomeCover = true
     })
+
+    watch(() => [noteStore.noteList, diaryStore.diaryList], ([newNotes, newDiaries]) => {
+            allCover.length = 0
+            newNotes.forEach((value) => allCover.push(value.coverImg))
+            newDiaries.forEach((value) => allCover.push(value.coverImg))
+        }, {immediate: true, deep: true}
+    )
 
 </script>
 
@@ -278,6 +330,62 @@
             }
         }
 
+        .my-favorite-link-title {
+            margin: 100px 0 30px 0;
+            text-align: center;
+            color: white;
+            font-size: 1.75rem;
+        }
+
+        .my-favorite-link-title {
+            margin: 100px 0 30px 0;
+            text-align: center;
+            color: white;
+            font-size: 1.75rem;
+        }
+
+        .my-favorite-link {
+            width: 50%;
+            margin: 0 auto;
+
+            .links-container {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding-bottom: 5px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+
+                .link-icon {
+                    max-width: 1rem;
+                    margin-right: 10px;
+                }
+
+                .link-title {
+                    background-image: linear-gradient(90deg, #e3ff07, #ffd21a, #fd9600, #ff8302);
+                    background-clip: text;
+                    color: transparent;
+                    margin-right: 10px;
+                }
+
+                .need-a-ladder {
+                    color: red;
+                }
+            }
+        }
+
+        .my-all-cover-title {
+            margin: 100px 0 30px 0;
+            text-align: center;
+            color: white;
+            font-size: 1.75rem;
+        }
+
+        .my-all-cover {
+            width: 55%;
+            margin: 0 auto;
+        }
+
         .placeholder {
             margin-bottom: 75px;
         }
@@ -297,4 +405,21 @@
         text-transform: none !important;
     }
 
+    .link-to-out-of-blog {
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 800;
+        transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .link-to-out-of-blog:hover {
+        color: #ffffff;
+        text-decoration: underline;
+        transform: scale(1.03);
+    }
+
+    .link-to-out-of-blog:focus {
+        outline: 2px solid rgba(255, 90, 0, 0.25);
+        outline-offset: 2px;
+    }
 </style>

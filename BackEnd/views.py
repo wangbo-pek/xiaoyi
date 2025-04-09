@@ -217,6 +217,8 @@ def get_blog_info(request):
             "blogViewedCount": blog_info_obj.blog_viewed_count,
             "blogDurationRunning": blog_info_obj.blog_duration_running,
         }
+        blog_info_obj.save(update_fields=['blog_viewed_count'])
+
         return JsonResponse({
             "code": 0,
             "msg": "success",
