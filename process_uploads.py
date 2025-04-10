@@ -25,6 +25,7 @@ def extract_text(md_text: str, max_length: int = 100) -> str:
 
 
 def process_uploads():
+
     print('1')
     upload_path = Path("/Users/wangbo/Documents/uploads")
     if not upload_path.exists():
@@ -82,7 +83,7 @@ def process_uploads():
         lines = md_content.strip().splitlines()
 
         if is_note:
-            # ✅ 提取最后一行分类/标签
+            # 提取最后一行分类/标签
             category = ''
             tags = []
             if lines:
@@ -98,7 +99,7 @@ def process_uploads():
                     lines = lines[:-1]
                     md_content = '\n'.join(lines)
 
-            # ✅ 提取引用作为 brief
+            # 提取引用作为 brief
             brief_quote = ''
             for line in lines:
                 if line.strip().startswith('>'):
@@ -117,7 +118,7 @@ def process_uploads():
             )
 
         elif is_diary:
-            # ✅ 提取第一行 brief
+            # 提取第一行 brief
             brief = ''
             if lines:
                 first_line = lines[0]

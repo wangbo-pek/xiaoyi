@@ -180,11 +180,11 @@
 
         .dialog-background {
             width: 50%;
-            height: 42em;
+            height: 30em;
             position: fixed;
-            top: 6em;
+            top: 10rem;
             background-color: rgba(255, 255, 255);
-            border-radius: 10px 10px 10px 10px;
+            border-radius: 5px 5px 5px 5px;
 
             .dialog-cover-container {
 
@@ -192,17 +192,18 @@
                     height: 400px;
                     background-size: cover;
                     background-position: center;
-                    border-radius: 12px 12px 0 0;
+                    border-radius: 5px 5px 0 0;
                 }
             }
 
             .dialog-content-container {
                 width: 80%;
-                background: rgba(255, 255, 255, 0.85);
+                height: 75%;
+                background: rgba(255, 255, 255, 0.75);
                 border-radius: 10px;
                 padding: 20px;
                 position: relative;
-                top: -7.5em;
+                bottom: 18.5rem;
                 left: 4.5em;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
@@ -222,7 +223,7 @@
                             color: white;
                             padding: 6px 10px;
                             border-radius: 10px;
-                            font-size: 0.65rem;
+                            font-size: 0.75rem;
                             font-weight: 800;
                         }
                     }
@@ -243,7 +244,7 @@
                             }
 
                             .category-text {
-                                font-size: 0.65rem;
+                                font-size: 0.75rem;
                                 font-weight: 800;
                                 color: rgb(0, 100, 100);
                             }
@@ -271,6 +272,7 @@
                     .created-date-text {
                         color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
+                        font-weight: 700;
                     }
                 }
 
@@ -287,13 +289,14 @@
                     .modified-date-text {
                         color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
+                        font-weight: 700;
                     }
                 }
 
                 .viewed {
                     display: flex;
                     align-items: center;
-                    gap: 4px;
+                    gap: 5px;
 
                     .viewed-icon {
                         color: rgba(0, 40, 40, 0.75);
@@ -303,13 +306,14 @@
                     .viewed-text {
                         color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
+                        font-weight: 700;
                     }
                 }
 
                 .liked {
                     display: flex;
                     align-items: center;
-                    gap: 4px;
+                    gap: 5px;
 
                     .liked-icon {
                         color: rgba(0, 40, 40, 0.75);
@@ -317,15 +321,16 @@
                     }
 
                     .liked-text {
-                        color:rgba(0, 40, 40, 0.75);
+                        color: rgba(0, 40, 40, 0.75);
                         font-size: 14px;
+                        font-weight: 700;
                     }
                 }
 
                 .disgusted {
                     display: flex;
                     align-items: center;
-                    gap: 4px;
+                    gap: 5px;
 
                     .disgusted-icon {
                         color: rgba(0, 40, 40, 0.75);
@@ -335,6 +340,7 @@
                     .disgusted-text {
                         color: rgba(0, 40, 40, 0.75);
                         font-size: 0.9rem;
+                        font-weight: 700;
                     }
                 }
             }
@@ -343,7 +349,7 @@
                 margin: 25px 0 0 0;
 
                 .title {
-                    font-size: 1.75rem;
+                    font-size: 2rem;
                     font-weight: 900;
                     color: rgba(0, 100, 100);;
                 }
@@ -353,9 +359,9 @@
                 margin: 25px 0 0 0;
 
                 .brief {
-                    font-size: 1rem;
+                    font-size: 1.1rem;
                     color: rgba(0, 40, 40, 0.9);
-                    line-height: 1.6;
+                    line-height: 1.5;
                 }
             }
 
@@ -365,6 +371,9 @@
                 justify-content: flex-end;
                 gap: 35px;
                 margin: 20px 30px 10px 0;
+                position: absolute;
+                bottom: 1rem;
+                left: 25rem;
 
                 .read-more {
                     .read-more-btn {
@@ -378,6 +387,7 @@
                         .read-more-text {
                             color: white;
                             font-size: 0.85rem;
+                            font-weight: 800;
                         }
                     }
                 }
@@ -389,11 +399,12 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        background-color:  rgba(0, 100, 100);
+                        background-color: rgba(0, 100, 100);
 
                         .exit-text {
                             color: white;
                             font-size: 0.85rem;
+                            font-weight: 300;
                         }
                     }
                 }

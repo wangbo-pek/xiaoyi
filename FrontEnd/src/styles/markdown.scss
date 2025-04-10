@@ -1,156 +1,162 @@
 /* 样式调整：设置 Markdown 中的图片样式 */
 :deep(.markdown-content img) {
-    max-width: 90%; // 限制图片宽度为容器的最大宽度的 90%
-    display: block; // 将图片设置为块级元素
-    margin: 20px auto; // 上下边距 20px，左右居中
-    border-radius: 5px; // 添加圆角效果
-    border: 5px solid rgba(0, 75, 57);
+    max-width: 90%;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    border: 3px solid rgba(15, 230, 200, 0.5);
 }
 
 /* 设置 markdown-content 中的 h1 ~ h4 标题样式 */
 :deep(.markdown-content h1) {
-    font-size: 2em; // 设置 h1 字体大小
-    color:  rgb(10, 110, 90); // 设置 h1 字体颜色
-    margin: 30px 0; // 设置上下间距
-    font-weight: 800; // 设置加粗
-    text-align: center; // 设置居中对齐
+    font-size: 1.75rem;
+    color: rgba(15, 230, 200, 0.99);
+    margin: 30px 0 30px 0;
+    font-weight: 800;
+    text-align: left;
+    position: relative;
+    left: 2rem;
 }
 
 :deep(.markdown-content h2) {
-    font-size: 1.75em; // 设置 h2 字体大小
-    color: rgba(10, 110, 90, 0.95); // 设置 h2 字体颜色
-    margin: 20px 0; // 设置上下间距
-    font-weight: 700; // 设置加粗
+    font-size: 1.6rem;
+    color: rgba(15, 230, 200, 0.9);
+    margin: 30px 0 30px 0;
+    font-weight: 700;
+    position: relative;
+    left: 2rem;
 }
 
 :deep(.markdown-content h3) {
-    font-size: 1.5em; // 设置 h3 字体大小
-    color: rgba(10, 110, 90, 0.9);  // 设置 h3 字体颜色
-    margin: 16px 0; // 设置上下间距
-    font-weight: 600; // 设置加粗
-    text-align: left; // 设置左对齐
+    font-size: 1.3em;
+    color: rgba(15, 230, 200, 0.9);
+    margin: 30px 0 30px 0;
+    font-weight: 600;
+    text-align: left;
+    position: relative;
+    left: 2rem;
 }
 
 :deep(.markdown-content h4) {
-    font-size: 1.25em; // 设置 h4 字体大小
-    color: rgba(10, 110, 90, 0.85);  // 设置 h4 字体颜色
-    margin: 15px 0; // 设置上下间距
-    font-weight: 400; // 设置加粗
-    text-align: left; // 设置左对齐
+    font-size: 1.2em; // 设置 h4 字体大小
+    color: rgba(15, 230, 200, 0.9);
+    margin: 30px 0 30px 0;
+    font-weight: 400;
+    text-align: left;
 }
 
 /* 设置 markdown-content 中的段落样式 */
 :deep(.markdown-content p) {
-    font-size: 1rem; // 设置段落字体大小
-    color: rgba(222, 222, 222, 0.75); // 设置段落字体颜色
-    line-height: 1.5; // 设置行高
-    margin: 10px 0; // 设置上下边距
-    padding: 0 10px; // 设置左右内边距
-    text-align: left; // 设置文本对齐方式，自动调整左右边距
+    font-size: 1rem;
+    color: rgba(250, 250, 250, 0.9);
+    line-height: 1.4;
+    margin: 15px 0 15px 0;
+    padding: 0 10px;
+    text-align: left;
 }
 
 /* 设置无序列表（ul）样式 */
 :deep(.markdown-content ul) {
-    list-style-type: disc; /* 使用圆点样式 */
-    padding-left: 50px; /* 给无序列表增加左边距 */
-    margin: 10px 0; /* 给无序列表设置上下间距 */
+    list-style-type: square;
+    padding-left: 4rem;
+    margin: 10px 0;
 }
 
 /* 设置无序列表项（li）样式 */
 :deep(.markdown-content ul li) {
-    font-size: 1rem; /* 设置字体大小 */
-    color: white; /* 设置文本颜色 */
-    margin-bottom: 8px; /* 设置列表项之间的间距 */
-    line-height: 1.6; /* 设置行高 */
+    font-size: 1rem;
+    color: rgba(250, 250, 250, 0.9);
+    margin-bottom: 5px;
+    line-height: 1.3;
 }
 
 /* 设置有序列表（ol）样式 */
 :deep(.markdown-content ol) {
-    list-style-type: decimal; /* 使用数字样式 */
-    padding-left: 50px; /* 给有序列表增加左边距 */
-    margin: 10px 0; /* 给有序列表设置上下间距 */
+    list-style-type: decimal;
+    padding-left: 4rem;
+    margin: 10px 0;
 }
 
 /* 设置有序列表项（li）样式 */
 :deep(.markdown-content ol li) {
-    font-size: 1rem; /* 设置字体大小 */
-    color: white; /* 设置文本颜色 */
-    margin-bottom: 8px; /* 设置列表项之间的间距 */
-    line-height: 1.6; /* 设置行高 */
+    font-size: 1rem;
+    color: rgba(250, 250, 250, 0.9);
+    margin-bottom: 5px;
+    line-height: 1.3;
 }
 
 /* 设置代码块的背景颜色、内边距、圆角和阴影效果 */
 :deep(.markdown-content pre) {
-    font-size: 0.8rem; /* 调整字体大小 */
-    line-height: 1.7; /* 增加行高 */
+    line-height: 1.25rem;
     font-family: 'Courier New', Courier, monospace;
-    background-color: rgba(245, 245, 245, 0.15); /* 轻灰色背景 */
-    padding: 15px; /* 添加内边距 */
-    border-radius: 8px; /* 圆角效果 */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-    overflow-x: auto; /* 超出宽度时，出现水平滚动条 */
+    background-color: rgba(15, 230, 200, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
 }
 
 /* 设置代码块内部代码的样式 */
 :deep(.markdown-content code) {
-    font-family: 'Fira Code', Courier, monospace; /* 等宽字体 */
-    font-size: 0.85rem; /* 字体大小 */
-    background-color: rgba(0, 0, 0, 0.25); /* 背景色与pre背景一致 */
-    padding: 0 5px; /* 小的内边距 */
-    border-radius: 5px; /* 圆角效果 */
-    color: #cafda6; /* 代码内容的颜色 */
+    font-family: 'Fira Code', Courier, monospace;
+    font-size: 0.9rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    border-radius: 1px;
+    color: rgba(30, 190, 200, 0.9);
 }
 
 /* 自定义关键字样式 */
 :deep(.markdown-content .hljs-keyword) {
-    color: #d58052; /* 关键字使用红色 */
-    font-weight: bold;
+    color: rgba(220, 50, 100, 0.9);
+    font-weight: 550;
 }
 
 /* 自定义字符串样式 */
 :deep(.markdown-content .hljs-string) {
-    color: #54b996; /* 字符串使用蓝色 */
+    color: rgba(75, 220, 145, 0.9);
 }
 
-/* 自定义函数名样式 */
-:deep(.markdown-content .hljs-function) {
-    color: #f0ad4e; /* 函数名使用黄色 */
+/* 自定义函数名参数样式 */
+:deep(.markdown-content .hljs-params) {
+    color: #d0b223;
 }
 
 /* 自定义斜体样式 */
 :deep(.markdown-content em) {
     font-style: italic;
-    color: #f63c3c;
+    color: rgba(255, 220, 220, 0.9);
+    font-weight: 200;
 }
 
 /* 下划线样式 */
 :deep(.markdown-content u) {
     text-decoration: underline;
-    color: #a2a2a2;
+    color: rgba(255, 220, 220, 0.9);
     font-weight: 700;
 }
 
 /* 删除线样式 */
 :deep(.markdown-content del) {
     text-decoration: line-through;
-    color: #a2a2a2;
+    color: rgba(255, 220, 220, 0.9);
 }
 
 /* 引用样式 */
 :deep(.markdown-content blockquote) {
     padding: 10px 20px;
-    border-left: 5px solid rgba(0, 75, 57);
-    background-color: rgba(0, 75, 57, 0.5);
-    margin: 15px 0; /* 设置上下外边距 */
+    border-left: 5px solid rgba(15, 230, 200, 0.85);
+    background-color: rgba(15, 230, 200, 0.15);
+    margin: 30px 0;
     font-weight: 800;
 }
 
 /* 引用样式 */
 :deep(.markdown-content blockquote p) {
-    color: rgba(255, 255, 255);
+    color:  rgba(250, 250, 250, 0.95);
     font-size: 0.95rem;
-    font-weight: 800;
-    margin: 0; /* 移除引用内部段落的默认外边距 */
+    font-weight: 600;
+    margin: 0;
 }
 
 :deep(.toc) {
