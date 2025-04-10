@@ -370,14 +370,15 @@
     .article-title-container {
 
         .article-title {
+            width: 100%;
             padding: 20px 200px 5px 200px;
             border-radius: 10px 10px 2px 0;
             position: absolute;
-            top: 29.45rem;
-            left: 20rem;
-            font-size: 5rem;
-            background-color: rgba(0, 75, 57, 0.9);
+            top: 30.4rem;
+            font-size: 4rem;
+            background-color: rgba(0, 75, 57, 0.5);
             color: #ffffff;
+            text-align: center;
         }
     }
 
