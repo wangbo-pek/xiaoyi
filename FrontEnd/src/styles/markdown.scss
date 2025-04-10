@@ -10,7 +10,7 @@
 /* 设置 markdown-content 中的 h1 ~ h4 标题样式 */
 :deep(.markdown-content h1) {
     font-size: 1.75rem;
-    color: rgba(15, 230, 200, 0.99);
+    color: rgba(230, 255, 255, 0.99);
     margin: 30px 0 30px 0;
     font-weight: 800;
     text-align: left;
@@ -20,7 +20,7 @@
 
 :deep(.markdown-content h2) {
     font-size: 1.6rem;
-    color: rgba(15, 230, 200, 0.9);
+    color: rgba(230, 255, 255, 0.99);
     margin: 30px 0 30px 0;
     font-weight: 700;
     position: relative;
@@ -29,7 +29,7 @@
 
 :deep(.markdown-content h3) {
     font-size: 1.3em;
-    color: rgba(15, 230, 200, 0.9);
+    color: rgba(230, 255, 255, 0.99);
     margin: 30px 0 30px 0;
     font-weight: 600;
     text-align: left;
@@ -39,7 +39,7 @@
 
 :deep(.markdown-content h4) {
     font-size: 1.2em; // 设置 h4 字体大小
-    color: rgba(15, 230, 200, 0.9);
+    color: rgba(230, 255, 255, 0.99);
     margin: 30px 0 30px 0;
     font-weight: 400;
     text-align: left;
@@ -89,7 +89,7 @@
 :deep(.markdown-content pre) {
     line-height: 1.25rem;
     font-family: 'Courier New', Courier, monospace;
-    background-color: rgba(15, 230, 200, 0.3);
+    background-color: rgba(100, 100, 100, 0.25);
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -100,10 +100,10 @@
 :deep(.markdown-content code) {
     font-family: 'Fira Code', Courier, monospace;
     font-size: 0.9rem;
-    background-color: rgba(0, 0, 0, 0.25);
-    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 1px 3px;
     border-radius: 1px;
-    color: rgba(30, 190, 200, 0.9);
+    color: rgba(58, 144, 150, 0.9);
 }
 
 /* 自定义关键字样式 */
@@ -144,7 +144,7 @@
 
 /* 引用样式 */
 :deep(.markdown-content blockquote) {
-    padding: 10px 20px;
+    padding: 25px 25px;
     border-left: 5px solid rgba(15, 230, 200, 0.85);
     background-color: rgba(15, 230, 200, 0.15);
     margin: 30px 0;
