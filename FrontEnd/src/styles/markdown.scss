@@ -109,7 +109,7 @@
 :deep(.markdown-content blockquote) {
     padding: 25px 25px;
     border-left: 5px solid rgba(15, 230, 200, 0.85);
-    background-color: rgba(15, 230, 200, 0.15);
+    background-color: rgba(15, 230, 200, 0.05);
     margin: 30px 0;
     font-weight: 800;
 }
@@ -159,7 +159,7 @@
     margin: 5px auto 10px 10px;
     font-size: 0.9em; /* 设置字体大小 */
     font-weight: 700; /* 设置字体加粗 */
-    color: white;
+    color: #9cece0;
 }
 
 :deep(.toc) {
