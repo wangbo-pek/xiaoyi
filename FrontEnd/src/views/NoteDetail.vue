@@ -176,7 +176,7 @@
 
 <script setup lang='ts'>
     import {useRoute} from "vue-router";
-    import {onMounted, onUnmounted, ref, watchEffect} from "vue";
+    import {nextTick, onMounted, onUnmounted, ref, watchEffect} from "vue";
     import useNoteStore from "@/store/note.ts";
     import {useRouter} from "vue-router";
     import axios_server from "@/utils/axios_server.ts";
@@ -307,7 +307,7 @@
 
     const backTo = () => {
         $router.push({
-            name:'note'
+            name: 'note'
         })
     }
 
@@ -354,21 +354,89 @@
     })
 
     // 解析并高亮代码块
+    // const highlightCode = () => {
+    //     const codeBlock = document.querySelectorAll('pre code')
+    //     codeBlock.forEach((block) => {
+    //         hljs.highlightElement(block as HTMLElement)
+    //     })
+    // }
+
     const highlightCode = () => {
-        const codeBlock = document.querySelectorAll('pre code')
-        codeBlock.forEach((block) => {
-            hljs.highlightElement(block as HTMLElement)
+        console.log("📋 highlightCode 执行了")
+        const blocks = document.querySelectorAll('pre code')
+
+        blocks.forEach((codeBlock) => {
+            const pre = codeBlock.parentElement
+            if (!pre || pre.classList.contains('code-decorated')) return
+
+            // 避免重复处理
+            pre.classList.add('code-decorated')
+
+            // === 创建容器结构 ===
+            const wrapper = document.createElement('div')
+            wrapper.className = 'code-wrapper'
+
+            const header = document.createElement('div')
+            header.className = 'code-header'
+
+
+            // 获取语言 class，如 language-python
+            const langClass = Array.from(codeBlock.classList).find(cls => cls.startsWith('language-'))
+            const langLabel = langClass ? langClass.replace('language-', '') : ''
+            // ✅ 创建语言标签 DOM
+            const langSpan = document.createElement('span')
+            langSpan.className = 'code-lang'
+            langSpan.textContent = langLabel.toUpperCase()
+
+            const macDots = document.createElement('div')
+            macDots.className = 'mac-dots'
+            macDots.innerHTML = `
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+        `
+
+            const copyBtn = document.createElement('button')
+            copyBtn.className = 'copy-btn'
+            copyBtn.innerHTML = `
+  <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ccc" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+  </svg>
+`
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(codeBlock.textContent || '')
+                copyBtn.textContent = '已复制'
+                setTimeout(() => copyBtn.innerHTML = `
+  <svg class="copy-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ccc" viewBox="0 0 24 24">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+  </svg>
+`, 1500)
+            })
+
+            // ✅ 添加到 header 中
+            header.appendChild(macDots)
+            header.appendChild(langSpan)
+            header.appendChild(copyBtn)
+            header.appendChild(copyBtn)
+
+            // 替换 DOM 结构：把 pre 放进 wrapper
+            const parent = pre.parentElement!
+            parent.insertBefore(wrapper, pre)
+            wrapper.appendChild(header)
+            wrapper.appendChild(pre)
+            hljs.highlightElement(codeBlock as HTMLElement)
         })
     }
 
-    // 实时渲染 Markdown 内容
     watchEffect(() => {
         if (noteStore.currentNote.renderedMarkdown) {
-            setTimeout(() => {
+            nextTick(() => {
                 highlightCode()
-            }, 100)
+            })
         }
-    });
+    })
 </script>
 
 <style scoped lang='scss'>
