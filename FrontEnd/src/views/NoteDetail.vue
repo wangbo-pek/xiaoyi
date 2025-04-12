@@ -1,5 +1,4 @@
 <template>
-
     <div class="header-container">
         <div class="header" :class="{'change-bgcolor':isScrollOverViewport}">
             <div class="title-big">
@@ -25,7 +24,7 @@
     <div class="article-content-container">
         <div class="article-background">
 
-            <!-- 标签、二级分类区域 -->
+            <!-- 标签、分类区域 -->
             <div class="tags-category-container">
                 <div class="tags-container">
                     <span class="tag" v-for="(tag, index) in noteStore.currentNote.tagsName" :key="index">
@@ -83,8 +82,19 @@
                 <div v-html="toc"></div>
             </div>
 
+            <div class="like-or-dislike">
+                <div class="whether-praised">
+                    <span class="whether-praised-text">Is This Article Can Be Praised？</span>
+                </div>
+                <div class="praised-or-dispraised-icon">
+                    <v-icon class="praised-icon" icon="mdi-heart-outline"></v-icon>
+                    <v-icon class="dispraised-icon" icon="mdi-heart-off-outline"></v-icon>
+                </div>
+            </div>
+
             <div class="divider2"></div>
 
+            <!-- 文章footer区域 -->
             <div class="article-footer-container">
                 <div class="author-container">
                     <span class="author">
@@ -106,6 +116,7 @@
                 </div>
             </div>
 
+            <!-- 文章外部link区域 -->
             <div class="share-container">
                 <div class="tags">
                     <span class="tag" v-for="(tag, index) in noteStore.currentNote.tagsName" :key="index">{{
@@ -160,6 +171,7 @@
         </v-card>
     </v-dialog>
 
+    <v-icon class="back-icon" icon="mdi-arrow-left" @click="backTo"></v-icon>
 </template>
 
 <script setup lang='ts'>
@@ -175,7 +187,7 @@
     import hljs from 'highlight.js'
     import 'highlight.js/styles/github.css'
     import {twitter, facebook, github, douban, weibo, zhihu, shaoshupai} from '@/data/socialMedia.ts'
-    import {coffeeMe, mailMe, rssMe} from "@/data/personalDetail.ts";
+    import {coffeeMe} from "@/data/personalDetail.ts";
 
     defineOptions({
         name: 'NoteDetail',
@@ -203,33 +215,76 @@
     }
 
     // 前端展示table of contents的内容
-    const toc = ref('');
+    const toc = ref('')
 
     const handleTableOfContents = () => {
-        const regex = /<h1>(.*?)<\/h1>/g;
-        let match;
-        let tocHtml = '<ul>';
-        let counter = 1;
-        let updatedMarkdown = noteStore.currentNote.renderedMarkdown;
+        const rendered = noteStore.currentNote.renderedMarkdown
+        const headingRegex = /<(h[1-2])>(.*?)<\/h[1-2]>/g
 
-        while ((match = regex.exec(noteStore.currentNote.renderedMarkdown)) !== null) {
-            const headingText = match[1];
-            const id = `heading-${counter}`;
+        let match
+        let updatedMarkdown = rendered
+        let tocHtml = ''
+        let h1Index = 0
+        let h2Index = 0
 
-            // 将原始的 <h1>标签 替换为带 id 的 <h1 id="heading-1">
-            const originalHeading = match[0]; // <h1>标题</h1>
-            const updatedHeading = `<h1 id="${id}">${headingText}</h1>`;
-            updatedMarkdown = updatedMarkdown.replace(originalHeading, updatedHeading);
+        const tocItems: { level: string, text: string, id: string }[] = []
 
-            // 构建 TOC 目录项
-            tocHtml += `<li><a href="#${id}">${headingText}</a></li>`;
-            counter++;
+        // 收集所有 heading（顺序重要）
+        while ((match = headingRegex.exec(rendered)) !== null) {
+            const level = match[1]
+            const text = match[2]
+
+            if (level === 'h1') {
+                h1Index++
+                h2Index = 0
+                const id = `heading-${h1Index}`
+                tocItems.push({level, text, id})
+                updatedMarkdown = updatedMarkdown.replace(match[0], `<h1 id="${id}">${text}</h1>`)
+            } else if (level === 'h2') {
+                h2Index++
+                const id = `heading-${h1Index}-${h2Index}`
+                tocItems.push({level, text, id})
+                updatedMarkdown = updatedMarkdown.replace(match[0], `<h2 id="${id}">${text}</h2>`)
+            }
         }
 
-        tocHtml += '</ul>';
-        // 更新 markdown 和 TOC 内容
-        noteStore.currentNote.renderedMarkdown = updatedMarkdown;
-        toc.value = tocHtml;
+        // 构建结构良好的嵌套 HTML
+        tocHtml += '<ul>'
+        let openSublist = false
+
+        tocItems.forEach((item, index) => {
+            if (item.level === 'h1') {
+                // 关闭之前的子列表
+                if (openSublist) {
+                    tocHtml += '</ul>'
+                    openSublist = false
+                }
+                tocHtml += `<li><a href="#${item.id}">${item.text}</a>`
+                // 检查后面是否有 h2
+                if (tocItems[index + 1]?.level === 'h2') {
+                    tocHtml += '<ul>'
+                    openSublist = true
+                } else {
+                    tocHtml += '</li>'
+                }
+            } else if (item.level === 'h2') {
+                tocHtml += `<li><a href="#${item.id}">${item.text}</a></li>`
+                // 如果下一个不是 h2，关闭当前子列表
+                if (tocItems[index + 1]?.level !== 'h2') {
+                    tocHtml += '</ul></li>'
+                    openSublist = false
+                }
+            }
+        })
+
+        if (openSublist) {
+            tocHtml += '</ul></li>'
+        }
+
+        tocHtml += '</ul>'
+
+        noteStore.currentNote.renderedMarkdown = updatedMarkdown
+        toc.value = tocHtml
     }
 
     const jumpToSocialMedia = (name: string) => {
@@ -250,17 +305,14 @@
         }
     }
 
-    const showCoffeeDialog = ref(false)  // 控制咖啡图片 dialog
-    // const touchMe = (name: string) => {
-    //     const urlMap: Record<string, string> = {
-    //         mailMe: mailMe.linkUrl,
-    //         rssMe: rssMe.linkUrl
-    //     }
-    //     const url = urlMap[name]
-    //     if (url) {
-    //         window.open(url, '_blank')
-    //     }
-    // }
+    const backTo = () => {
+        $router.push({
+            name:'note'
+        })
+    }
+
+    // 控制咖啡图片 dialog
+    const showCoffeeDialog = ref(false)
 
     onMounted(async () => {
         // 页面加载时，从后端获取文章content
@@ -278,7 +330,7 @@
         handleTableOfContents()
 
         // 调用 highlightCode 来处理代码高亮
-        highlightCode();
+        highlightCode()
 
         // 页面挂载时监听handleScroll
         window.addEventListener('scroll', handleScroll)
@@ -291,6 +343,9 @@
                 behavior: 'smooth'
             })
         }, 10)
+
+        // toc可以平滑滚动
+        document.documentElement.classList.add('smooth-scroll')
     })
 
     onUnmounted(() => {
@@ -545,6 +600,37 @@
                 }
             }
 
+            .like-or-dislike {
+                display: flex;
+                flex-direction: column;
+
+                .whether-praised {
+                    margin: 5px auto 5px auto;
+
+                    .whether-praised-text {
+                        color: white;
+                    }
+                }
+
+                .praised-or-dispraised-icon {
+                    display: flex;
+                    margin: 5px auto 5px auto;
+                    gap: 20px;
+
+                    .praised-icon {
+                        cursor: pointer;
+                        color: white;
+                        font-size: 1.3rem;
+                    }
+
+                    .dispraised-icon {
+                        cursor: pointer;
+                        color: white;
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+
             .divider2 {
                 width: 100%;
                 height: 2px;
@@ -730,7 +816,6 @@
         margin: 10px 0 10px 0;
     }
 
-
     @import "@/styles/markdown";
     :deep(.markdown-content) {
     }
@@ -753,4 +838,18 @@
         }
     }
 
+    .back-icon {
+        position: fixed;
+        top: 1rem;
+        left: 3rem;
+        color: white;
+        font-size: 2rem;
+        z-index: 3000;
+    }
+
+</style>
+<style lang="scss">
+    html {
+        scroll-behavior: smooth;
+    }
 </style>
